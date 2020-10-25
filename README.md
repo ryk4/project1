@@ -14,5 +14,7 @@ git remote -v --verifies the new remote url
 
 git push origin master --pushes everything to 'master'
 
+git branch --check which branch your on
+
 
 
