@@ -1,4 +1,3 @@
-
 Rytis Klimavicius
 
 -----Project creation-----
@@ -13,11 +12,13 @@ Rytis Klimavicius
 6. php artisan migrate:fresh --create a fresh database using database migration files.
 Optional 7. php artisan db:Seed --fills database with starter/dummy data.
 
------Push/Pull to repo----
+-----Push/Pull to repository----
 git status --view files that are ready to commit
 git add fileName --adds the files in the local repo and stages them for commit
 git commit -m "updating readme file v3" --commits the tracked changes and prepares them to be pushed.
-git 
+git branch --check which branch your on
+git push --push to the branch you're currently on
+git push origin master --push everything to 'master' branch
 
 
 
@@ -42,3 +43,13 @@ git branch --check which branch your on
 
 
 
+
+
+
+
+-----Software versions-----
+6.14.8  npm -v
+12.19.0 node -v
+7.4.10  php -v
+4.0.5   laravel -v
+---------------------------
