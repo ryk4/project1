@@ -10,7 +10,7 @@ Rytis Klimavicius
 4. copy .env.example .env --create a copy of .env file
 5. php artisan key:generate --create app encryption key. Laravel requires encryption key which is used to encode various elements like cookies, password and more. 
 6. php artisan migrate:fresh --create a fresh database using database migration files.
-Optional 7. php artisan db:Seed --fills database with starter/dummy data.
+Optional 7. php artisan db:Seed --fills database with starter/dummy data from Database/Seeders.
 
 -----Push/Pull to repository----
 git status --view files that are ready to commit
