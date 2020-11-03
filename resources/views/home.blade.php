@@ -7,6 +7,27 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
+                <div class="col-md-12 d-inline">
+                    <div class="row">
+                        @isset($recipes)
+                            @foreach ($recipes as $recipe)
+                                <div class="col-md-4">
+                                    <h5>{{$recipe->title}}</h5>
+                                    <p>{{$recipe->ingredients}}</p>
+                                    <br>
+                                    <p>{{$recipe->prepTime}} + {{$recipe->cookTime}}</p>
+                                    <p>P,C,F:{{$recipe->protein}},{{$recipe->carbohydrates}},{{$recipe->fat}}</p>
+                                    <p>tags: {{$recipe->tags}}</p>
+                                </div>
+                            @endforeach
+                        @endisset
+                    </div>
+
+                </div>
+
+
+
+
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">

@@ -23,9 +23,11 @@ git push origin master --push everything to 'master' branch
 
 
 -----Other Git Commands-----
+php artisan migrate:fresh --seed --to migrate and seed database in one go
 
 
 ---Git commands---
+
 
 Git clone {projectURL} --clones an existing repository
 Git init --initialise local repository as git repository

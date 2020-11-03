@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class RecipeController extends Controller
 {
 
+
+
     //get all recipes
     public function getAllRecipes() {
         $recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT);
