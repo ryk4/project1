@@ -6,6 +6,8 @@ use App\Models\Recipe;
 use App\Models\RecipeDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Storage;
+
 
 
 class RecipeController extends Controller
@@ -21,6 +23,10 @@ class RecipeController extends Controller
             ->select('recipes.*','recipeDetails.*')
             ->get()->toJson(JSON_PRETTY_PRINT);
 
+       // $contents = Storage::path('1.jpg');
+
+
+       // dd($contents);
 
         return response($recipes, 200);
 
