@@ -26,13 +26,22 @@ class HomeController extends Controller
     public function index()
     {
         //call api get recipes
-        $recipes = Recipe::get();
-        //$recipes = DB::table('recipes')->get();
+        $recipes = app(RecipeController::class)->getAllRecipes(); //working
 
-        //return recipes model to view
+        //check if response is valid
+        if($recipes->status() != 200){
+            abort(404);
+        }
 
-        //dd($recipes);
 
-        return view('home', ['recipes' => $recipes]);
+        //convert json response into
+        $object = (array)json_decode($recipes->content());
+
+        //convert into Recipe Collection
+        $collection = \App\Models\Recipe::hydrate($object);
+
+        //$collection = $collection->flatten(); --OPTIONAL ?????
+
+        return view('home', ['recipes' => $collection]);
     }
 }

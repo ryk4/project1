@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Recipe;
 use App\Models\RecipeDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class RecipeController extends Controller
@@ -12,9 +13,15 @@ class RecipeController extends Controller
 
 
 
-    //get all recipes
+    //get all recipes + recipeDetails
     public function getAllRecipes() {
-        $recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT);
+        //$recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT); OLD
+        $recipes = DB::table('recipes')
+            ->join('recipeDetails','recipes.recipeDetails_id','=','recipeDetails.id')
+            ->select('recipes.*','recipeDetails.*')
+            ->get()->toJson(JSON_PRETTY_PRINT);
+
+
         return response($recipes, 200);
 
     }

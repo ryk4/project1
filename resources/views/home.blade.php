@@ -7,6 +7,8 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
+
+
                 <div class="col-md-12 d-inline">
                     <div class="row">
                         @isset($recipes)

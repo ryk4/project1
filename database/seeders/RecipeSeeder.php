@@ -65,5 +65,31 @@ class RecipeSeeder extends Seeder
             'prepTime' => '10',
             'cookTime' => '20'
         ]);
+
+        //creating recipe 3
+        DB::table('recipes')->insert([
+            'id' => '3',
+            'title' => 'Pizza',
+            'ingredients' => '100 sausage; 200g pizza bread; Ketchup sauce; Mayo',
+            'steps' => '1. Create pica. 2. Cook it at 450.',
+            'image' => 'default img.',
+            'tags' => 'High carbs, High fat',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'recipeDetails_id' => '3'
+        ]);
+        DB::table('recipeDetails')->insert([
+            'id' => '3',
+            'calories' => '780',
+            'protein' => '80',
+            'carbohydrates' => '120',
+            'fat' => '25',
+            'sodium' => '5',
+            'fiber' => null,
+            'sugar' => '0',
+            'servings' => '1',
+            'prepTime' => '20',
+            'cookTime' => '35'
+        ]);
     }
 }
