@@ -34,5 +34,8 @@ Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\
 //API tokens Controller
 Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::class, 'generateToken'])->name('generateToken');
 
+//UI routes
+Route::get('/recipe', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
+
 
 

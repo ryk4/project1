@@ -2,6 +2,8 @@ Rytis Klimavicius
 
 -----Project creation-----
 #to be added
+php artisan ui vue
+npm run && npm install
 
 -----Steps required to pull a project and configure on local------
 1. git clone {projectURL} --Clone GitHub repository. 

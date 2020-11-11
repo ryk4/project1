@@ -23,7 +23,6 @@ class RecipeController extends Controller
             ->select('recipes.*','recipeDetails.*')
             ->get()->toJson(JSON_PRETTY_PRINT);
 
-       // $contents = Storage::path('1.jpg');
 
 
        // dd($contents);
@@ -124,4 +123,12 @@ class RecipeController extends Controller
             ],404);
         }
     }
+
+
+    //recipe modal
+    public function recipe()
+    {
+        return view('recipes/recipe');
+    }
+
 }
