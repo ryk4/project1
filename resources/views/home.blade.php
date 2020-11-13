@@ -78,7 +78,7 @@
 
                                     </div>
 
-                                <
+
                             @endforeach
                         @endisset
                     </div>
