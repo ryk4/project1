@@ -18,25 +18,25 @@ class RecipeSeeder extends Seeder
         //creating recipe 1
         DB::table('recipes')->insert([
             'id' => '1',
-            'title' => 'Chicken with rice and veggies',
-            'ingredients' => '200g chicken; 100g rice; 50g bell pepper; frozen veggies 400g (any choice)',
-            'steps' => '1. Season the chicken. 2. Cook the chicken. 3. Boil water and cook rice until cooked. 4. Add everything into
+            'title' => 'Chicken, rice and veggies',
+            'ingredients' => 'Chicken breast-200g;Rice-100g;Bell pepper-150g;Ketchup-40g;Tomato/Cocumber-Any amount;Chicken spices-20g;Olive oil-10ml;',
+            'steps' => '1. Season the chicken and leave to rest for 10minutes. 2. Boil the water and cook the rice. 3. While Rice is cooking, heat up the pan and cook both sides of the 
+            chicken breast for 5mins (or until cooked) 4. That\'s it! Place everything into a place and enjoy your meal! 
             frying pan and stir for 10mins. 5. Leave to rest for 3mins.',
             'image' => 'default img.',
-            'tags' => 'High protein, High carbs, Low Fat',
+            'tags' => 'Meat;High protein;High carbs;Low Fat;',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'recipeDetails_id' => '1'
         ]);
         DB::table('recipeDetails')->insert([
-            'calories' => '450',
-            'protein' => '80',
-            'carbohydrates' => '75',
-            'fat' => '8',
-            'sugar' => '4',
-            'servings' => '2',
-            'prepTime' => '5',
-            'cookTime' => '15'
+            'calories' => '728',
+            'protein' => '70',
+            'carbohydrates' => '85.9',
+            'fat' => '11.9',
+            'sugar' => '0',
+            'servings' => '1',
+            'cookTime' => '20'
         ]);
 
         //creating recipe 2
@@ -62,7 +62,6 @@ class RecipeSeeder extends Seeder
             'fiber' => null,
             'sugar' => '10',
             'servings' => '2',
-            'prepTime' => '10',
             'cookTime' => '20'
         ]);
 
@@ -88,7 +87,6 @@ class RecipeSeeder extends Seeder
             'fiber' => null,
             'sugar' => '0',
             'servings' => '1',
-            'prepTime' => '20',
             'cookTime' => '35'
         ]);
     }

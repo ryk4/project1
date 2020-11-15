@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//welcome page
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
@@ -35,7 +34,7 @@ Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\
 Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::class, 'generateToken'])->name('generateToken');
 
 //UI routes
-Route::get('/recipe', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
+Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
 
 
 

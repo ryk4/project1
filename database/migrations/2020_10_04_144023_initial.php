@@ -23,7 +23,6 @@ class Initial extends Migration
             $table->integer('fiber')->nullable();
             $table->integer('sugar')->nullable();
             $table->integer('servings')->nullable();
-            $table->integer('prepTime')->nullable();
             $table->integer('cookTime')->nullable();
 
         });
@@ -32,7 +31,7 @@ class Initial extends Migration
             $table->bigIncrements('id')->autoIncrement();
             $table->string('title');
             $table->string('ingredients');
-            $table->string('steps');
+            $table->text('steps');
             $table->string('image')->nullable(); //nullable means that it can be null
             $table->string('tags')->nullable();
             $table->timestamp('created_at')->nullable();

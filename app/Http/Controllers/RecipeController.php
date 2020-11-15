@@ -35,7 +35,12 @@ class RecipeController extends Controller
     public function getRecipe($id)
     {
         if (Recipe::where('id', $id)->exists()) {
-            $recipe = Recipe::where('id', $id)->get()->toJson(JSON_PRETTY_PRINT);
+            $recipe = DB::table('recipes')
+                ->join('recipeDetails','recipes.recipeDetails_id','=','recipeDetails.id')
+                ->select('recipes.*','recipeDetails.*')
+                ->where('recipes.id', $id)
+                ->get()->toJson(JSON_PRETTY_PRINT);
+
             return response($recipe, 200);
         } else {
             return response()->json([
@@ -126,9 +131,27 @@ class RecipeController extends Controller
 
 
     //recipe modal
-    public function recipe()
+    public function recipe($id)
     {
-        return view('recipes/recipe');
+
+        //call api get recipes
+        $recipe = app(RecipeController::class)->getRecipe($id); //working
+
+        //check if response is valid
+        if($recipe->status() != 200){
+            abort(404);
+        }
+
+
+
+        //convert json response into
+        $content = json_decode($recipe->content());
+
+        //convert into Recipe Collection
+        $collection = \App\Models\Recipe::hydrate($content);
+
+
+        return view('recipes/recipe', ['recipe' => $collection]);
     }
 
 }

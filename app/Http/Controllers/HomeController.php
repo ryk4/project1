@@ -13,10 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+   /* public function __construct() ----DISABLE required AUTH for home
     {
         $this->middleware('auth');
-    }
+    }*/
 
     /**
      * Show the application dashboard.
