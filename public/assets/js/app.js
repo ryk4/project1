@@ -1,3 +1,6 @@
+
+//hamburger menu
+
 $('#menu_toggle').on('click', (function(_this) {
   return function() {
     $('.b-header_nav').addClass('b-header_nav__active');

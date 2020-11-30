@@ -25,6 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Recipe API Controller
 Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
+Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
+
 Route::middleware('auth:api')->post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);
 Route::middleware('auth:api')->get('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipe']);
 Route::middleware('auth:api')->put('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'updateRecipe']);

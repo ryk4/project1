@@ -25,17 +25,19 @@ class Initial extends Migration
             $table->integer('servings')->nullable();
             $table->integer('cookTime')->nullable();
 
+
         });
 
         Schema::create('recipes', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
             $table->string('title');
-            $table->string('ingredients');
+            $table->text('ingredients');
             $table->text('steps');
             $table->string('image')->nullable(); //nullable means that it can be null
-            $table->string('tags')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->integer('viewCounter')->default(0);
+            $table->integer('favouriteCounter')->default(0);
 
 
             $table->unsignedBigInteger('recipeDetails_id')->nullable();

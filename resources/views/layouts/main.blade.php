@@ -98,6 +98,7 @@
 </footer>
 <!--Base style-->
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <!--Base js-->
 <script src="../../../public/assets/js/jquery.min.js"></script>

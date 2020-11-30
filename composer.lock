@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14e0acfc88ffb57203a99cd7dae25cc5",
+    "content-hash": "2a6a78c3037c564c5d99082ee979c0df",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -426,6 +426,10 @@
                 "markdown",
                 "parser"
             ],
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.7.x"
+            },
             "time": "2019-12-30T22:54:17+00:00"
         },
         {
@@ -1711,6 +1715,10 @@
                 "laravel",
                 "parsedown"
             ],
+            "support": {
+                "issues": "https://github.com/parsedown/laravel/issues",
+                "source": "https://github.com/parsedown/laravel"
+            },
             "time": "2020-01-07T02:12:55+00:00"
         },
         {
@@ -6580,5 +6588,6 @@
     "platform": {
         "php": "^7.3"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

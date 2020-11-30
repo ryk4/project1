@@ -5,14 +5,14 @@
     <div class="container py-3">
         <div class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Recieps</a></li>
-            <li class="breadcrumb-item"><a href="#">Spice</a></li>
+            <li class="breadcrumb-item"><a href="#">Recipes</a></li>
+            <li class="breadcrumb-item"><a href="#">Meat</a></li>
             <li class="breadcrumb-item active">{{$recipe[0]->title}}</li>
         </div>
     </div>
     <article class="container g-block__three-rounds bg-white mb-3 p-md-5 p-3">
         <div class="row">
-            <div class="col-12 col-md-6"><img class="img-fluid mb-3" src="/assets/images/reciept_2_card.jpg" alt="How to cook jalapeno sauce"></div>
+            <div class="col-12 col-md-6" "><img class="img-fluid mb-3" src="/images/recipes/{{$recipe[0]->id}}.jpg" alt="{{$recipe[0]->title}}"></div>
             <div class="col-12 col-md-6">
                 <h1>{{$recipe[0]->title}}</h1>
                 <hr>
@@ -30,54 +30,18 @@
 
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-8">
-                <h2>How to cook</h2>
-                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                <div class="d-flex align-items-center">
-                    <h6 class="col" data-toggle="collapse" href="#stage1" role="button" aria-expanded="true" aria-controls="stage1">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="listStage0">
-                            <label class="b-list_item-title custom-control-label" for="listStage0"><strong>Stage 1: Get a fish</strong></label>
-                        </div>
-                    </h6>
-                </div>
-                <div class="collapse show" id="stage1">
-                    <p>If it really difficult to fish, you can steal it.</p>
-                </div>
-                <div class="d-flex align-items-center">
-                    <h6 class="col" data-toggle="collapse" href="#stage2" role="button" aria-expanded="true" aria-controls="stage2">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="listStage2">
-                            <label class="b-list_item-title custom-control-label" for="listStage2"><strong>Stage 2: Clean it</strong></label>
-                        </div>
-                    </h6>
-                </div>
-                <div class="collapse show" id="stage2">
-                    <p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
-                </div>
-                <div class="d-flex align-items-center">
-                    <h6 class="col" data-toggle="collapse" href="#stage3" role="button" aria-expanded="true" aria-controls="stage3">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="listStage3">
-                            <label class="b-list_item-title custom-control-label" for="listStage3"><strong>Stage 3: Cook it</strong></label>
-                        </div>
-                    </h6>
-                </div>
-                <div class="collapse show" id="stage3">
-                    <p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.</p>
-                </div>
-                <div class="d-flex align-items-center">
-                    <h6 class="col" data-toggle="collapse" href="#stage4" role="button" aria-expanded="true" aria-controls="stage4">
-                        <div class="custom-control custom-checkbox">
-                            <input class="custom-control-input" type="checkbox" id="listStage4">
-                            <label class="b-list_item-title custom-control-label" for="listStage4"><strong>Stage 4: Finish</strong></label>
-                        </div>
-                    </h6>
-                </div>
-                <div class="collapse show" id="stage4">
-                    <p>Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
-                </div>
-            </div>
-            <div class="col-12 col-lg-6 col-xl-4 flex-last">
+           @php
+            /*  OLD
+                $Parsedown = new Parsedown();
+                echo $Parsedown->text($recipe[0]->steps);
+            */
+            @endphp
+
+                {!!  $recipe[0]->steps !!}
+
+
+            <!-- Ingredients START-->
+            <div class="col-12 col-lg-6 col-xl-4">
                 <div class="b-list b-list__bordered b-list__white">
                     <h4>Ingridients</h4>
 
@@ -106,22 +70,20 @@
 
                 </div>
                 <div class="g-tag-list my-3">
-
                     @php
-                    $strTags = $recipe[0] -> tags;
-                    $counter=0;
-                    while($strTags != ""){
-                        $tag = strtok($strTags, ";"); //extract e.g 100g-Chicken
-                        $strTags = str_replace($tag,"",$strTags);//remove it from string
-                        $strTags = substr_replace($strTags,'',0,1);
-                        echo ' <a class="g-tag-list_item" href="#">'.$tag.'</a>';
-                        $counter++;
+                        $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipe[0]->id)->content());
 
-                    }
+                        foreach($tags as $tag){
+                            echo '<a class="g-tag-list_item" href="#">'.$tag->name.'</a>';
+                        }
                     @endphp
+
 
                 </div>
             </div>
+
+            <!-- Ingredients END-->
+
         </div>
     </article>
     <!--simple items section-->

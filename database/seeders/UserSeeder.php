@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'name' => 'Rytis Klimavicius',
             'email' => 'rytiskli@gmail.com',
             'password' => Hash::make('Sudas123'),
+            'user_level' => 0 ,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);

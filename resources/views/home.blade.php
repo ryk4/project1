@@ -7,8 +7,8 @@
     <!-- heroscreen block-->
     <div class="b-hero b-hero__light" style="background-image:url(/assets/images/background_home.jpg)">
         <div class="container pl-sm-5 py-sm-5 my-sm-5">
-            <h3 class="display-5 ml-sm-5 text-italic"> <i>It’s AWESOME!</i></h3>
-            <h2 class="display-4"> <strong>More then 1000 of best recieps</strong></h2>
+            <h3 class="display-5 ml-sm-5 text-italic"> <i>"What you eat is what you are."</i></h3>
+            <h2 class="display-4"> <strong>Find your favourite recipes</strong></h2>
         </div>
         <div class="container py-sm-4">
             <h5 class="mb-4 text-center"> <i>Recent categories</i></h5>
@@ -103,17 +103,38 @@
                 @foreach ($recipes as $recipe)
                     <div class="b-card col-12 col-md-6 col-xl-3">
                         <div class="b-card_inner">
-                            <div class="b-card_image" style="background-image:url(/assets/images/reciept_1_card.jpg)"><a class="b-card_image-link" href="/recipe/{{$recipe -> id}}"></a>
-                                <div class="b-card_image-info-top"><span class="g-badge" style="background-color:#d44f68">Fish</span><span class="g-views"><i class="fa fa-eye"></i>12</span><span class="g-likes"><i class="fa fa-heart"></i>5</span></div>
+                            <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipe -> id}}.jpg)"><a class="b-card_image-link" href="/recipe/{{$recipe -> id}}"></a>
+                                @php
+                                    $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipe->id)->content());
+
+                                @endphp
+                                <div class="b-card_image-info-top">
+
+                                        @if(!empty($tags))
+                                             <span class="g-badge" style="background-color:#{{$tags[0]->representative_color}}">{{$tags[0]->name}}</span>
+                                                 @php
+                                                      unset($tags[0])
+                                                 @endphp
+                                        @endif
+
+                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipe -> viewCounter}}</span><span class="g-likes"><i class="fa fa-heart"></i>{{$recipe -> favouriteCounter}}</span></div>
                                 <div class="b-card_image-info-bottom"></div>
                             </div>
                             <div class="b-card_description">
                                 <h3 class="b-card_title"><a href="/recipe/{{$recipe -> id}}">{{$recipe->title}}</a></h3>
                                 <div class="b-card_text">
-                                    <p>{{$recipe->calories}} calories</p>
+                                    <p class="text-muted">
+                                        <span><i class="fas fa-clock"></i> {{$recipe->cookTime}} mins, </span>
+                                        <span><i class="fas fa-heartbeat"></i> {{$recipe->calories}} calories</span></p>
                                 </div>
-                                <div class="b-card_text">
-                                    <p>{{$recipe->tags}}</p>
+                                <div class="b-card_text" style="padding-bottom: 10px;">
+                                    @if(!empty($tags))
+                                        @foreach ($tags as $tag)
+
+                                            <div class="homepageTags">{{$tag->name}}</div>
+
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="g-autor"><a href="/recipe/{{$recipe -> id}}">Read more</a></div>
                             </div>
@@ -121,11 +142,8 @@
                     </div>
                 @endforeach
             @endisset
-
-
-
-
         </div>
+
         <div class="clearfix text-right"><a class="link_animated" href="objects_category_with_filter.html">Watch more<i class="fa fa-angle-right"></i></a></div>
     </section>
     <!--newest items section END-->

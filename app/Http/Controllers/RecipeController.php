@@ -14,18 +14,14 @@ class RecipeController extends Controller
 {
 
 
-
     //get all recipes + recipeDetails
-    public function getAllRecipes() {
+    public function getAllRecipes()
+    {
         //$recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT); OLD
         $recipes = DB::table('recipes')
-            ->join('recipeDetails','recipes.recipeDetails_id','=','recipeDetails.id')
-            ->select('recipes.*','recipeDetails.*')
+            ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
+            ->select('recipes.*', 'recipeDetails.*')
             ->get()->toJson(JSON_PRETTY_PRINT);
-
-
-
-       // dd($contents);
 
         return response($recipes, 200);
 
@@ -36,8 +32,8 @@ class RecipeController extends Controller
     {
         if (Recipe::where('id', $id)->exists()) {
             $recipe = DB::table('recipes')
-                ->join('recipeDetails','recipes.recipeDetails_id','=','recipeDetails.id')
-                ->select('recipes.*','recipeDetails.*')
+                ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
+                ->select('recipes.*', 'recipeDetails.*')
                 ->where('recipes.id', $id)
                 ->get()->toJson(JSON_PRETTY_PRINT);
 
@@ -45,6 +41,24 @@ class RecipeController extends Controller
         } else {
             return response()->json([
                 "message" => "Recipe not found"
+            ], 404);
+        }
+    }
+
+    //get tags for specific recipe
+    public static function getRecipeTags($id){
+        if (Recipe::where('id', $id)->exists()) {
+
+            $recipe = DB::table('recipes_categories')
+                ->join('categories', 'recipes_categories.categories_id', '=', 'categories.id')
+                ->select('categories.name', 'categories.description','categories.representative_color')
+                ->where('recipes_categories.recipes_id', $id)
+                ->get()->toJson(JSON_PRETTY_PRINT);
+
+            return response($recipe, 200);
+        } else {
+            return response()->json([
+                "message" => "Recipe not found for id supplied: ".$id
             ], 404);
         }
     }
@@ -137,18 +151,24 @@ class RecipeController extends Controller
         //call api get recipes
         $recipe = app(RecipeController::class)->getRecipe($id); //working
 
+
         //check if response is valid
         if($recipe->status() != 200){
             abort(404);
         }
 
 
-
         //convert json response into
+        //$content = json_decode($recipe->content());
+
         $content = json_decode($recipe->content());
+
 
         //convert into Recipe Collection
         $collection = \App\Models\Recipe::hydrate($content);
+
+
+        $collection = $collection->flatten();
 
 
         return view('recipes/recipe', ['recipe' => $collection]);
