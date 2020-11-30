@@ -9,7 +9,11 @@ class RecipeDetail extends Model
     protected $table = 'recipeDetails';
     public $timestamps = false;
 
-    protected $fillable = ['calories','protein','fat','carbohydrates'];
+    protected $fillable = [
+        'calories',
+        'protein',
+        'fat',
+        'carbohydrates'];
 
     /* __Construct not working!!!
      *

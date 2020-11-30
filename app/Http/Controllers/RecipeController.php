@@ -8,19 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
 
-
-
 class RecipeController extends Controller
 {
 
 
     //get all recipes + recipeDetails
+    //ADD FILTERING
     public function getAllRecipes()
     {
         //$recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT); OLD
         $recipes = DB::table('recipes')
             ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
             ->select('recipes.*', 'recipeDetails.*')
+            ->when(request('protein'), function ($query, $role) { //filter by 'protein'
+                return $query->where('protein', $role);
+            })
             ->get()->toJson(JSON_PRETTY_PRINT);
 
         return response($recipes, 200);
@@ -143,8 +145,65 @@ class RecipeController extends Controller
         }
     }
 
+    //UI (User Interface)
 
-    //recipe modal
+    public function getRecipesFilter()
+    {
+
+        //send paging + order into api
+        $recipes = app(RecipeController::class)->getAllRecipes(); //working
+
+        //check if response is valid
+        if($recipes->status() != 200){
+            abort(404);
+        }
+
+
+        //convert json response into
+        $object = (array)json_decode($recipes->content());
+
+        //convert into Recipe Collection
+        $collection = \App\Models\Recipe::hydrate($object);
+
+        //$collection = $collection->flatten(); --OPTIONAL ?????
+
+
+        //filter + order logic
+
+        //check if request has filter value
+
+       // dd($collection);
+
+        $collection = \App\Models\Recipe::Paginate(2);
+
+
+        /*if(request()->has('category'))
+        {
+            $collection = \App\Models\Recipe::where('category',request('category')); //--removes
+
+        }*/
+
+        /*if(request()->has('category'))
+        {
+            $collection = \App\Models\Recipe::where('category',request('category')); //--removes
+
+        }
+        else
+        {
+            $collection = \App\Models\Recipe::Paginate(9); //--removes
+
+        }*/
+
+
+
+
+        //$collection = Paginator::make($collection, 50, 5);
+
+
+        return view('recipes/recipes', ['recipes' => $collection]);
+
+    }
+
     public function recipe($id)
     {
 

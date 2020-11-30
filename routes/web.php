@@ -23,6 +23,10 @@ Auth::routes();
 //home Controller
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Home API
+Route::post('/sendEmail', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('sendEmail');;
+
+
 //Recipe API Controller
 Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
 Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
@@ -37,6 +41,7 @@ Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::cla
 
 //UI routes
 Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
-
+Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter']);
+Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactPage']);
 
 

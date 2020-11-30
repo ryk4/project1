@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home page
+    <title>FoodLifting
     </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 </head>
 <body>
 <header class="b-header b-header__default">
-    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo.png" alt="Logo"/></a>
+    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1pngPurple.png" alt="Logo"/></a>
         <nav class="b-header_nav">
             <ul>
                 <li class="nav_block"><a href="/">Home</a>
@@ -97,6 +97,8 @@
 </footer>
 <!--Base style-->
 <link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/css/main.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <!--Base js-->
 <script src="/assets/js/jquery.min.js"></script>

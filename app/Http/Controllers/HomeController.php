@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,11 +19,8 @@ class HomeController extends Controller
         $this->middleware('auth');
     }*/
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
+    //UI
     public function index()
     {
         //call api get recipes
@@ -43,5 +41,37 @@ class HomeController extends Controller
         //$collection = $collection->flatten(); --OPTIONAL ?????
 
         return view('home', ['recipes' => $collection]);
+    }
+
+    public function contactPage(){
+
+        return view('pages/contact');
+    }
+
+
+    //API
+
+    //'contact us' page send email
+    public function sendEmail(Request $request)
+    {
+       // dd($request->all());//check if data from view exists and is valid
+
+        $subject = 'Contact US Page';
+        //send the actual email
+        $data = array(
+            'subject' => $subject,
+            'name'=> $request -> inputName,
+            'email'=> $request -> inputEmail,
+            'comment' => $request -> inputComment);
+
+        Mail::send(['text'=>'mail'], $data, function($message) {
+            $message->to('foodlifting.contact@gmail.com', 'Tutorials Point')->subject
+            ('Contact US Page');
+            $message->from('foodlifting.contact@gmail.com','rytis kli');
+        });
+
+
+        return view('pages/contact');
+
     }
 }

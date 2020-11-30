@@ -117,7 +117,8 @@
                                                  @endphp
                                         @endif
 
-                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipe -> viewCounter}}</span><span class="g-likes"><i class="fa fa-heart"></i>{{$recipe -> favouriteCounter}}</span></div>
+                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipe -> viewCounter}}</span>
+                                    <span class="g-likes"><i class="fa fa-heart"></i>{{$recipe -> favouriteCounter}}</span></div>
                                 <div class="b-card_image-info-bottom"></div>
                             </div>
                             <div class="b-card_description">

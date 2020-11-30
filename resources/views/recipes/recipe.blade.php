@@ -155,5 +155,4 @@
     <!--simple items section END-->
     @endsection
 
-</main>
 

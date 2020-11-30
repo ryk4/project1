@@ -16,22 +16,12 @@
 </head>
 <body>
 <header class="b-header b-header__absolute-top b-header__white">
-    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo__white.png" alt="Logo"/></a>
+    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
             <ul>
                 <li class="nav_block"><a href="{{ url('/home') }}">Home</a>
                 </li>
-                <li class="nav_block"><a href="objects_category.html">Category<i class="fas fa-angle-down"></i></a>
-                    <ul>
-                        <li class="left"><a>Categories design<i class="fas fa-angle-right"></i></a>
-                            <ul>
-                                <li><a href="objects_category_with_filter.html">With filter</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="../../../public/object_default.html">Reciept page v.1</a></li>
-                        <li><a href="object_nohero.html">Reciept page v.2</a></li>
-                        <li><a href="object_default_with_sidebar.html">Reciept page v.3</a></li>
-                    </ul>
+                <li class="nav_block"><a href="{{ url('/recipes') }}">Recipes</a>
                 </li>
                 <li class="nav_block"><a>Elements<i class="fas fa-angle-down"></i></a>
                     <ul>
@@ -47,7 +37,7 @@
                 </li>
                 <li class="nav_block"><a href="pages_about.html">About</a>
                 </li>
-                <li class="nav_block"><a href="pages_contacts.html">Contacts</a>
+                <li class="nav_block"><a href="contact">Contact us</a>
                 </li>
             </ul>
         </nav>
