@@ -26,6 +26,7 @@ class HomeController extends Controller
         //call api get recipes
         $recipes = app(RecipeController::class)->getAllRecipes(); //working
 
+
         //check if response is valid
         if($recipes->status() != 200){
             abort(404);
@@ -36,7 +37,7 @@ class HomeController extends Controller
         $object = (array)json_decode($recipes->content());
 
         //convert into Recipe Collection
-        $collection = \App\Models\Recipe::hydrate($object);
+        $collection = \App\Models\Recipe::hydrate($object)->slice(0,4); //get top 4 only
 
         //$collection = $collection->flatten(); --OPTIONAL ?????
 

@@ -10102,7 +10102,6 @@ main a[href^='https://']:after {
     -webkit-font-smoothing: antialiased;
     font-family: "Font Awesome 5 Free";
     font-weight: 700;
-    content: "\f35d";
     font-size: .8em;
     margin-left: .35rem
 }

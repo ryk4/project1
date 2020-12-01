@@ -23,7 +23,11 @@
                         </form>
                     </div>
                     <h4>Categories</h4>
-                    <div class="list-group"><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#">Fish<span class="badge badge-pill text-white" style="background-color:#d44f68">19</span></a><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#">Fruits<span class="badge badge-pill text-white" style="background-color:#e8a765">2</span></a><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#">Spice<span class="badge badge-pill text-white" style="background-color:#7d6dad">1</span></a><a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="#">Meat<span class="badge badge-pill text-white" style="background-color:#d24a43">6</span></a>
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ url('/recipes?category=Meat') }}">Meat<span class="badge badge-pill text-white" style="background-color:#d44f68">19</span></a>
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ url('/recipes?category=Fish') }}">Fish<span class="badge badge-pill text-white" style="background-color:#7d6dad">2</span></a>
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ url('/recipes?category=Vegetarian') }}">Vegetarian<span class="badge badge-pill text-white" style="background-color:#67d44f">1</span></a>
+                        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ url('/recipes?category=Fruits') }}">Fruits<span class="badge badge-pill text-white" style="background-color:#e8a765">6</span></a>
                     </div>
                 </div>
             </aside>

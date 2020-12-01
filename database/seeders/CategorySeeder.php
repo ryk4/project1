@@ -33,13 +33,16 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'id' => '3',
             'Name' => 'Vegetarian',
-            'Description' => 'Vegetables. Yikes'
+            'Description' => 'Vegetables. Yikes',
+            'representative_color' => '67d44f'
         ]);
 
         DB::table('categories')->insert([
             'id' => '4',
             'Name' => 'Fruits',
-            'Description' => 'Not as bad as veggies.'
+            'Description' => 'Not as bad as veggies.',
+            'representative_color' => 'e8a765'
+
         ]);
 
         DB::table('categories')->insert([
@@ -88,13 +91,22 @@ class CategorySeeder extends Seeder
         DB::table('recipes_categories')->insert([
         'recipes_id' => '2',
         'categories_id' => '2',
-    ]);
+        ]);
 
-    DB::table('recipes_categories')->insert([
-        'recipes_id' => '2',
-        'categories_id' => '6',
-    ]);
+        DB::table('recipes_categories')->insert([
+            'recipes_id' => '2',
+            'categories_id' => '6',
+        ]);
 
+        DB::table('recipes_categories')->insert([
+            'recipes_id' => '3',
+            'categories_id' => '2',
+        ]);
+
+        DB::table('recipes_categories')->insert([
+            'recipes_id' => '3',
+            'categories_id' => '6',
+        ]);
 
     }
 }

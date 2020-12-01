@@ -16,14 +16,37 @@ class RecipeController extends Controller
     //ADD FILTERING
     public function getAllRecipes()
     {
+        //find all recipe ID that are allowed after filtering out
+        $categories = DB::table('recipes_categories')
+            ->join('categories','recipes_categories.categories_id','=','categories.id')
+            ->when(request('category'), function ($query, $role) {
+                //extract several filters
+                $arr = explode(',', $role); //split category from 1 string into array of strings.
+
+                return $query->whereIn('name', $arr);
+            })->get();
+
+/*
+        dd($categories->pluck('id'));
+
+        $collection2 = collect(['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]);
+
+        $filtered2 = $collection2;
+
+        dd($filtered2->only(['product_id', 'name']));
+*/
+        //dd($categories->pluck('recipes_id'));
+
+
+
+
         //$recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT); OLD
         $recipes = DB::table('recipes')
             ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
             ->select('recipes.*', 'recipeDetails.*')
-            ->when(request('protein'), function ($query, $role) { //filter by 'protein'
-                return $query->where('protein', $role);
-            })
+            ->whereIn('recipes.id',$categories->pluck('recipes_id'))
             ->get()->toJson(JSON_PRETTY_PRINT);
+
 
         return response($recipes, 200);
 
@@ -150,8 +173,9 @@ class RecipeController extends Controller
     public function getRecipesFilter()
     {
 
-        //send paging + order into api
+        //apply filter into
         $recipes = app(RecipeController::class)->getAllRecipes(); //working
+
 
         //check if response is valid
         if($recipes->status() != 200){
@@ -174,7 +198,7 @@ class RecipeController extends Controller
 
        // dd($collection);
 
-        $collection = \App\Models\Recipe::Paginate(2);
+        $collection = CollectionHelper::paginate($collection, 6);
 
 
         /*if(request()->has('category'))

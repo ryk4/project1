@@ -39,7 +39,7 @@
     <!--popular section-->
     <section class="container py-3 mt-5">
         <h2 class="h1">Popular</h2>
-        <p class="text-muted">Redaction chosen category</p>
+        <p class="text-muted">Most popular recipes</p>
         <div class="row">
             <div class="b-card col-12 col-xl-6">
                 <div class="b-card_inner">
@@ -84,21 +84,6 @@
         <h2 class="h1">New items</h2>
         <p class="text-muted">Recently added recipes</p>
         <div class="row">
-            <div class="b-card col-12 col-md-6 col-xl-3">
-                <div class="b-card_inner">
-                    <div class="b-card_image" style="background-image:url(/assets/images/reciept_1_card.jpg)"><a class="b-card_image-link" href="../../../public/object_default.html"></a>
-                        <div class="b-card_image-info-top"><span class="g-badge" style="background-color:#d44f68">Fish</span><span class="g-views"><i class="fa fa-eye"></i>12</span><span class="g-likes"><i class="fa fa-heart"></i>5</span></div>
-                        <div class="b-card_image-info-bottom"></div>
-                    </div>
-                    <div class="b-card_description">
-                        <h3 class="b-card_title"><a href="../../../public/object_default.html">Amazing fish steak</a></h3>
-                        <div class="b-card_text">
-                            <p>Pure some sugar on me.</p>
-                        </div>
-                        <div class="g-autor"><a href="index.html">Rambo</a></div>
-                    </div>
-                </div>
-            </div>
             @isset($recipes)
                 @foreach ($recipes as $recipe)
                     <div class="b-card col-12 col-md-6 col-xl-3">
