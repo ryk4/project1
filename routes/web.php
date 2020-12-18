@@ -41,7 +41,7 @@ Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::cla
 
 //UI routes
 Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
-Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter']);
+Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactPage']);
 
 

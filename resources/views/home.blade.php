@@ -11,8 +11,12 @@
             <h2 class="display-4"> <strong>Find your favourite recipes</strong></h2>
         </div>
         <div class="container py-sm-4">
-            <h5 class="mb-4 text-center"> <i>Recent categories</i></h5>
-            <div class="row justify-content-center"><a class="g-badge" style="background-color:#d44f68" href="objects_category.html">Fish</a><a class="g-badge" style="background-color:#e8a765" href="objects_category.html">Fruits</a><a class="g-badge" style="background-color:#7d6dad" href="objects_category.html">Spice</a><a class="g-badge" style="background-color:#d24a43" href="objects_category.html">Meat</a>
+            <h5 class="mb-4 text-center"> <i>Popular categories</i></h5>
+            <div class="row justify-content-center">
+                <a class="g-badge" style="background-color:#d44f68" href="{{ url('/recipes?category=Fish') }}">Fish</a>
+                <a class="g-badge" style="background-color:#e8a765" href="{{ url('/recipes?category=Fruits') }}">Fruits</a>
+                <a class="g-badge" style="background-color:#7d6dad" href="{{ url('/recipes?category=Spice') }}">Spice</a>
+                <a class="g-badge" style="background-color:#d24a43" href="{{ url('/recipes?category=Meat') }}">Meat</a>
             </div>
         </div>
     </div>
@@ -41,41 +45,63 @@
         <h2 class="h1">Popular</h2>
         <p class="text-muted">Most popular recipes</p>
         <div class="row">
-            <div class="b-card col-12 col-xl-6">
-                <div class="b-card_inner">
-                    <div class="b-card_image" style="background-image:url(/assets/images/reciept_1_card.jpg)"><a class="b-card_image-link" href="../../../public/object_default.html"></a>
-                        <div class="b-card_image-info-top"><span class="g-badge" style="background-color:#d44f68">Fish</span><span class="g-views"><i class="fa fa-eye"></i>12</span><span class="g-likes"><i class="fa fa-heart"></i>5</span></div>
-                        <div class="b-card_image-info-bottom">
-                            <h3 class="b-card_title"><a href="../../../public/object_default.html">Amazing fish steak</a></h3>
-                            <div class="g-autor"><a href="index.html">Rambo</a></div>
+
+            @isset($recipesNew)
+                <div class="b-card col-12 col-xl-6">
+                    <div class="b-card_inner">
+                        <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipesNew[0] -> id}}.jpg)">
+                            <a class="b-card_image-link" href="/recipe/{{$recipesNew[0] -> id}}"></a>
+
+                            <div class="b-card_image-info-top">
+                                @php
+                                    $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipesNew[0]->id)->content());
+                                @endphp
+                                @if(!empty($tags))
+                                    <span class="g-badge" style="background-color:#{{$tags[0]->representative_color}}">{{$tags[0]->name}}</span>
+                                    @php
+                                        unset($tags[0])
+                                    @endphp
+                                @endif
+                                <span class="g-views"><i class="fa fa-eye"></i>{{$recipesNew[0] -> viewCounter}}</span>
+                                <span class="g-likes"><i class="fa fa-heart"></i>{{$recipesNew[0] -> favouriteCounter}}</span></div>
+                            <div class="b-card_image-info-bottom">
+                                <h3 class="b-card_title"><a href="/recipe/{{$recipesNew[0] -> id}}">{{$recipesNew[0] -> title}}</a></h3>
+                                <div class="g-autor"><a href="/recipe/{{$recipesNew[0] -> id}}">Read more</a></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="b-card col-12 col-md-6 col-xl-3">
-                <div class="b-card_inner">
-                    <div class="b-card_image" style="background-image:url(/assets/images/reciept_2_card.jpg)"><a class="b-card_image-link" href="object_nohero.html"></a>
-                        <div class="b-card_image-info-top"><span class="g-badge" style="background-color:#7d6dad">Spice</span><span class="g-views"><i class="fa fa-eye"></i>0</span><span class="g-likes"><i class="fa fa-heart"></i>0</span></div>
-                        <div class="b-card_image-info-bottom">
-                            <h3 class="b-card_title"><a href="object_nohero.html">How to cook jalapeno sauce</a></h3>
-                            <div class="g-autor"><a href="index.html">John Doe</a></div>
+                @for ($i = 1; $i < 3; $i++)
+                    <div class="b-card col-12 col-md-6 col-xl-3">
+                        <div class="b-card_inner">
+                            <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipesNew[$i] -> id}}.jpg)">
+                                <a class="b-card_image-link" href="/recipe/{{$recipesNew[$i] -> id}}"></a>
+                                <div class="b-card_image-info-top">
+                                    @php
+                                        $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipesNew[$i]->id)->content());
+                                    @endphp
+                                    @if(!empty($tags))
+                                        <span class="g-badge" style="background-color:#{{$tags[0]->representative_color}}">{{$tags[0]->name}}</span>
+                                        @php
+                                            unset($tags[$i])
+                                        @endphp
+                                    @endif
+                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipesNew[$i] -> viewCounter}}</span>
+                                    <span class="g-likes"><i class="fa fa-heart"></i>{{$recipesNew[$i] -> favouriteCounter}}</span></div>
+                                <div class="b-card_image-info-bottom">
+                                    <h3 class="b-card_title"><a href="/recipe/{{$recipesNew[$i] -> id}}">{{$recipesNew[$i] -> title}}</a></h3>
+                                    <div class="g-autor"><a href="/recipe/{{$recipesNew[$i] -> id}}">Read more</a></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="b-card col-12 col-md-6 col-xl-3">
-                <div class="b-card_inner">
-                    <div class="b-card_image" style="background-image:url(/assets/images/reciept_3_card.jpg)"><a class="b-card_image-link" href="object_default_with_sidebar.html"></a>
-                        <div class="b-card_image-info-top"><span class="g-badge" style="background-color:#d24a43">Meat</span><span class="g-views"><i class="fa fa-eye"></i>6</span><span class="g-likes"><i class="fa fa-heart"></i>30</span></div>
-                        <div class="b-card_image-info-bottom">
-                            <h3 class="b-card_title"><a href="object_default_with_sidebar.html">Fineness of cooking medium rare steak</a></h3>
-                            <div class="g-autor"><a href="index.html">Rambo</a></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+                @endfor
+
+            @endisset
+
         </div>
-        <div class="clearfix text-right"><a class="link_animated" href="objects_category_with_filter.html">Watch more<i class="fa fa-angle-right"></i></a></div>
+        <div class="clearfix text-right"><a class="link_animated" href="{{ route ('recipes') }}">View more<i class="fa fa-angle-right"></i></a></div>
     </section>
     <!--popular section END-->
 
@@ -84,8 +110,8 @@
         <h2 class="h1">New items</h2>
         <p class="text-muted">Recently added recipes</p>
         <div class="row">
-            @isset($recipes)
-                @foreach ($recipes as $recipe)
+            @isset($recipesNew)
+                @foreach ($recipesNew as $recipe)
                     <div class="b-card col-12 col-md-6 col-xl-3">
                         <div class="b-card_inner">
                             <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipe -> id}}.jpg)"><a class="b-card_image-link" href="/recipe/{{$recipe -> id}}"></a>
@@ -130,7 +156,7 @@
             @endisset
         </div>
 
-        <div class="clearfix text-right"><a class="link_animated" href="objects_category_with_filter.html">Watch more<i class="fa fa-angle-right"></i></a></div>
+        <div class="clearfix text-right"><a class="link_animated" href="{{ route ('recipes') }}">View more<i class="fa fa-angle-right"></i></a></div>
     </section>
     <!--newest items section END-->
     <!--newest items section-->

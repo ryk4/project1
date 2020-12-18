@@ -37,11 +37,14 @@ class HomeController extends Controller
         $object = (array)json_decode($recipes->content());
 
         //convert into Recipe Collection
-        $collection = \App\Models\Recipe::hydrate($object)->slice(0,4); //get top 4 only
+
+        $popularCollection= \App\Models\Recipe::hydrate($object)->slice(0,3); //top 3popular
+        $newCollection = \App\Models\Recipe::hydrate($object)->slice(0,4); //top 4 new
 
         //$collection = $collection->flatten(); --OPTIONAL ?????
 
-        return view('home', ['recipes' => $collection]);
+        return view('home', ['recipesNew' => $newCollection,
+            'recipesPopular' => $popularCollection]);
     }
 
     public function contactPage(){

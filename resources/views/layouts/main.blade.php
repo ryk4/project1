@@ -16,29 +16,43 @@
 </head>
 <body>
 <header class="b-header b-header__absolute-top b-header__white">
-    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
+    <li class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
             <ul>
                 <li class="nav_block"><a href="{{ url('/home') }}">Home</a>
                 </li>
                 <li class="nav_block"><a href="{{ url('/recipes') }}">Recipes</a>
                 </li>
-                <li class="nav_block"><a>Elements<i class="fas fa-angle-down"></i></a>
-                    <ul>
-                        <li><a href="pages_cards.html">Cards</a></li>
-                        <li><a href="pages_delems.html">Design elements</a></li>
-                        <li><a href="pages_forms.html">Forms</a></li>
-                    </ul>
+                <li class="nav_block"><a href="{{ url('/contact') }}">Contact us</a>
                 </li>
-                <li class="nav_block"><a href="blog.html">Blog<i class="fas fa-angle-down"></i></a>
-                    <ul>
-                        <li><a href="post.html">Blog page v.1</a></li>
-                    </ul>
-                </li>
-                <li class="nav_block"><a href="pages_about.html">About</a>
-                </li>
-                <li class="nav_block"><a href="contact">Contact us</a>
-                </li>
+                @guest
+                    <li class="nav_block">
+                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav_block">
+                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav_block">{{ Auth::user()->name }}
+                        <ul>
+                            <li>
+                                <a href="{{ url('settings') }}">Settings</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('settings') }}">Settings2</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ ('Logout') }}</a>
+                                <form id="logout-form" action="{{ url('logout') }}" method="POST" >
+                                    @csrf
+                                </form>
+                            </li>
+
+                        </ul>
+                    </li>
+                @endguest
             </ul>
         </nav>
         <div class="span" id="menu_toggle"><i class="fa fa-bars"></i></div>
@@ -71,6 +85,7 @@
                 </li>
                 <li><a href="pages_contacts.html">Contacts</a>
                 </li>
+
             </ul>
         </nav>
         <div class="b-footer_social-list">

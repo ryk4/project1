@@ -1,87 +1,83 @@
 @extends('layouts.mainRecipe')
 
+@php
+    $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipe[0]->id)->content());
+@endphp
 
 @section('content')
-    <div class="container py-3">
-        <div class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Recipes</a></li>
-            <li class="breadcrumb-item"><a href="#">Meat</a></li>
-            <li class="breadcrumb-item active">{{$recipe[0]->title}}</li>
-        </div>
-    </div>
-    <article class="container g-block__three-rounds bg-white mb-3 p-md-5 p-3">
-        <div class="row">
-            <div class="col-12 col-md-6" "><img class="img-fluid mb-3" src="/images/recipes/{{$recipe[0]->id}}.jpg" alt="{{$recipe[0]->title}}"></div>
-            <div class="col-12 col-md-6">
-                <h1>{{$recipe[0]->title}}</h1>
-                <hr>
-                <h4>Short info</h4>
-                <p class="text-muted">
-                    <span><i class="fas fa-clock"></i> {{$recipe[0]->cookTime}} mins, </span>
-                    <span><i class="fas fa-heartbeat"></i> {{$recipe[0]->calories}} calories</span></p>
-                <p class="text-muted">
-                    <span>{{$recipe[0]->protein}}g Protein, {{$recipe[0]->carbohydrates}}g Carbohydrates, {{$recipe[0]->fat}}g Fat</span>
-                <p><strong>Autor : <a href="index.html">Rytis Klimavicius</a></strong></p>
-                <hr><a class="btn btn-primary mb-3" href="#"><i class="fas fa-bookmark mr-2"></i> bookmark</a>
-            </div>
-        </div>
+<div class="container py-3">
+<div class="breadcrumb">
+<li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{ route('recipes') }}">Recipes</a></li>
+<li class="breadcrumb-item"><a href="{{ route('recipes') }}?category={{$tags[0]->name}}">{{$tags[0]->name}}</a></li>
+<li class="breadcrumb-item active">{{$recipe[0]->title}}</li>
+</div>
+</div>
+<article class="container g-block__three-rounds bg-white mb-3 p-md-5 p-3">
+<div class="row">
+<div class="col-12 col-md-6" "><img class="img-fluid mb-3" src="/images/recipes/{{$recipe[0]->id}}.jpg" alt="{{$recipe[0]->title}}"></div>
+<div class="col-12 col-md-6">
+<h1>{{$recipe[0]->title}}</h1>
+<hr>
+<h4>Short info</h4>
+<p class="text-muted">
+<span><i class="fas fa-clock"></i> {{$recipe[0]->cookTime}} mins, </span>
+<span><i class="fas fa-heartbeat"></i> {{$recipe[0]->calories}} calories</span></p>
+<p class="text-muted">
+<span>{{$recipe[0]->protein}}g Protein, {{$recipe[0]->carbohydrates}}g Carbohydrates, {{$recipe[0]->fat}}g Fat</span>
+<p><strong>Autor : <a href="index.html">Rytis Klimavicius</a></strong></p>
+<hr><a class="btn btn-primary mb-3" href="#"><i class="fas fa-bookmark mr-2"></i> bookmark</a>
+</div>
+</div>
 
 
-        <div class="row">
-            <div class="col-12 col-lg-6 col-xl-8">
-           @php
-            /*  OLD
-                $Parsedown = new Parsedown();
-                echo $Parsedown->text($recipe[0]->steps);
-            */
-            @endphp
+<div class="row">
+<div class="col-12 col-lg-6 col-xl-8">
 
-                {!!  $recipe[0]->steps !!}
+{!!  $recipe[0]->steps !!}
 
 
-            <!-- Ingredients START-->
-            <div class="col-12 col-lg-6 col-xl-4">
-                <div class="b-list b-list__bordered b-list__white">
-                    <h4>Ingridients</h4>
+<!-- Ingredients START-->
+<div class="col-12 col-lg-6 col-xl-4">
+<div class="b-list b-list__bordered b-list__white">
+<h4>Ingridients</h4>
 
-                    @php
-                    $strIngredients = $recipe[0] -> ingredients;
-                    $counter=0;
+@php
+$strIngredients = $recipe[0] -> ingredients;
+$counter=0;
 
-                    while($strIngredients != ""){
-                        $individual = strtok($strIngredients, ";"); //extract e.g 100g-Chicken
-                        $strIngredients = str_replace($individual,"",$strIngredients);//remove it from string
-                        $strIngredients = substr_replace($strIngredients,'',0,1);
+while($strIngredients != ""){
+    $individual = strtok($strIngredients, ";"); //extract e.g 100g-Chicken
+    $strIngredients = str_replace($individual,"",$strIngredients);//remove it from string
+    $strIngredients = substr_replace($strIngredients,'',0,1);
 
-                        echo('
-                        <div class="b-list_item custom-control custom-checkbox">
-                        <input class="custom-control-input" type="checkbox" id="listItem'.$counter.'">
-                        <label class="b-list_item-title custom-control-label" for="listItem'.$counter.'"><span>'.strtok($individual, "-").'</span></label>
-                        <div class="b-list_item-value"><span>'.substr($individual, strpos($individual, "-") + 1).'</span></div>
-                         </div>
-                        ');
+    echo('
+    <div class="b-list_item custom-control custom-checkbox">
+    <input class="custom-control-input" type="checkbox" id="listItem'.$counter.'">
+    <label class="b-list_item-title custom-control-label" for="listItem'.$counter.'"><span>'.strtok($individual, "-").'</span></label>
+    <div class="b-list_item-value"><span>'.substr($individual, strpos($individual, "-") + 1).'</span></div>
+     </div>
+    ');
 
-                        $counter++;
+    $counter++;
 
-                    }
+}
 
-                    @endphp
+                        @endphp
 
-                </div>
-                <div class="g-tag-list my-3">
-                    @php
-                        $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipe[0]->id)->content());
+                    </div>
+                    <div class="g-tag-list my-3">
+                        @php
 
-                        foreach($tags as $tag){
-                            echo '<a class="g-tag-list_item" href="#">'.$tag->name.'</a>';
-                        }
-                    @endphp
+                            foreach($tags as $tag){
+                                echo '<a class="g-tag-list_item" href="#">'.$tag->name.'</a>';
+                            }
+                        @endphp
 
 
+                    </div>
                 </div>
             </div>
-
             <!-- Ingredients END-->
 
         </div>

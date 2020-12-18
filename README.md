@@ -14,6 +14,22 @@ npm run && npm install
 6. php artisan migrate:fresh --create a fresh database using database migration files.
 Optional 7. php artisan db:Seed --fills database with starter/dummy data from Database/Seeders.
 
+-----Steps required to initialise a brand new project and push onto repository----<br>
+For vue.js project:
+1. Create a repository on github.com
+2. Open cmd and navigate to project folder 
+3. Git init --initialize the local directory as a Git repository
+4. Git add * --add all changes and prepare them for commit
+5. Git commit -m "initial commit" --commit the changes onto local repository
+6. Git remote add origin remote {project_url_from_github.com}
+7. Git push -f origin master --push onto master branch on github
+
+
+
+
+
+For laravel project
+
 -----Push/Pull to repository---- <br>
 git status --view files that are ready to commit <br>
 git add fileName --adds the files in the local repo and stages them for commit <br>
