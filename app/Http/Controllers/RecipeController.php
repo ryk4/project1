@@ -12,6 +12,40 @@ class RecipeController extends Controller
 {
 
 
+    //test ===============================================
+    public function recipeTest ($id){
+        //call api get recipes
+      /*  $recipe = app(RecipeController::class)->getRecipe($id); //working
+
+
+        //check if response is valid
+        if($recipe->status() != 200){
+            abort(404);
+        }
+
+
+        //convert json response into
+        //$content = json_decode($recipe->content());
+
+        $content = json_decode($recipe->content());
+
+
+        //convert into Recipe Collection
+        $collection = \App\Models\Recipe::hydrate($content);
+
+
+        $collection = $collection->flatten();*/
+
+
+        return view('recipes/recipeTest');
+    }
+
+
+
+
+    
+
+
     //get all recipes + recipeDetails
     //ADD FILTERING
     public function getAllRecipes()
@@ -56,13 +90,15 @@ class RecipeController extends Controller
     public function getRecipe($id)
     {
         if (Recipe::where('id', $id)->exists()) {
+
             $recipe = DB::table('recipes')
                 ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
                 ->select('recipes.*', 'recipeDetails.*')
                 ->where('recipes.id', $id)
-                ->get()->toJson(JSON_PRETTY_PRINT);
+                ->get();
 
-            return response($recipe, 200);
+           // dd(json_encode($recipe->first()));
+            return response(json_encode($recipe->first()), 200);
         } else {
             return response()->json([
                 "message" => "Recipe not found"
@@ -247,14 +283,23 @@ class RecipeController extends Controller
         $content = json_decode($recipe->content());
 
 
+
         //convert into Recipe Collection
-        $collection = \App\Models\Recipe::hydrate($content);
+       // $collection = \App\Models\Recipe::hydrate($content);
 
 
-        $collection = $collection->flatten();
+       // $collection = $collection->flatten();
 
 
-        return view('recipes/recipe', ['recipe' => $collection]);
+        return view('recipes/recipe',['recipe' => $content]);
+    }
+
+
+    //helpper function
+
+    //converts recipe steps markdown to proper HTML
+    public function RecipeStepsMarkdown($markdown){
+
     }
 
 }

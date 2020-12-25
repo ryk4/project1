@@ -10,10 +10,24 @@
     <!--decorative-->
     <meta name="theme-color" content="#d44f68">
     <!--decorative END-->
+
+    <!-- Vue.js -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/preload.css">
+
+
+    <!-- css -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
 </head>
 <body>
+<div id="app">
+
 <header class="b-header b-header__default">
     <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1pngPurple.png" alt="Logo"/></a>
         <nav class="b-header_nav">
@@ -64,54 +78,19 @@
 <!-- HEADER END -->
 
 <main>
+
     @yield('content')
+
 </main>
 
 
-<footer class="b-footer">
-    <div class="container d-flex flex-wrap">
-        <nav class="b-footer_navigation">
-            <ul>
-                <li><a href="{{ url('/home') }}">Home</a>
-                </li>
-                <li><a href="objects_category.html">Category</a>
-                </li>
-                <li><a>Elements</a>
-                </li>
-                <li><a href="blog.html">Blog</a>
-                </li>
-                <li><a href="pages_about.html">About</a>
-                </li>
-                <li><a href="pages_contacts.html">Contacts</a>
-                </li>
-            </ul>
-        </nav>
-        <div class="b-footer_social-list">
-            <ul>
-                <li><a href=""><i class="fab fa-facebook" title="Facebook"></i></a></li>
-                <li><a href=""><i class="fab fa-flickr" title="Flickr"></i></a></li>
-                <li><a href=""><i class="fab fa-twitter" title="Twitter"></i></a></li>
-                <li><a href=""><i class="fab fa-pinterest" title="Pinterest"></i></a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row"></div>
-    </div>
-</footer>
-<!--Base style-->
-<link rel="stylesheet" href="/assets/css/style.css">
-<link rel="stylesheet" href="/css/main.css">
+    <footer-component></footer-component>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<!--Base js-->
-<script src="/assets/js/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<!--App js-->
-<script src="/assets/js/app.js"></script>
-<!-- Enable tooltips-->
-<script>$(function () { $('[data-toggle="tooltip"]').tooltip() })</script>
+
+</div>
+
+
+
 </body>
 </html>
 

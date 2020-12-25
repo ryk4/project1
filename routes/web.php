@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//test pages ========================
+Route::get('/homeTest', [App\Http\Controllers\HomeController::class, 'homeTest']);
+Route::get('/recipeTest/{id}', [App\Http\Controllers\RecipeController::class, 'recipeTest']);
+
+
 //welcome page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -32,7 +38,7 @@ Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAl
 Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
 
 Route::middleware('auth:api')->post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);
-Route::middleware('auth:api')->get('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipe']);
+Route::get('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipe']);
 Route::middleware('auth:api')->put('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'updateRecipe']);
 Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'deleteRecipe']);
 

@@ -52,6 +52,13 @@ class HomeController extends Controller
         return view('pages/contact');
     }
 
+    //tests
+    public function homeTest(){
+
+        return view('homeTest');
+    }
+
+
 
     //API
 
