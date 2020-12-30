@@ -1,5 +1,3 @@
-
-<!--header-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +20,22 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    
+    <script>
+        function initMap() {
+            var uluru = {lat: 54.723460, lng: 25.337933};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: uluru,
+                gestureHandling: 'cooperative'
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYrT3I2aBq4314tkfMn93EF3B3ph-cQ98&amp;callback=initMap"></script>
 
 
 </head>
@@ -38,6 +52,7 @@
                 </li>
                 <li class="nav_block"><a href="{{ url('/contact') }}">Contact us</a>
                 </li>
+                
                 @guest
                     <li class="nav_block">
                         <a href="{{ route('login') }}">{{ __('Login') }}</a>

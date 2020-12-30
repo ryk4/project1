@@ -18,15 +18,20 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('footer-component', require('./components/recipePage/FooterComponent.vue').default);
 
+//Recipe
 Vue.component('recipe-component', require('./components/RecipeComponent.vue').default);
 Vue.component('description-component', require('./components/recipePage/DescriptionComponent.vue').default);
 Vue.component('steps-component', require('./components/recipePage/StepsComponent.vue').default);
 Vue.component('ingredients-component', require('./components/recipePage/IngredientsComponent.vue').default);
 
+//recipes
+Vue.component('recipes-component', require('./components/RecipesComponent.vue').default);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('footer-component', require('./components/recipePage/FooterComponent.vue').default);
+
+Vue.component('contact-top-component', require('./components/contact/contactTop.vue').default);
+Vue.component('get-in-touch-component', require('./components/contact/getInTouch.vue').default);
 
 
 /**
@@ -34,6 +39,14 @@ Vue.component('footer-component', require('./components/recipePage/FooterCompone
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+ //pagination
+
+ Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+//pagination
+
 
 const app = new Vue({
     el: '#app',

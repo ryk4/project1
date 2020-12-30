@@ -39,16 +39,10 @@ export default {
         }
     },
     mounted() {
-        console.log('2. Steps component mounted.');
-
-
-         this.ParseStepsMarkdown(this.steps)
-
-
+        this.ParseStepsMarkdown(this.steps)
     },
     methods: {
         toggleCheckBox(recipe,event){
-            console.log("togling recipe! :"+recipe.stageTitle);
             this.stages[recipe.id].hidden =  !this.stages[recipe.id].hidden;
 
         },
@@ -59,7 +53,6 @@ export default {
 
             this.title = obj.Title;
             this.description = obj.Description;
-
 
             obj.Stage.forEach(element => {
                 this.fullStage.stageTitle = element.StageTitle;

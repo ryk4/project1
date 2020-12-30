@@ -12,9 +12,6 @@ class ApiTokenController extends Controller
     {
         //validate if the $request is coming from authenticated user
 
-
-
-
         $token = Str::random(60);
 
         $request->user()->forceFill([

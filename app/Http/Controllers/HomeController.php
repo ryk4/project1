@@ -43,8 +43,8 @@ class HomeController extends Controller
 
         //$collection = $collection->flatten(); --OPTIONAL ?????
 
-        return view('home', ['recipesNew' => $newCollection,
-            'recipesPopular' => $popularCollection]);
+        //return view('home', ['recipesNew' => $newCollection,'recipesPopular' => $popularCollection]);
+        return view('home');
     }
 
     public function contactPage(){
@@ -71,9 +71,9 @@ class HomeController extends Controller
         //send the actual email
         $data = array(
             'subject' => $subject,
-            'name'=> $request -> inputName,
-            'email'=> $request -> inputEmail,
-            'comment' => $request -> inputComment);
+            'name'=> $request -> name,
+            'email'=> $request -> email,
+            'comment' => $request -> comment);
 
         Mail::send(['text'=>'mail'], $data, function($message) {
             $message->to('foodlifting.contact@gmail.com', 'Tutorials Point')->subject
@@ -82,7 +82,11 @@ class HomeController extends Controller
         });
 
 
-        return view('pages/contact');
+        //return a valid response
+        return response()->json([
+            "message" => "email sent"
+        ], 201);
+
 
     }
 }

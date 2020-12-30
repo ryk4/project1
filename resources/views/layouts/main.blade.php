@@ -18,6 +18,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/preload.css">
 
+
     <!--Base js =================================================================IDK IF NEEDED =================================================================
 
 
@@ -34,6 +35,14 @@
 <header class="b-header b-header__absolute-top b-header__white">
     <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
+            
+            <form method="post" action="{{ action('App\Http\Controllers\ApiTokenController@generateToken') }}" accept-charset="UTF-8">
+                <button type="submit" class="btn btn-primary">
+                    {{ __('generateToken') }}
+                </button>
+
+            </form>
+
             <ul>
                 <li class="nav_block"><a href="{{ url('/home') }}">Home</a>
                 </li>

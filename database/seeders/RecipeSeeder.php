@@ -44,8 +44,7 @@ class RecipeSeeder extends Seeder
             'id' => '2',
             'title' => 'Beef with Pasta',
             'ingredients' => '500g Beef; 200g Pasta; Ketchup sauce;',
-            'steps' => '1. Season the beef. 2. Cook the beef. 3. Boil water and cook pasta until cooked. 4. Add everything into
-            frying pan and stir for 10mins.',
+            'steps' => '{ "Title": "Cooking chicken and rice", "Description": "Chicken and rice is perhaps one of the simpliest and most popular recipe out there. It requires little to no knowledge in the culinary area.", "Stage": [ { "StageTitle": "Stage 1", "StageContent": "Season chicken using favourite spices and leave to rest for 10mins. Pour water into pan until half full and heat the water until it\'s boiling." }, { "StageTitle": "Stage 2", "StageContent": "Once the water is boiling, place the rice inside it and cook for 15min. Note: stir rice using a spoon every 5mins, so it\'s not stuck together and cooks evenly." }, { "StageTitle": "Stage 3", "StageContent": "Pour some oil into the frying pan and cook both sides of the chicken for at least 5mins. Once you think the chicken is cooked, cut the middle to make sure it has been cooked properly." }, { "StageTitle": "Stage 4", "StageContent": "Chop cocumber/tomato or any other salad how you like and place everything in a plate. That is it for this simple recipe." } ] }',
             'image' => 'default img.',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
@@ -69,7 +68,7 @@ class RecipeSeeder extends Seeder
             'id' => '3',
             'title' => 'Pizza',
             'ingredients' => '100 sausage; 200g pizza bread; Ketchup sauce; Mayo',
-            'steps' => '1. Create pica. 2. Cook it at 450.',
+            'steps' => '{ "Title": "Cooking chicken and rice", "Description": "Chicken and rice is perhaps one of the simpliest and most popular recipe out there. It requires little to no knowledge in the culinary area.", "Stage": [ { "StageTitle": "Stage 1", "StageContent": "Season chicken using favourite spices and leave to rest for 10mins. Pour water into pan until half full and heat the water until it\'s boiling." }, { "StageTitle": "Stage 2", "StageContent": "Once the water is boiling, place the rice inside it and cook for 15min. Note: stir rice using a spoon every 5mins, so it\'s not stuck together and cooks evenly." }, { "StageTitle": "Stage 3", "StageContent": "Pour some oil into the frying pan and cook both sides of the chicken for at least 5mins. Once you think the chicken is cooked, cut the middle to make sure it has been cooked properly." }, { "StageTitle": "Stage 4", "StageContent": "Chop cocumber/tomato or any other salad how you like and place everything in a plate. That is it for this simple recipe." } ] }',
             'image' => 'default img.',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

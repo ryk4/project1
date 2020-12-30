@@ -11,78 +11,34 @@ use Storage;
 class RecipeController extends Controller
 {
 
-
-    //test ===============================================
-    public function recipeTest ($id){
-        //call api get recipes
-      /*  $recipe = app(RecipeController::class)->getRecipe($id); //working
-
-
-        //check if response is valid
-        if($recipe->status() != 200){
-            abort(404);
-        }
-
-
-        //convert json response into
-        //$content = json_decode($recipe->content());
-
-        $content = json_decode($recipe->content());
-
-
-        //convert into Recipe Collection
-        $collection = \App\Models\Recipe::hydrate($content);
-
-
-        $collection = $collection->flatten();*/
-
-
-        return view('recipes/recipeTest');
-    }
-
-
-
-
-    
-
-
     //get all recipes + recipeDetails
     //ADD FILTERING
     public function getAllRecipes()
     {
+
         //find all recipe ID that are allowed after filtering out
         $categories = DB::table('recipes_categories')
             ->join('categories','recipes_categories.categories_id','=','categories.id')
             ->when(request('category'), function ($query, $role) {
-                //extract several filters
+
                 $arr = explode(',', $role); //split category from 1 string into array of strings.
 
                 return $query->whereIn('name', $arr);
             })->get();
 
-/*
-        dd($categories->pluck('id'));
-
-        $collection2 = collect(['product_id' => 1, 'name' => 'Desk', 'price' => 100, 'discount' => false]);
-
-        $filtered2 = $collection2;
-
-        dd($filtered2->only(['product_id', 'name']));
-*/
-        //dd($categories->pluck('recipes_id'));
-
-
-
-
-        //$recipes = Recipe::get()->toJson(JSON_PRETTY_PRINT); OLD
         $recipes = DB::table('recipes')
             ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
-            ->select('recipes.*', 'recipeDetails.*')
+            ->join('recipes_categories','recipes.id','=','recipes_categories.recipes_id')
+            ->join('categories','recipes_categories.categories_id','=','categories.id')
+            ->select('recipes.*', 'recipeDetails.*','recipes_categories.categories_id','categories.name','categories.description','categories.representative_color')
+            ->whereIn('recipes_categories.categories_id',['1','2','3','4'])//required in recipes page to display 'main' tag
             ->whereIn('recipes.id',$categories->pluck('recipes_id'))
-            ->get()->toJson(JSON_PRETTY_PRINT);
+            ->get();
 
 
-        return response($recipes, 200);
+        $collection = CollectionHelper::paginate($recipes, 6);    
+
+        return response($collection, 200);
 
     }
 
@@ -139,7 +95,6 @@ class RecipeController extends Controller
 
         //create Recipe model
         $recipe = new Recipe;
-       // $recipe->id =  Integer::random(7);
 
         $recipe->title = $request -> title;
         $recipe->ingredients = $request -> ingredients;
@@ -208,98 +163,24 @@ class RecipeController extends Controller
 
     public function getRecipesFilter()
     {
-
-        //apply filter into
-        $recipes = app(RecipeController::class)->getAllRecipes(); //working
-
-
-        //check if response is valid
-        if($recipes->status() != 200){
-            abort(404);
-        }
-
-
-        //convert json response into
-        $object = (array)json_decode($recipes->content());
-
-        //convert into Recipe Collection
-        $collection = \App\Models\Recipe::hydrate($object);
-
-        //$collection = $collection->flatten(); --OPTIONAL ?????
-
-
-        //filter + order logic
-
-        //check if request has filter value
-
-       // dd($collection);
-
-        $collection = CollectionHelper::paginate($collection, 6);
-
-
-        /*if(request()->has('category'))
-        {
-            $collection = \App\Models\Recipe::where('category',request('category')); //--removes
-
-        }*/
-
-        /*if(request()->has('category'))
-        {
-            $collection = \App\Models\Recipe::where('category',request('category')); //--removes
-
-        }
-        else
-        {
-            $collection = \App\Models\Recipe::Paginate(9); //--removes
-
-        }*/
-
-
-
-
-        //$collection = Paginator::make($collection, 50, 5);
-
-
-        return view('recipes/recipes', ['recipes' => $collection]);
+        return view('recipes/recipes');
 
     }
 
     public function recipe($id)
     {
-
         //call api get recipes
         $recipe = app(RecipeController::class)->getRecipe($id); //working
-
 
         //check if response is valid
         if($recipe->status() != 200){
             abort(404);
         }
 
-
-        //convert json response into
-        //$content = json_decode($recipe->content());
-
         $content = json_decode($recipe->content());
-
-
-
-        //convert into Recipe Collection
-       // $collection = \App\Models\Recipe::hydrate($content);
-
-
-       // $collection = $collection->flatten();
-
 
         return view('recipes/recipe',['recipe' => $content]);
     }
 
-
-    //helpper function
-
-    //converts recipe steps markdown to proper HTML
-    public function RecipeStepsMarkdown($markdown){
-
-    }
 
 }

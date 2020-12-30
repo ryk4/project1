@@ -34,7 +34,6 @@
 
         },
         mounted() {
-            console.log(' 1.Description Component is mounted.')
 
         }
 

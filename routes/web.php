@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 
 //test pages ========================
-Route::get('/homeTest', [App\Http\Controllers\HomeController::class, 'homeTest']);
-Route::get('/recipeTest/{id}', [App\Http\Controllers\RecipeController::class, 'recipeTest']);
-
 
 //welcome page
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -30,11 +27,16 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Home API
-Route::post('/sendEmail', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('sendEmail');;
 
 
 //Recipe API Controller
+//Route::middleware('auth:api')->post('/api/sendEmail', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('sendEmail'); //add routes
+Route::post('/api/sendEmail', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('sendEmail'); //add routes
+
+
 Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
+//Route::middleware('auth:api')->get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
+
 Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
 
 Route::middleware('auth:api')->post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);

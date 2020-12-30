@@ -10,14 +10,19 @@
                 </div>
             </div>
         </div>
-        <div class="g-tag-list my-3"><a class="g-tag-list_item" href="#">fish</a><a class="g-tag-list_item" href="#">like a boss</a><a class="g-tag-list_item" href="#">salt</a></div>
+        <div class="g-tag-list my-3">
+            <span  v-for="tag in this.tags" :key="tag.name">
+                <a class="g-tag-list_item" href="#">{{tag.name}}</a>        
+            </span>
         </div>
+
+    </div>
 </template>
 
 <script>
 export default {
     name: 'ingredients-component',
-    props: ['ingredientsInJson'],
+    props: ['ingredientsInJson','recipeID'],
     data: function() {
         return{
             ingredients: [],
@@ -28,25 +33,20 @@ export default {
                 unit: ''
             },
             tags: [],
-            tag: {
+            tag: { //not actually needed, just for reference. object is built automatically when doing push()
                 name: '',
-                color: ''
+                description: ''
             }
         }
     },
     mounted(){
-        console.log('3. Ingredients component mounted.');
         this.ParseIngredients(this.ingredientsInJson);
+        this.FetchAndParseTags();
     },
     methods: {
         ParseIngredients(jsonIngredients){
 
-            console.log('=logic bef:'+jsonIngredients);
-
             var obj = JSON.parse(jsonIngredients);
-
-            console.log('=logic aft:'+obj);
-
 
             obj.Ingredients.forEach(element => {
                 this.ingredients.push({
@@ -56,7 +56,18 @@ export default {
                     unit: element.Unit });
             });
         },
-
+        FetchAndParseTags(){
+            //call api
+            fetch(`/api/recipe/tags/${this.recipeID}`)
+                .then(res => res.json())
+                .then(res => {                
+                    res.forEach(element => {
+                        this.tags.push({
+                            name : element.name,
+                            description: element.description});
+                    });    
+                })        
+        }
     }
 }
 </script>

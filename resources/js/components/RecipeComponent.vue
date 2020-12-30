@@ -1,18 +1,21 @@
 <template>
     <div>
-        <article class="container g-block__three-rounds bg-white mb-3 p-md-5 p-3">
-            
-                <div class="Description">
-                    <description-component v-if="loaded" v-bind:recipe="recipe"></description-component>
-                </div>
+        <div class="container py-3">
+            <div class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/recipes">Recipes</a></li>
+                <li class="breadcrumb-item"><a href="#">Add simple tag</a></li>
                 
+                <li class="breadcrumb-item active">{{this.recipe.title}}</li>
+            </div>
+
+        </div>
+        <article class="container g-block__three-rounds bg-white mb-3 p-md-5 p-3">               
+                <description-component v-if="loaded" v-bind:recipe="recipe"></description-component>
+                           
                 <div class="row">
-
                     <steps-component v-if="loaded" v-bind:steps="stepsContent"></steps-component>
-
-                    <ingredients-component v-if="loaded" v-bind:ingredientsInJson="ingredients"></ingredients-component>
-            
-            
+                    <ingredients-component v-if="loaded" v-bind:ingredientsInJson="ingredients" :recipeID="recipe.id"></ingredients-component>
                 </div>
             </article>
     </div>
@@ -46,19 +49,13 @@ export default {
       }
   },
     mounted() {
-        console.log('Recipe component mounted after everything inside.');
-         this.fetchArticle();
+        this.fetchArticle();
 
-
-    },
-     created() {
-        console.log('created runs first. fetch recipe here')
 
     },
     methods: {
          fetchArticle() {
-            console.log('running fetch article');
-            fetch('/api/recipe/1')
+            fetch(`/api/recipe/1`)
             .then(res => res.json())
             .then(res => {                
                 this.recipe.id = res.id;
@@ -78,8 +75,9 @@ export default {
 
             })
 
-            console.log('fetched all stuff ');
-
+        },
+        goTo(route) {
+            window.location = route;
         }
     },
 }
