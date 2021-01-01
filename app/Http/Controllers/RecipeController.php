@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Models\RecipeDetail;
+use App\Models\Recipes_categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Storage;
@@ -83,26 +84,57 @@ class RecipeController extends Controller
     //create a single recipe
     public function createRecipe(Request $request)
     {
-        //create details first since it has FK in Recipe
+        //validate request first
+        $validated = $request->validate([
+            'calories' => 'required|max:255',
+            'servings' => 'required',
+            'ingredients' => 'required',
+            'image' => 'required',
+            'steps' => 'required',
+            'categories' => 'required',
 
+        ]);
+    
+
+        //create details first since it has FK in Recipe
         $recipeDetail = new RecipeDetail();
         $recipeDetail->calories = $request->calories;
         $recipeDetail->protein = $request->protein;
         $recipeDetail->carbohydrates = $request->carbohydrates;
         $recipeDetail->fat = $request->fat;
+        $recipeDetail->sodium = $request->sodium;
+        $recipeDetail->fiber = $request->fiber;
+        $recipeDetail->sugar = $request->sugar;
+        $recipeDetail->servings = $request->servings;
+        $recipeDetail->cookTime = $request->cookTime;
 
         $recipeDetail->save();
 
         //create Recipe model
         $recipe = new Recipe;
 
-        $recipe->title = $request -> title;
-        $recipe->ingredients = $request -> ingredients;
-        $recipe->image = $request -> image;
-        $recipe->tags = $request -> tags;
-        $recipe->steps = $request -> steps;
+        $recipe->title = $request->title;
+        $recipe->ingredients = $request->ingredients;
+        $recipe->image = $request->image;
+        $recipe->steps = $request->steps;
         $recipe->recipeDetails_id = $recipeDetail->id;
         $recipe->save();
+
+        //return $request->categories;
+
+
+        //insert to recipies_categories
+
+        foreach ($request->categories as $categoryId) {
+            $categories = new recipes_categories;
+
+            $categories->recipes_id = $recipe->id;
+            $categories->categories_id = $categoryId;
+            $categories->save();
+            //dd($categoryId);
+
+        }
+
 
         //return a valid response
         return response()->json([
@@ -164,6 +196,12 @@ class RecipeController extends Controller
     public function getRecipesFilter()
     {
         return view('recipes/recipes');
+
+    }
+
+    public function recipeAdd()
+    {
+        return view('recipes/recipeAdd');
 
     }
 

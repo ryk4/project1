@@ -33,6 +33,7 @@ Vue.component('recipes-component', require('./components/RecipesComponent.vue').
 Vue.component('contact-top-component', require('./components/contact/contactTop.vue').default);
 Vue.component('get-in-touch-component', require('./components/contact/getInTouch.vue').default);
 
+Vue.component('recipe-add-component', require('./components/RecipeAdd/RecipeAddComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,12 +41,12 @@ Vue.component('get-in-touch-component', require('./components/contact/getInTouch
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- //pagination
 
  Vue.component('pagination', require('laravel-vue-pagination'));
 
 
-//pagination
+
+
 
 
 const app = new Vue({

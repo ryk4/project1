@@ -36,17 +36,20 @@
     <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
             
-            <form method="post" action="{{ action('App\Http\Controllers\ApiTokenController@generateToken') }}" accept-charset="UTF-8">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('generateToken') }}
-                </button>
-
-            </form>
 
             <ul>
+                
                 <li class="nav_block"><a href="{{ url('/home') }}">Home</a>
                 </li>
                 <li class="nav_block"><a href="{{ url('/recipes') }}">Recipes</a>
+                </li>
+                <li>  
+                @guest 
+                @else                
+                    @if (Auth::user()->user_level<=1)
+                        <a href='{{url('/recipe/add')}}'>Add recipes</a>
+                    @endif
+                @endguest
                 </li>
                 <li class="nav_block"><a href="{{ url('/contact') }}">Contact us</a>
                 </li>
@@ -60,6 +63,14 @@
                         </li>
                     @endif
                 @else
+                    
+                    <li class="nav_block">
+                        <form method="post" action="{{ action('App\Http\Controllers\ApiTokenController@generateToken') }}" accept-charset="UTF-8">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('generateToken') }}
+                            </button>
+                        </form>
+                    </li>
                     <li class="nav_block">{{ Auth::user()->name }}
                         <ul>
                             <li>

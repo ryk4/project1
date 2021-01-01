@@ -39,7 +39,7 @@ Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAl
 
 Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
 
-Route::middleware('auth:api')->post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);
+Route::post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);
 Route::get('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipe']);
 Route::middleware('auth:api')->put('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'updateRecipe']);
 Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'deleteRecipe']);
@@ -48,6 +48,8 @@ Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\
 Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::class, 'generateToken'])->name('generateToken');
 
 //UI routes
+Route::get('/recipe/add', [App\Http\Controllers\RecipeController::class, 'recipeAdd'])->name('recipeAdd');
+
 Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
 Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactPage']);

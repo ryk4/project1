@@ -46,7 +46,6 @@
                 </div>
 
                 <!-- Recipes START -->
-                
                 <div v-if="recipesFetched" >
                     <div class="row">
                         <div class="b-card col-12 col-lg-6 col-xl-4" v-for="r in recipes.data" :key="r.id">
@@ -117,7 +116,8 @@ export default {
                     selected : false
 
                 },
-            ],
+            ]
+
         }
     },
     mounted() {

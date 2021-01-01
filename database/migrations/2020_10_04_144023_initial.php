@@ -15,14 +15,14 @@ class Initial extends Migration
     {
         Schema::create('recipeDetails', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
-            $table->integer('calories')->default(null);
-            $table->integer('protein')->default(null);;
-            $table->integer('carbohydrates')->default(null);;
-            $table->integer('fat')->default(null);;
+            $table->integer('calories')->default(0);
+            $table->integer('protein')->nullable()->default(null);
+            $table->integer('carbohydrates')->nullable()->default(null);;
+            $table->integer('fat')->nullable()->default(null);;
             $table->integer('sodium')->nullable();
             $table->integer('fiber')->nullable();
             $table->integer('sugar')->nullable();
-            $table->integer('servings')->nullable();
+            $table->integer('servings')->default('1');
             $table->integer('cookTime')->nullable();
 
 
