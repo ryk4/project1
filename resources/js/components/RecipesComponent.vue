@@ -130,7 +130,7 @@ export default {
         fetchRecipesAPI(page = 1){//if page not supplied, then 1
             console.log('fetching recipes again');
 
-            //filter by categories list
+            //add categorie's names ONLY to a single array
             var categories = this.categories.filter(vals => vals.selected).map(element => element.name)
 
             axios.get('/api/recipes?page=' + page+'&category='+categories.join(','))

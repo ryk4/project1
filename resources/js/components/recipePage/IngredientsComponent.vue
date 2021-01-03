@@ -48,10 +48,10 @@ export default {
 
             var obj = JSON.parse(jsonIngredients);
 
-            obj.Ingredients.forEach(element => {
+            obj.forEach(element => {
                 this.ingredients.push({
                     id : this.ingredient.id++,
-                    name : element.Ingredient,
+                    name : element.Name,
                     quantity: element.Quantity,
                     unit: element.Unit });
             });

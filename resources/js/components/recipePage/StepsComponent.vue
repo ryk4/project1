@@ -54,7 +54,7 @@ export default {
             this.title = obj.Title;
             this.description = obj.Description;
 
-            obj.Stage.forEach(element => {
+            obj.Stages.forEach(element => {
                 this.fullStage.stageTitle = element.StageTitle;
                 this.fullStage.stageDescription = element.StageContent;
                 this.stages.push({

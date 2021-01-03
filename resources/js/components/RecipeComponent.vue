@@ -29,6 +29,7 @@ import StepsComponent from './recipePage/StepsComponent.vue'
 
 export default {
   components: { DescriptionComponent, StepsComponent, IngredientsComponent },
+  props: ['id'],
   data: function() {
       return {
           recipe :{
@@ -51,11 +52,10 @@ export default {
     mounted() {
         this.fetchArticle();
 
-
     },
     methods: {
          fetchArticle() {
-            fetch(`/api/recipe/1`)
+            fetch(`/api/recipe/${this.id}`)
             .then(res => res.json())
             .then(res => {                
                 this.recipe.id = res.id;

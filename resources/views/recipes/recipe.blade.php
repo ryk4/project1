@@ -3,8 +3,7 @@
 @section('content')
 
 
-
-<recipe-component></recipe-component>
+<recipe-component :id="{{$id}}"></recipe-component>
 
 
 @endsection

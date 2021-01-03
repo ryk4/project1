@@ -1,6 +1,7 @@
 <template >
     <div class="row">
-        <div class="col-12 col-md-6" ><img class="img-fluid mb-3" :src="`/images/recipes/${this.recipe.id}.jpg`" alt="HHH"></div>
+        <!--<div class="col-12 col-md-6" ><img class="img-fluid mb-3" :src="`/images/recipes/${this.recipe.id}.jpg`" alt="HHH"></div>-->
+        <div class="col-12 col-md-6" ><img class="img-fluid mb-3" :src="`/images/recipes/1.jpg`" alt="HHH"></div>
         <div class="col-12 col-md-6">
             <h1>{{this.recipe.title}}</h1>
             <hr>

@@ -35,6 +35,10 @@ Vue.component('get-in-touch-component', require('./components/contact/getInTouch
 
 Vue.component('recipe-add-component', require('./components/RecipeAdd/RecipeAddComponent.vue').default);
 
+import VueSimpleAlert from "vue-simple-alert";
+Vue.use(VueSimpleAlert);
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

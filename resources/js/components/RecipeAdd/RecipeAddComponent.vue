@@ -8,47 +8,45 @@
     <div class="row recipeDetails">
         <div class="inputArea col-lg-4">
             <label for="titleInput">Title</label>
-            <input  class="form-control" id="titleInput" aria-describedby="titleHelp" placeholder="Enter title">        
+            <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
+        </div>
+        <div class="inputArea col-lg-2">
         </div>
         <div class="inputArea col-lg-2">
             <label>Calories</label>
-            <input  class="form-control" placeholder="Cals">     
+            <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
         </div>
         <div class="inputArea col-lg-2">
             <label>Cook time (mins)</label>
-            <input  class="form-control" id="cookTime" value=20  >
+            <input  class="form-control" v-model="recipe.cookTime" value=20  >
         </div>
         <div class="inputArea col-lg-2">
             <label>Portions</label>
-            <input  class="form-control" id="portion" placeholder="Servings" value=1 required>
+            <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
         </div>
         <div class="inputArea col-lg-2">
             <label>Carbohydrates</label>
-            <input  class="form-control" >
+            <input  class="form-control" v-model="recipe.carbohydrates" >
         </div>
         <div class="inputArea col-lg-2">
             <label>Protein</label>
-            <input  class="form-control" >
+            <input  class="form-control" v-model="recipe.protein">
         </div>
         <div class="inputArea col-lg-2">
             <label>Fat</label>
-            <input  class="form-control" >
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Fat</label>
-            <input  class="form-control" >
+            <input  class="form-control" v-model="recipe.fat">
         </div>
         <div class="inputArea col-lg-2">
             <label>Sodium</label>
-            <input  class="form-control" >
+            <input  class="form-control" v-model="recipe.sodium" disabled>
         </div>
         <div class="inputArea col-lg-2">
             <label>Fiber</label>
-            <input  class="form-control" >
+            <input  class="form-control" v-model="recipe.fiber" disabled>
         </div>
         <div class="inputArea col-lg-2">
             <label>Sugar</label>
-            <input  class="form-control">
+            <input  class="form-control" v-model="recipe.sugar" disabled>
         </div>
     </div><br><br>
     
@@ -79,8 +77,8 @@
             <ul class="list-group">
                 <li v-for="(ingredient, index) in this.ingredients" :key="index" class="list-group-item d-flex justify-content-between align-items-center"
                 @click="ingredientRemove(index)">
-                    {{ingredient.name}}
-                    <span class="badge badge-primary badge-pill" >{{ingredient.amount}} {{ingredient.unit}}</span>
+                    {{ingredient.Name}}
+                    <span class="badge badge-primary badge-pill" >{{ingredient.Quantity}} {{ingredient.Unit}}</span>
                 </li>
                 
             </ul>
@@ -93,15 +91,15 @@
                 <label>Recipe Description</label>
             </div>
             <div class="col col-lg-9">
-                    <textarea class="form-control" id="textAreaStage1" rows="2"></textarea>
+                    <textarea class="form-control" id="textAreaStage1" rows="2" v-model="steps.Description"></textarea>
             </div>
         </div>
-        <div class="row col-11" v-for="(stage,index) in this.stages" :key="index">
+        <div class="row col-11" v-for="(stage,index) in this.steps.Stages" :key="index">
             <div class="col col-lg-3  stepsColumn">
-                <input  class="form-control" placeholder="Stage 1" v-model="stage.stageTitle">
+                <input  class="form-control" placeholder="Stage 1" v-model="stage.StageTitle">
             </div>
             <div class="col col-lg-7 stepsColumn">
-                <textarea class="form-control" rows="2" v-model="stage.stageDescription"></textarea>
+                <textarea class="form-control" rows="2" v-model="stage.StageContent"></textarea>
             </div>
             <div class="col col-lg-2 stepsColumn">
                 <button type="button" class="btn btn-primary" @click="removeStage(index)">Remove</button>
@@ -117,26 +115,26 @@
         <div class="col-lg-4">
             <label>Category</label>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-            <label class="form-check-label" for="exampleRadios1">
+            <input class="form-check-input" type="radio" id="meatButton" value="1"  v-model="mainCategory">
+            <label class="form-check-label" for="meatButton">
                 Meat
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
+            <input class="form-check-input" type="radio" id="fishButton" value="2" v-model="mainCategory">
+            <label class="form-check-label" for="fishButton">
                 Fish
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
+            <input class="form-check-input" type="radio" id="vegButton" value="3" v-model="mainCategory">
+            <label class="form-check-label" for="vegButton">
                 Vegetarian
             </label>
             </div>
             <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4">
-            <label class="form-check-label" for="exampleRadios4">
+            <input class="form-check-input" type="radio" id="fruitButton" value="4" v-model="mainCategory">
+            <label class="form-check-label" for="fruitButton">
                 Fruit
             </label>
             </div>
@@ -145,19 +143,19 @@
         <div class="form-check col-lg-4">
             <label>Optional tags</label>
             <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="5" id="defaultCheck1" v-model="optionalCategories">
             <label class="form-check-label" for="defaultCheck1">
                 Dairy
             </label><br>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+            <input class="form-check-input" type="checkbox" value="6" id="defaultCheck2" v-model="optionalCategories">
             <label class="form-check-label" for="defaultCheck2">
                 High Protein
             </label><br>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+            <input class="form-check-input" type="checkbox" value="7" id="defaultCheck3" v-model="optionalCategories">
             <label class="form-check-label" for="defaultCheck3">
                 High Carbohydrates
             </label><br>
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+            <input class="form-check-input" type="checkbox" value="8" id="defaultCheck4" v-model="optionalCategories">
             <label class="form-check-label" for="defaultCheck4">
                 Low Fat
             </label><br>         
@@ -176,8 +174,8 @@
     <div class="submitArea">
 
             <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
-            <button type="button" class="btn btn-secondary">Cancel</button>
-            <button type="button" class="btn btn-warning">Test Print</button>
+            <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
+            <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
 
     </div>
 
@@ -189,8 +187,18 @@
 export default {
     data: function() {
         return {
-            recipeProperties: {
+            recipe: {
                 //properties will go here
+                title: '',
+                calories: '',
+                cookTime: null,
+                servings: null,
+                carbohydrates: null,
+                protein: null,
+                fat: null,
+                sodium: null,
+                fiber: null,
+                sugar: null
             },
             ingredient: {
                 //binding to input areas
@@ -199,22 +207,25 @@ export default {
                 unit: ''
             },
             description: '',
-            ingredients: [
-               ],
+            ingredients: [],
 
-            stages:[
-                {
-                    stageTitle: 'Stage 1',
-                    stageDescription: '',
-                },
-                {
-                    stageTitle: 'Stage 2',
-                    stageDescription: '',
-                }
-            ], 
-            category: '',
+            steps:{
+                Title: 'Cooking Guide',
+                Description: '',
+                Stages:[
+                    {
+                        StageTitle: 'Stage 1',
+                        StageContent: '',
+                    },
+                    {
+                        StageTitle: 'Stage 2',
+                        StageContent: '',
+                    }
+                ]
+            }, 
+            mainCategory: 1,
             optionalCategories: [],
-            imageUrl: ''                
+            imageUrl: ''
         }
 
     },
@@ -225,9 +236,9 @@ export default {
             console.log('vals:'+this.ingredient.name+','+this.ingredient.amount+','+this.ingredient.unit);
             this.ingredients.push({
               //  id: this.ingredient.id++,//used as key as
-                name: this.ingredient.name,
-                amount: this.ingredient.amount,
-                unit: this.ingredient.unit
+                Name: this.ingredient.name,
+                Quantity: this.ingredient.amount,
+                Unit: this.ingredient.unit
             })
 
             //reset fields
@@ -241,31 +252,65 @@ export default {
         },
         //stages add
         addStage(){
-            this.stages.push({              
-                stageTitle: 'Stage'+(this.stages.length+1),
-                stageDescription: '',
+            this.steps.Stages.push({              
+                StageTitle: 'Stage'+(this.steps.Stages.length+1),
+                StageContent: '',
             })
         },
         removeStage(stagesIndex){
-            this.stages.splice(stagesIndex,1);
+            this.steps.Stages.splice(stagesIndex,1);
         },
         //
         cancelButton(){
-
+            this.$confirm("Are you sure you want to leave?","","warning").then(() => {
+                window.location.href = '/';
+            });
         },
-        submitButton(){
-            //send request to POST api/recipes/add
+         submitButton(){            
+            //body
+            const recipe = { 
+                title: this.recipe.title,
+                ingredients: JSON.stringify(this.ingredients),
+                image: "default img for now",
+                steps: JSON.stringify(this.steps),
+                calories: this.recipe.calories,
+                protein: this.recipe.protein,
+                carbohydrates: this.recipe.carbohydrates,
+                fat: this.recipe.title.fat,
+                servings: this.recipe.servings,
+                cookTime: this.recipe.cookTime,
+                categories: [this.mainCategory].concat(this.optionalCategories)//concat "main category" and optional categories into 1 array
 
-            //check response
-            
-            
-            onsole.log('redirecting');
-            //redirect after everything is done
-            //window.location.href = '/recipes';
+            };
+            //headers
+            const headers = { 
+                "Content-type": "application/json",
+                "Accept": "application/json"
+            };
+            axios.post("/api/recipe/create", recipe, { headers })
+                .then(response => {
+                    //print response
+                    this.$alert("Recipe Successfully added!","","success");
+                    console.log('API success. response: ' + response.data.message );
+
+                    //===================================================================forward back or add another one ? 
+                    //custom event box
+
+                })
+                .catch(error => {//catch error
+                    this.$alert("Error! (Add error msg)","","error");
+                    console.log("Api post error: ", error.response.data);                   
+                    
+            });
 
         },
         testPrint(){
             //print everything to log, purely for testing and to be removed afterwards
+            console.log("=test button pressed= ")
+
+            this.$alert("Recipe Successfully added!","","success");
+
+
         }
     },
     mounted() {

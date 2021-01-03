@@ -87,7 +87,7 @@ class RecipeController extends Controller
         //validate request first
         $validated = $request->validate([
             'calories' => 'required|max:255',
-            'servings' => 'required',
+            'servings' => 'required|integer',
             'ingredients' => 'required',
             'image' => 'required',
             'steps' => 'required',
@@ -138,7 +138,7 @@ class RecipeController extends Controller
 
         //return a valid response
         return response()->json([
-            "message" => "recipe created"
+            "message" => "recipe created" //ADD with the following properties
         ], 201);
 
     }
@@ -207,17 +207,9 @@ class RecipeController extends Controller
 
     public function recipe($id)
     {
-        //call api get recipes
-        $recipe = app(RecipeController::class)->getRecipe($id); //working
+        
 
-        //check if response is valid
-        if($recipe->status() != 200){
-            abort(404);
-        }
-
-        $content = json_decode($recipe->content());
-
-        return view('recipes/recipe',['recipe' => $content]);
+        return view('recipes/recipe',['id' => $id]);
     }
 
 
