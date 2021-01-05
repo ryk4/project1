@@ -1,54 +1,65 @@
 <template>
 <form class="">
 
+
+
   <div class="form container pt-3">
     <div class="titleArea">
         <h2>Create new recipe</h2>
     </div><br>
-    <div class="row recipeDetails">
-        <div class="inputArea col-lg-4">
-            <label for="titleInput">Title</label>
-            <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
+
+    <div class="card">
+        <div class="card-header">
+            Information
         </div>
-        <div class="inputArea col-lg-2">
+        <div class="card-body">
+            <div class="row recipeDetails">
+                <div class="inputArea col-lg-4">
+                    <label for="titleInput">Title</label>
+                    <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
+                </div>
+                <div class="inputArea col-lg-2">
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Calories</label>
+                    <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Cook time (mins)</label>
+                    <input  class="form-control" v-model="recipe.cookTime" value=20  >
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Portions</label>
+                    <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Carbohydrates</label>
+                    <input  class="form-control" v-model="recipe.carbohydrates" >
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Protein</label>
+                    <input  class="form-control" v-model="recipe.protein">
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Fat</label>
+                    <input  class="form-control" v-model="recipe.fat">
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Sodium</label>
+                    <input  class="form-control" v-model="recipe.sodium" disabled>
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Fiber</label>
+                    <input  class="form-control" v-model="recipe.fiber" disabled>
+                </div>
+                <div class="inputArea col-lg-2">
+                    <label>Sugar</label>
+                    <input  class="form-control" v-model="recipe.sugar" disabled>
+                </div>
+            </div>   
         </div>
-        <div class="inputArea col-lg-2">
-            <label>Calories</label>
-            <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Cook time (mins)</label>
-            <input  class="form-control" v-model="recipe.cookTime" value=20  >
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Portions</label>
-            <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Carbohydrates</label>
-            <input  class="form-control" v-model="recipe.carbohydrates" >
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Protein</label>
-            <input  class="form-control" v-model="recipe.protein">
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Fat</label>
-            <input  class="form-control" v-model="recipe.fat">
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Sodium</label>
-            <input  class="form-control" v-model="recipe.sodium" disabled>
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Fiber</label>
-            <input  class="form-control" v-model="recipe.fiber" disabled>
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Sugar</label>
-            <input  class="form-control" v-model="recipe.sugar" disabled>
-        </div>
-    </div><br><br>
+    </div>
+
     
     <div class="row recipeIngredients">
          <div class="inputArea col-lg-3">

@@ -2093,6 +2093,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -42673,271 +42684,277 @@ var render = function() {
       _vm._m(0),
       _c("br"),
       _vm._v(" "),
-      _c("div", { staticClass: "row recipeDetails" }, [
-        _c("div", { staticClass: "inputArea col-lg-4" }, [
-          _c("label", { attrs: { for: "titleInput" } }, [_vm._v("Title")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.title,
-                expression: "recipe.title"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              "aria-describedby": "titleHelp",
-              placeholder: "Enter title"
-            },
-            domProps: { value: _vm.recipe.title },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.recipe, "title", $event.target.value)
-              }
-            }
-          })
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("\r\n            Information\r\n        ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Calories")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.calories,
-                expression: "recipe.calories"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Cals" },
-            domProps: { value: _vm.recipe.calories },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row recipeDetails" }, [
+            _c("div", { staticClass: "inputArea col-lg-4" }, [
+              _c("label", { attrs: { for: "titleInput" } }, [_vm._v("Title")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.title,
+                    expression: "recipe.title"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  "aria-describedby": "titleHelp",
+                  placeholder: "Enter title"
+                },
+                domProps: { value: _vm.recipe.title },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "title", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "calories", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Cook time (mins)")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.cookTime,
-                expression: "recipe.cookTime"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { value: "20" },
-            domProps: { value: _vm.recipe.cookTime },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Calories")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.calories,
+                    expression: "recipe.calories"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Cals" },
+                domProps: { value: _vm.recipe.calories },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "calories", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "cookTime", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Portions")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.servings,
-                expression: "recipe.servings"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Servings", value: "1", required: "" },
-            domProps: { value: _vm.recipe.servings },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Cook time (mins)")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.cookTime,
+                    expression: "recipe.cookTime"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { value: "20" },
+                domProps: { value: _vm.recipe.cookTime },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "cookTime", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "servings", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Carbohydrates")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.carbohydrates,
-                expression: "recipe.carbohydrates"
-              }
-            ],
-            staticClass: "form-control",
-            domProps: { value: _vm.recipe.carbohydrates },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Portions")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.servings,
+                    expression: "recipe.servings"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Servings", value: "1", required: "" },
+                domProps: { value: _vm.recipe.servings },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "servings", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "carbohydrates", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Protein")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.protein,
-                expression: "recipe.protein"
-              }
-            ],
-            staticClass: "form-control",
-            domProps: { value: _vm.recipe.protein },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Carbohydrates")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.carbohydrates,
+                    expression: "recipe.carbohydrates"
+                  }
+                ],
+                staticClass: "form-control",
+                domProps: { value: _vm.recipe.carbohydrates },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "carbohydrates", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "protein", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Fat")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.fat,
-                expression: "recipe.fat"
-              }
-            ],
-            staticClass: "form-control",
-            domProps: { value: _vm.recipe.fat },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Protein")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.protein,
+                    expression: "recipe.protein"
+                  }
+                ],
+                staticClass: "form-control",
+                domProps: { value: _vm.recipe.protein },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "protein", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "fat", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Sodium")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.sodium,
-                expression: "recipe.sodium"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { disabled: "" },
-            domProps: { value: _vm.recipe.sodium },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Fat")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.fat,
+                    expression: "recipe.fat"
+                  }
+                ],
+                staticClass: "form-control",
+                domProps: { value: _vm.recipe.fat },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "fat", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "sodium", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Fiber")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.fiber,
-                expression: "recipe.fiber"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { disabled: "" },
-            domProps: { value: _vm.recipe.fiber },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Sodium")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.sodium,
+                    expression: "recipe.sodium"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { disabled: "" },
+                domProps: { value: _vm.recipe.sodium },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "sodium", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "fiber", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Sugar")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.recipe.sugar,
-                expression: "recipe.sugar"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { disabled: "" },
-            domProps: { value: _vm.recipe.sugar },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Fiber")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.fiber,
+                    expression: "recipe.fiber"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { disabled: "" },
+                domProps: { value: _vm.recipe.fiber },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "fiber", $event.target.value)
+                  }
                 }
-                _vm.$set(_vm.recipe, "sugar", $event.target.value)
-              }
-            }
-          })
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Sugar")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.recipe.sugar,
+                    expression: "recipe.sugar"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { disabled: "" },
+                domProps: { value: _vm.recipe.sugar },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.recipe, "sugar", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
         ])
       ]),
-      _c("br"),
-      _c("br"),
       _vm._v(" "),
       _c("div", { staticClass: "row recipeIngredients" }, [
         _c("div", { staticClass: "inputArea col-lg-3" }, [
@@ -56863,7 +56880,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
+/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56894,7 +56911,7 @@ Vue.component('contact-top-component', __webpack_require__(/*! ./components/cont
 Vue.component('get-in-touch-component', __webpack_require__(/*! ./components/contact/getInTouch.vue */ "./resources/js/components/contact/getInTouch.vue")["default"]);
 Vue.component('recipe-add-component', __webpack_require__(/*! ./components/RecipeAdd/RecipeAddComponent.vue */ "./resources/js/components/RecipeAdd/RecipeAddComponent.vue")["default"]);
 
-Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -57629,8 +57646,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
