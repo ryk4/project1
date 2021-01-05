@@ -56863,7 +56863,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
+/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56894,7 +56894,7 @@ Vue.component('contact-top-component', __webpack_require__(/*! ./components/cont
 Vue.component('get-in-touch-component', __webpack_require__(/*! ./components/contact/getInTouch.vue */ "./resources/js/components/contact/getInTouch.vue")["default"]);
 Vue.component('recipe-add-component', __webpack_require__(/*! ./components/RecipeAdd/RecipeAddComponent.vue */ "./resources/js/components/RecipeAdd/RecipeAddComponent.vue")["default"]);
 
-Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -120,25 +120,20 @@ class RecipeController extends Controller
         $recipe->recipeDetails_id = $recipeDetail->id;
         $recipe->save();
 
-        //return $request->categories;
-
-
         //insert to recipies_categories
-
         foreach ($request->categories as $categoryId) {
             $categories = new recipes_categories;
 
             $categories->recipes_id = $recipe->id;
             $categories->categories_id = $categoryId;
             $categories->save();
-            //dd($categoryId);
 
         }
 
 
         //return a valid response
         return response()->json([
-            "message" => "recipe created" //ADD with the following properties
+            "message" => "Recipe has been created" //ADD with the following properties
         ], 201);
 
     }
