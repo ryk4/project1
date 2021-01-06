@@ -74,10 +74,10 @@
                     <li class="nav_block">{{ Auth::user()->name }}
                         <ul>
                             <li>
-                                <a href="{{ url('settings') }}">Settings</a>
+                                <a href="{{ url('settings') }}">Admin area</a>
                             </li>
                             <li>
-                                <a href="{{ url('settings') }}">Settings2</a>
+                                <a href="{{ url('settings') }}">Settings</a>
                             </li>
                             <li>
                                 <a href="{{ url('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ ('Logout') }}</a>

@@ -1,196 +1,196 @@
 <template>
 <form class="">
+    <div class="form container pt-3">
+        <div class="titleArea">
+            <h2>Create new recipe</h2>
+        </div><br>
+        <div class="card">
+            <div class="card-header">
+                Recipe details
+            </div>
+            <div class="card-body">
+                <div class="row recipeDetails">
+                    <div class="inputArea col-lg-4">
+                        <label for="titleInput">Title</label>
+                        <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
+                    </div>
+                    <div class="inputArea col-lg-2">
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Calories</label>
+                        <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Cook time (mins)</label>
+                        <input  class="form-control" v-model="recipe.cookTime" value=20  >
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Portions</label>
+                        <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Carbohydrates</label>
+                        <input  class="form-control" v-model="recipe.carbohydrates" >
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Protein</label>
+                        <input  class="form-control" v-model="recipe.protein">
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Fat</label>
+                        <input  class="form-control" v-model="recipe.fat">
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Sodium</label>
+                        <input  class="form-control" v-model="recipe.sodium" disabled>
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Fiber</label>
+                        <input  class="form-control" v-model="recipe.fiber" disabled>
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Sugar</label>
+                        <input  class="form-control" v-model="recipe.sugar" disabled>
+                    </div>
+                </div>   
+            </div>
+        </div><br>
 
+        <div class="card">
+            <div class="card-header">
+                Steps and Ingredients
+            </div>
+            <div class="card-body">
+                <div class="row recipeIngredients">
+                    <div class="inputArea col-lg-3">
+                        <label>Ingredient</label>
+                        <input v-model="ingredient.name" class="form-control" placeholder="Type ingredient">
+                    </div>
+                    <div class="inputArea col-lg-2">
+                        <label>Amount</label>
+                        <input v-model="ingredient.amount"  class="form-control" placeholder="amount">
+                    </div>
+                    <div class="inputArea col-lg-2"> 
+                        <label>Unit</label>
+                        <select v-model="ingredient.unit"  class="form-control">
+                            <option value='g' selected>g</option>
+                            <option value='ml'>ml</option>
+                            <option value='whole'>whole</option>
+                        </select>
 
+                    </div>
+                    <div class="inputArea col-lg-1"> 
+                        <label>Submit</label>
+                        <button type="button" v-on:click="ingredientAdd()" class="btn btn-primary">Add</button>
+                    </div>
+                    <div class="inputArea col-lg-4" v-if="this.ingredients.length">
+                        <label>Added ingredients:</label>
+                        <ul class="list-group">
+                            <li v-for="(ingredient, index) in this.ingredients" :key="index" class="list-group-item d-flex justify-content-between align-items-center"
+                            @click="ingredientRemove(index)">
+                                {{ingredient.Name}}
+                                <span class="badge badge-primary badge-pill" >{{ingredient.Quantity}} {{ingredient.Unit}}</span>
+                            </li>
+                            
+                        </ul>
+                    </div>      
+                </div><br>  
+                <div class="row justify-content-md-center recipeStepsInterface">
+                    <div class="row col-11 mb-4">
+                        <div class="col col-lg-3">
+                            <label>Recipe Description</label>
+                        </div>
+                        <div class="col col-lg-9">
+                                <textarea class="form-control" id="textAreaStage1" rows="2" v-model="steps.Description"></textarea>
+                        </div>
+                    </div>
+                    <div class="row col-11" v-for="(stage,index) in this.steps.Stages" :key="index">
+                        <div class="col col-lg-3  stepsColumn">
+                            <input  class="form-control" placeholder="Stage 1" v-model="stage.StageTitle">
+                        </div>
+                        <div class="col col-lg-7 stepsColumn">
+                            <textarea class="form-control" rows="2" v-model="stage.StageContent"></textarea>
+                        </div>
+                        <div class="col col-lg-2 stepsColumn">
+                            <button type="button" class="btn btn-primary" @click="removeStage(index)">Remove</button>
+                        </div>
+                    </div>
+                    <div class="row col-11">
+                        <button type="button" class="btn btn-light" v-on:click="addStage">Add Stage</button>
+                    </div>
+                </div>
+            </div>
+        </div><br>
 
-  <div class="form container pt-3">
-    <div class="titleArea">
-        <h2>Create new recipe</h2>
-    </div><br>
-
-    <div class="card">
-        <div class="card-header">
-            Information
-        </div>
-        <div class="card-body">
-            <div class="row recipeDetails">
-                <div class="inputArea col-lg-4">
-                    <label for="titleInput">Title</label>
-                    <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
+        <div class="card submitCard">
+            <div class="card-header">
+                Tags and image
+            </div>
+            <div class="card-body">
+                <div class="row recipeTags">
+                    <div class="col-lg-4">
+                        <label>Category</label>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" id="meatButton" value="1"  v-model="mainCategory">
+                        <label class="form-check-label" for="meatButton">
+                            Meat
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" id="fishButton" value="2" v-model="mainCategory">
+                        <label class="form-check-label" for="fishButton">
+                            Fish
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" id="vegButton" value="3" v-model="mainCategory">
+                        <label class="form-check-label" for="vegButton">
+                            Vegetarian
+                        </label>
+                        </div>
+                        <div class="form-check">
+                        <input class="form-check-input" type="radio" id="fruitButton" value="4" v-model="mainCategory">
+                        <label class="form-check-label" for="fruitButton">
+                            Fruit
+                        </label>
+                        </div>
+                    </div>
+                    <div class="form-check col-lg-4">
+                        <label>Optional tags</label>
+                        <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5" id="defaultCheck1" v-model="optionalCategories">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Dairy
+                        </label><br>
+                        <input class="form-check-input" type="checkbox" value="6" id="defaultCheck2" v-model="optionalCategories">
+                        <label class="form-check-label" for="defaultCheck2">
+                            High Protein
+                        </label><br>
+                        <input class="form-check-input" type="checkbox" value="7" id="defaultCheck3" v-model="optionalCategories">
+                        <label class="form-check-label" for="defaultCheck3">
+                            High Carbohydrates
+                        </label><br>
+                        <input class="form-check-input" type="checkbox" value="8" id="defaultCheck4" v-model="optionalCategories">
+                        <label class="form-check-label" for="defaultCheck4">
+                            Low Fat
+                        </label><br>         
+                        </div>         
+                    </div>
+                    <div class="form-check col-lg-4">
+                        <div class="form-group">
+                            <label>Recipe image</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </div>
+                </div><br>
+                <div class="submitArea">
+                    <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
+                    <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
+                    <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
                 </div>
-                <div class="inputArea col-lg-2">
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Calories</label>
-                    <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Cook time (mins)</label>
-                    <input  class="form-control" v-model="recipe.cookTime" value=20  >
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Portions</label>
-                    <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Carbohydrates</label>
-                    <input  class="form-control" v-model="recipe.carbohydrates" >
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Protein</label>
-                    <input  class="form-control" v-model="recipe.protein">
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Fat</label>
-                    <input  class="form-control" v-model="recipe.fat">
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Sodium</label>
-                    <input  class="form-control" v-model="recipe.sodium" disabled>
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Fiber</label>
-                    <input  class="form-control" v-model="recipe.fiber" disabled>
-                </div>
-                <div class="inputArea col-lg-2">
-                    <label>Sugar</label>
-                    <input  class="form-control" v-model="recipe.sugar" disabled>
-                </div>
-            </div>   
+            </div>
         </div>
     </div>
-
-    
-    <div class="row recipeIngredients">
-         <div class="inputArea col-lg-3">
-            <label>Ingredient</label>
-            <input v-model="ingredient.name" class="form-control" placeholder="Type ingredient">
-        </div>
-        <div class="inputArea col-lg-2">
-            <label>Amount</label>
-            <input v-model="ingredient.amount"  class="form-control" placeholder="amount">
-        </div>
-        <div class="inputArea col-lg-2"> 
-            <label>Unit</label>
-            <select v-model="ingredient.unit"  class="form-control">
-                <option value='g' selected>g</option>
-                <option value='ml'>ml</option>
-                <option value='whole'>whole</option>
-            </select>
-
-        </div>
-        <div class="inputArea col-lg-1"> 
-            <label>Submit</label>
-            <button type="button" v-on:click="ingredientAdd()" class="btn btn-primary">Add</button>
-        </div>
-        <div class="inputArea col-lg-4" v-if="this.ingredients.length">
-            <label>Added ingredients:</label>
-            <ul class="list-group">
-                <li v-for="(ingredient, index) in this.ingredients" :key="index" class="list-group-item d-flex justify-content-between align-items-center"
-                @click="ingredientRemove(index)">
-                    {{ingredient.Name}}
-                    <span class="badge badge-primary badge-pill" >{{ingredient.Quantity}} {{ingredient.Unit}}</span>
-                </li>
-                
-            </ul>
-        </div>      
-    </div><br>
-
-    <div class="row justify-content-md-center recipeStepsInterface">
-        <div class="row col-11 mb-4">
-            <div class="col col-lg-3">
-                <label>Recipe Description</label>
-            </div>
-            <div class="col col-lg-9">
-                    <textarea class="form-control" id="textAreaStage1" rows="2" v-model="steps.Description"></textarea>
-            </div>
-        </div>
-        <div class="row col-11" v-for="(stage,index) in this.steps.Stages" :key="index">
-            <div class="col col-lg-3  stepsColumn">
-                <input  class="form-control" placeholder="Stage 1" v-model="stage.StageTitle">
-            </div>
-            <div class="col col-lg-7 stepsColumn">
-                <textarea class="form-control" rows="2" v-model="stage.StageContent"></textarea>
-            </div>
-            <div class="col col-lg-2 stepsColumn">
-                <button type="button" class="btn btn-primary" @click="removeStage(index)">Remove</button>
-            </div>
-        </div>
-         <div class="row col-11">
-            <button type="button" class="btn btn-light" v-on:click="addStage">Add Stage</button>
-         </div>
-    </div>
-
-    <br>
-    <div class="row recipeTags">
-        <div class="col-lg-4">
-            <label>Category</label>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" id="meatButton" value="1"  v-model="mainCategory">
-            <label class="form-check-label" for="meatButton">
-                Meat
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" id="fishButton" value="2" v-model="mainCategory">
-            <label class="form-check-label" for="fishButton">
-                Fish
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" id="vegButton" value="3" v-model="mainCategory">
-            <label class="form-check-label" for="vegButton">
-                Vegetarian
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" id="fruitButton" value="4" v-model="mainCategory">
-            <label class="form-check-label" for="fruitButton">
-                Fruit
-            </label>
-            </div>
-            
-        </div>
-        <div class="form-check col-lg-4">
-            <label>Optional tags</label>
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="5" id="defaultCheck1" v-model="optionalCategories">
-            <label class="form-check-label" for="defaultCheck1">
-                Dairy
-            </label><br>
-            <input class="form-check-input" type="checkbox" value="6" id="defaultCheck2" v-model="optionalCategories">
-            <label class="form-check-label" for="defaultCheck2">
-                High Protein
-            </label><br>
-            <input class="form-check-input" type="checkbox" value="7" id="defaultCheck3" v-model="optionalCategories">
-            <label class="form-check-label" for="defaultCheck3">
-                High Carbohydrates
-            </label><br>
-            <input class="form-check-input" type="checkbox" value="8" id="defaultCheck4" v-model="optionalCategories">
-            <label class="form-check-label" for="defaultCheck4">
-                Low Fat
-            </label><br>         
-            </div>         
-        </div>
-        <div class="form-check col-lg-4">
-            <div class="form-group">
-                <label>Recipe image</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-            </div>
-        </div>
-
-
-
-    </div><br>
-    <div class="submitArea">
-
-            <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
-            <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
-            <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
-
-    </div>
-
-  </div>
 </form>
 </template>
 
@@ -340,7 +340,7 @@ export default {
     }
     .submitArea{
         text-align: center;
-        margin-bottom:50px;
+        margin-bottom:15px;
     }
     
     
@@ -355,6 +355,9 @@ export default {
     .stepsColumn{
         padding:10px;
         
+    }
+    .submitCard{
+        margin-bottom:20px;
     }
 
 </style>

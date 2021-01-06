@@ -7317,7 +7317,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.titleArea[data-v-b0fb971e]{\n    text-align: center;\n    margin:20px;\n}\n.inputArea[data-v-b0fb971e]{\n    margin-bottom:30px;\n}\n.submitArea[data-v-b0fb971e]{\n    text-align: center;\n    margin-bottom:50px;\n}\n.recipeStepsInterface[data-v-b0fb971e]{\n    margin-bottom: 40px;\n}\n.individualStep[data-v-b0fb971e]{\n    margin: 10px 0 0px 0;\n\n    border-radius: 10px;\n}\n.stepsColumn[data-v-b0fb971e]{\n    padding:10px;\n}\n\n", ""]);
+exports.push([module.i, "\n.titleArea[data-v-b0fb971e]{\n    text-align: center;\n    margin:20px;\n}\n.inputArea[data-v-b0fb971e]{\n    margin-bottom:30px;\n}\n.submitArea[data-v-b0fb971e]{\n    text-align: center;\n    margin-bottom:15px;\n}\n.recipeStepsInterface[data-v-b0fb971e]{\n    margin-bottom: 40px;\n}\n.individualStep[data-v-b0fb971e]{\n    margin: 10px 0 0px 0;\n\n    border-radius: 10px;\n}\n.stepsColumn[data-v-b0fb971e]{\n    padding:10px;\n}\n.submitCard[data-v-b0fb971e]{\n    margin-bottom:20px;\n}\n\n", ""]);
 
 // exports
 
@@ -42686,7 +42686,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
-          _vm._v("\r\n            Information\r\n        ")
+          _vm._v("\r\n                Recipe details\r\n            ")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-body" }, [
@@ -42955,635 +42955,700 @@ var render = function() {
           ])
         ])
       ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row recipeIngredients" }, [
-        _c("div", { staticClass: "inputArea col-lg-3" }, [
-          _c("label", [_vm._v("Ingredient")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.ingredient.name,
-                expression: "ingredient.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "Type ingredient" },
-            domProps: { value: _vm.ingredient.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.ingredient, "name", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Amount")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.ingredient.amount,
-                expression: "ingredient.amount"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { placeholder: "amount" },
-            domProps: { value: _vm.ingredient.amount },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.ingredient, "amount", $event.target.value)
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-2" }, [
-          _c("label", [_vm._v("Unit")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.ingredient.unit,
-                  expression: "ingredient.unit"
-                }
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.ingredient,
-                    "unit",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "g", selected: "" } }, [
-                _vm._v("g")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "ml" } }, [_vm._v("ml")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "whole" } }, [_vm._v("whole")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "inputArea col-lg-1" }, [
-          _c("label", [_vm._v("Submit")]),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  return _vm.ingredientAdd()
-                }
-              }
-            },
-            [_vm._v("Add")]
-          )
-        ]),
-        _vm._v(" "),
-        this.ingredients.length
-          ? _c("div", { staticClass: "inputArea col-lg-4" }, [
-              _c("label", [_vm._v("Added ingredients:")]),
-              _vm._v(" "),
-              _c(
-                "ul",
-                { staticClass: "list-group" },
-                _vm._l(this.ingredients, function(ingredient, index) {
-                  return _c(
-                    "li",
-                    {
-                      key: index,
-                      staticClass:
-                        "list-group-item d-flex justify-content-between align-items-center",
-                      on: {
-                        click: function($event) {
-                          return _vm.ingredientRemove(index)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\r\n                    " +
-                          _vm._s(ingredient.Name) +
-                          "\r\n                    "
-                      ),
-                      _c(
-                        "span",
-                        { staticClass: "badge badge-primary badge-pill" },
-                        [
-                          _vm._v(
-                            _vm._s(ingredient.Quantity) +
-                              " " +
-                              _vm._s(ingredient.Unit)
-                          )
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ])
-          : _vm._e()
-      ]),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "row justify-content-md-center recipeStepsInterface" },
-        [
-          _c("div", { staticClass: "row col-11 mb-4" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c("div", { staticClass: "col col-lg-9" }, [
-              _c("textarea", {
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("\r\n                Steps and Ingredients\r\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row recipeIngredients" }, [
+            _c("div", { staticClass: "inputArea col-lg-3" }, [
+              _c("label", [_vm._v("Ingredient")]),
+              _vm._v(" "),
+              _c("input", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.steps.Description,
-                    expression: "steps.Description"
+                    value: _vm.ingredient.name,
+                    expression: "ingredient.name"
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { id: "textAreaStage1", rows: "2" },
-                domProps: { value: _vm.steps.Description },
+                attrs: { placeholder: "Type ingredient" },
+                domProps: { value: _vm.ingredient.name },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.steps, "Description", $event.target.value)
+                    _vm.$set(_vm.ingredient, "name", $event.target.value)
                   }
                 }
               })
-            ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Amount")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ingredient.amount,
+                    expression: "ingredient.amount"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "amount" },
+                domProps: { value: _vm.ingredient.amount },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.ingredient, "amount", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-2" }, [
+              _c("label", [_vm._v("Unit")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.ingredient.unit,
+                      expression: "ingredient.unit"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.ingredient,
+                        "unit",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "g", selected: "" } }, [
+                    _vm._v("g")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ml" } }, [_vm._v("ml")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "whole" } }, [_vm._v("whole")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "inputArea col-lg-1" }, [
+              _c("label", [_vm._v("Submit")]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.ingredientAdd()
+                    }
+                  }
+                },
+                [_vm._v("Add")]
+              )
+            ]),
+            _vm._v(" "),
+            this.ingredients.length
+              ? _c("div", { staticClass: "inputArea col-lg-4" }, [
+                  _c("label", [_vm._v("Added ingredients:")]),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    { staticClass: "list-group" },
+                    _vm._l(this.ingredients, function(ingredient, index) {
+                      return _c(
+                        "li",
+                        {
+                          key: index,
+                          staticClass:
+                            "list-group-item d-flex justify-content-between align-items-center",
+                          on: {
+                            click: function($event) {
+                              return _vm.ingredientRemove(index)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\r\n                                " +
+                              _vm._s(ingredient.Name) +
+                              "\r\n                                "
+                          ),
+                          _c(
+                            "span",
+                            { staticClass: "badge badge-primary badge-pill" },
+                            [
+                              _vm._v(
+                                _vm._s(ingredient.Quantity) +
+                                  " " +
+                                  _vm._s(ingredient.Unit)
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              : _vm._e()
           ]),
+          _c("br"),
           _vm._v(" "),
-          _vm._l(this.steps.Stages, function(stage, index) {
-            return _c("div", { key: index, staticClass: "row col-11" }, [
-              _c("div", { staticClass: "col col-lg-3  stepsColumn" }, [
+          _c(
+            "div",
+            {
+              staticClass: "row justify-content-md-center recipeStepsInterface"
+            },
+            [
+              _c("div", { staticClass: "row col-11 mb-4" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col col-lg-9" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.steps.Description,
+                        expression: "steps.Description"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "textAreaStage1", rows: "2" },
+                    domProps: { value: _vm.steps.Description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.steps, "Description", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(this.steps.Stages, function(stage, index) {
+                return _c("div", { key: index, staticClass: "row col-11" }, [
+                  _c("div", { staticClass: "col col-lg-3  stepsColumn" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: stage.StageTitle,
+                          expression: "stage.StageTitle"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "Stage 1" },
+                      domProps: { value: stage.StageTitle },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(stage, "StageTitle", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-lg-7 stepsColumn" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: stage.StageContent,
+                          expression: "stage.StageContent"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "2" },
+                      domProps: { value: stage.StageContent },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(stage, "StageContent", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col col-lg-2 stepsColumn" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.removeStage(index)
+                          }
+                        }
+                      },
+                      [_vm._v("Remove")]
+                    )
+                  ])
+                ])
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "row col-11" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-light",
+                    attrs: { type: "button" },
+                    on: { click: _vm.addStage }
+                  },
+                  [_vm._v("Add Stage")]
+                )
+              ])
+            ],
+            2
+          )
+        ])
+      ]),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card submitCard" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _vm._v("\r\n                Tags and image\r\n            ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row recipeTags" }, [
+            _c("div", { staticClass: "col-lg-4" }, [
+              _c("label", [_vm._v("Category")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: stage.StageTitle,
-                      expression: "stage.StageTitle"
+                      value: _vm.mainCategory,
+                      expression: "mainCategory"
                     }
                   ],
-                  staticClass: "form-control",
-                  attrs: { placeholder: "Stage 1" },
-                  domProps: { value: stage.StageTitle },
+                  staticClass: "form-check-input",
+                  attrs: { type: "radio", id: "meatButton", value: "1" },
+                  domProps: { checked: _vm._q(_vm.mainCategory, "1") },
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(stage, "StageTitle", $event.target.value)
+                    change: function($event) {
+                      _vm.mainCategory = "1"
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "meatButton" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            Meat\r\n                        "
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col col-lg-7 stepsColumn" }, [
-                _c("textarea", {
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: stage.StageContent,
-                      expression: "stage.StageContent"
+                      value: _vm.mainCategory,
+                      expression: "mainCategory"
                     }
                   ],
-                  staticClass: "form-control",
-                  attrs: { rows: "2" },
-                  domProps: { value: stage.StageContent },
+                  staticClass: "form-check-input",
+                  attrs: { type: "radio", id: "fishButton", value: "2" },
+                  domProps: { checked: _vm._q(_vm.mainCategory, "2") },
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(stage, "StageContent", $event.target.value)
+                    change: function($event) {
+                      _vm.mainCategory = "2"
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "fishButton" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            Fish\r\n                        "
+                    )
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col col-lg-2 stepsColumn" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.removeStage(index)
-                      }
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mainCategory,
+                      expression: "mainCategory"
                     }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "radio", id: "vegButton", value: "3" },
+                  domProps: { checked: _vm._q(_vm.mainCategory, "3") },
+                  on: {
+                    change: function($event) {
+                      _vm.mainCategory = "3"
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "vegButton" }
                   },
-                  [_vm._v("Remove")]
+                  [
+                    _vm._v(
+                      "\r\n                            Vegetarian\r\n                        "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mainCategory,
+                      expression: "mainCategory"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "radio", id: "fruitButton", value: "4" },
+                  domProps: { checked: _vm._q(_vm.mainCategory, "4") },
+                  on: {
+                    change: function($event) {
+                      _vm.mainCategory = "4"
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "fruitButton" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            Fruit\r\n                        "
+                    )
+                  ]
                 )
               ])
-            ])
-          }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check col-lg-4" }, [
+              _c("label", [_vm._v("Optional tags")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-check" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.optionalCategories,
+                      expression: "optionalCategories"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", value: "5", id: "defaultCheck1" },
+                  domProps: {
+                    checked: Array.isArray(_vm.optionalCategories)
+                      ? _vm._i(_vm.optionalCategories, "5") > -1
+                      : _vm.optionalCategories
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.optionalCategories,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "5",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.optionalCategories = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.optionalCategories = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.optionalCategories = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "defaultCheck1" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            Dairy\r\n                        "
+                    )
+                  ]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.optionalCategories,
+                      expression: "optionalCategories"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", value: "6", id: "defaultCheck2" },
+                  domProps: {
+                    checked: Array.isArray(_vm.optionalCategories)
+                      ? _vm._i(_vm.optionalCategories, "6") > -1
+                      : _vm.optionalCategories
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.optionalCategories,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "6",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.optionalCategories = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.optionalCategories = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.optionalCategories = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "defaultCheck2" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            High Protein\r\n                        "
+                    )
+                  ]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.optionalCategories,
+                      expression: "optionalCategories"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", value: "7", id: "defaultCheck3" },
+                  domProps: {
+                    checked: Array.isArray(_vm.optionalCategories)
+                      ? _vm._i(_vm.optionalCategories, "7") > -1
+                      : _vm.optionalCategories
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.optionalCategories,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "7",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.optionalCategories = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.optionalCategories = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.optionalCategories = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "defaultCheck3" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            High Carbohydrates\r\n                        "
+                    )
+                  ]
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.optionalCategories,
+                      expression: "optionalCategories"
+                    }
+                  ],
+                  staticClass: "form-check-input",
+                  attrs: { type: "checkbox", value: "8", id: "defaultCheck4" },
+                  domProps: {
+                    checked: Array.isArray(_vm.optionalCategories)
+                      ? _vm._i(_vm.optionalCategories, "8") > -1
+                      : _vm.optionalCategories
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.optionalCategories,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "8",
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.optionalCategories = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.optionalCategories = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.optionalCategories = $$c
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "form-check-label",
+                    attrs: { for: "defaultCheck4" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            Low Fat\r\n                        "
+                    )
+                  ]
+                ),
+                _c("br")
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ]),
+          _c("br"),
           _vm._v(" "),
-          _c("div", { staticClass: "row col-11" }, [
+          _c("div", { staticClass: "submitArea" }, [
+            _c("input", {
+              staticClass: "btn btn-primary mr-3",
+              attrs: { type: "button", value: "Create recipe" },
+              on: { click: _vm.submitButton }
+            }),
+            _vm._v(" "),
             _c(
               "button",
               {
-                staticClass: "btn btn-light",
+                staticClass: "btn btn-secondary",
                 attrs: { type: "button" },
-                on: { click: _vm.addStage }
+                on: { click: _vm.cancelButton }
               },
-              [_vm._v("Add Stage")]
+              [_vm._v("Cancel")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-warning",
+                attrs: { type: "button" },
+                on: { click: _vm.testPrint }
+              },
+              [_vm._v("Test Print")]
             )
           ])
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "row recipeTags" }, [
-        _c("div", { staticClass: "col-lg-4" }, [
-          _c("label", [_vm._v("Category")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mainCategory,
-                  expression: "mainCategory"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "meatButton", value: "1" },
-              domProps: { checked: _vm._q(_vm.mainCategory, "1") },
-              on: {
-                change: function($event) {
-                  _vm.mainCategory = "1"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "form-check-label", attrs: { for: "meatButton" } },
-              [_vm._v("\r\n                Meat\r\n            ")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mainCategory,
-                  expression: "mainCategory"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "fishButton", value: "2" },
-              domProps: { checked: _vm._q(_vm.mainCategory, "2") },
-              on: {
-                change: function($event) {
-                  _vm.mainCategory = "2"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "form-check-label", attrs: { for: "fishButton" } },
-              [_vm._v("\r\n                Fish\r\n            ")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mainCategory,
-                  expression: "mainCategory"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "vegButton", value: "3" },
-              domProps: { checked: _vm._q(_vm.mainCategory, "3") },
-              on: {
-                change: function($event) {
-                  _vm.mainCategory = "3"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              { staticClass: "form-check-label", attrs: { for: "vegButton" } },
-              [_vm._v("\r\n                Vegetarian\r\n            ")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mainCategory,
-                  expression: "mainCategory"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "radio", id: "fruitButton", value: "4" },
-              domProps: { checked: _vm._q(_vm.mainCategory, "4") },
-              on: {
-                change: function($event) {
-                  _vm.mainCategory = "4"
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "fruitButton" }
-              },
-              [_vm._v("\r\n                Fruit\r\n            ")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check col-lg-4" }, [
-          _c("label", [_vm._v("Optional tags")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-check" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.optionalCategories,
-                  expression: "optionalCategories"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", value: "5", id: "defaultCheck1" },
-              domProps: {
-                checked: Array.isArray(_vm.optionalCategories)
-                  ? _vm._i(_vm.optionalCategories, "5") > -1
-                  : _vm.optionalCategories
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.optionalCategories,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = "5",
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.optionalCategories = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.optionalCategories = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.optionalCategories = $$c
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "defaultCheck1" }
-              },
-              [_vm._v("\r\n                Dairy\r\n            ")]
-            ),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.optionalCategories,
-                  expression: "optionalCategories"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", value: "6", id: "defaultCheck2" },
-              domProps: {
-                checked: Array.isArray(_vm.optionalCategories)
-                  ? _vm._i(_vm.optionalCategories, "6") > -1
-                  : _vm.optionalCategories
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.optionalCategories,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = "6",
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.optionalCategories = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.optionalCategories = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.optionalCategories = $$c
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "defaultCheck2" }
-              },
-              [_vm._v("\r\n                High Protein\r\n            ")]
-            ),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.optionalCategories,
-                  expression: "optionalCategories"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", value: "7", id: "defaultCheck3" },
-              domProps: {
-                checked: Array.isArray(_vm.optionalCategories)
-                  ? _vm._i(_vm.optionalCategories, "7") > -1
-                  : _vm.optionalCategories
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.optionalCategories,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = "7",
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.optionalCategories = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.optionalCategories = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.optionalCategories = $$c
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "defaultCheck3" }
-              },
-              [_vm._v("\r\n                High Carbohydrates\r\n            ")]
-            ),
-            _c("br"),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.optionalCategories,
-                  expression: "optionalCategories"
-                }
-              ],
-              staticClass: "form-check-input",
-              attrs: { type: "checkbox", value: "8", id: "defaultCheck4" },
-              domProps: {
-                checked: Array.isArray(_vm.optionalCategories)
-                  ? _vm._i(_vm.optionalCategories, "8") > -1
-                  : _vm.optionalCategories
-              },
-              on: {
-                change: function($event) {
-                  var $$a = _vm.optionalCategories,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = "8",
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.optionalCategories = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.optionalCategories = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.optionalCategories = $$c
-                  }
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "form-check-label",
-                attrs: { for: "defaultCheck4" }
-              },
-              [_vm._v("\r\n                Low Fat\r\n            ")]
-            ),
-            _c("br")
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(2)
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "submitArea" }, [
-        _c("input", {
-          staticClass: "btn btn-primary mr-3",
-          attrs: { type: "button", value: "Create recipe" },
-          on: { click: _vm.submitButton }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary",
-            attrs: { type: "button" },
-            on: { click: _vm.cancelButton }
-          },
-          [_vm._v("Cancel")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-warning",
-            attrs: { type: "button" },
-            on: { click: _vm.testPrint }
-          },
-          [_vm._v("Test Print")]
-        )
+        ])
       ])
     ])
   ])
@@ -56880,7 +56945,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
+/* harmony import */ var vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-simple-alert */ "./node_modules/vue-simple-alert/lib/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56911,7 +56976,7 @@ Vue.component('contact-top-component', __webpack_require__(/*! ./components/cont
 Vue.component('get-in-touch-component', __webpack_require__(/*! ./components/contact/getInTouch.vue */ "./resources/js/components/contact/getInTouch.vue")["default"]);
 Vue.component('recipe-add-component', __webpack_require__(/*! ./components/RecipeAdd/RecipeAddComponent.vue */ "./resources/js/components/RecipeAdd/RecipeAddComponent.vue")["default"]);
 
-Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.use(vue_simple_alert__WEBPACK_IMPORTED_MODULE_0__["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -57646,8 +57711,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
