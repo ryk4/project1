@@ -37,12 +37,9 @@ Route::post('/api/sendEmail', [App\Http\Controllers\HomeController::class, 'send
 Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
 //Route::middleware('auth:api')->get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
 
-Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipeTags']);
 
-Route::post('/api/recipe/create', [App\Http\Controllers\RecipeController::class, 'createRecipe']);
-Route::get('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'getRecipe']);
-Route::middleware('auth:api')->put('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'updateRecipe']);
-Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'deleteRecipe']);
+Route::put('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'updateRecipe']);
+//Route::middleware('auth:api')->delete('/api/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'deleteRecipe']);
 
 //API tokens Controller
 Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::class, 'generateToken'])->name('generateToken');
@@ -54,4 +51,13 @@ Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recip
 Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactPage']);
 
+
+////////////////////////FRESH
+
+//API
+Route::get('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'getRecipe']);
+Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'getRecipeTags']);
+Route::post('/api/recipe/create', [App\Http\Controllers\Api\ApiRecipeController::class, 'createRecipe']);
+Route::put('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'updateRecipe']);
+Route::delete('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'deleteRecipe']);
 

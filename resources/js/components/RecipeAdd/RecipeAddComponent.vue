@@ -18,7 +18,7 @@
                     </div>
                     <div class="inputArea col-lg-2">
                         <label>Calories</label>
-                        <input  class="form-control" v-model="recipe.calories" placeholder="Cals">     
+                        <input  class="form-control" v-model="recipe.calories" placeholder="Cals" required>     
                     </div>
                     <div class="inputArea col-lg-2">
                         <label>Cook time (mins)</label>

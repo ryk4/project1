@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\RecipeObserver;
+use App\Models\Recipe;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        error_log('registering observers');
+
+        Recipe::observe(RecipeObserver::class);
     }
 }

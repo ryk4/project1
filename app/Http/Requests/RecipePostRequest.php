@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRecipeRequest extends FormRequest
+class RecipePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostRecipeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class PostRecipeRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            //validate request first         
+            'calories' => 'required|max:255',
+            'servings' => 'required|integer',
+            'ingredients' => 'required',
+            'image' => 'required',
+            'steps' => 'required',
+            'categories' => 'required'
         ];
     }
 }
