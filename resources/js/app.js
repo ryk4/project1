@@ -38,6 +38,8 @@ Vue.component('recipe-add-component', require('./components/RecipeAdd/RecipeAddC
 import VueSimpleAlert from "vue-simple-alert";
 Vue.use(VueSimpleAlert);
 
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

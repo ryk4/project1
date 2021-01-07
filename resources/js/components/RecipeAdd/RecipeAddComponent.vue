@@ -195,6 +195,8 @@
 </template>
 
 <script>
+import { required, minLength, between } from 'vuelidate/lib/validators'
+
 export default {
     data: function() {
         return {
@@ -219,7 +221,6 @@ export default {
             },
             description: '',
             ingredients: [],
-
             steps:{
                 Title: 'Cooking Guide',
                 Description: '',
@@ -236,9 +237,18 @@ export default {
             }, 
             mainCategory: 1,
             optionalCategories: [],
-            imageUrl: ''
+            imageUrl: '',
+            submitStatus: null
+
         }
 
+    },
+    validations: {
+        steps: {
+            Description: {
+                required
+            }
+        }
     },
     methods: {
         //ingrdients area
@@ -319,8 +329,20 @@ export default {
             //print everything to log, purely for testing and to be removed afterwards
             console.log("=test button pressed= ")
 
-            this.$alert("Recipe Successfully added!","","success");
+            this.$v.$touch()
+            if (this.$v.$invalid) {
+                console.log("=error= ")
 
+                this.submitStatus = 'ERROR'
+            } else {
+                // do your submit logic here
+                console.log("=no error= ")
+
+                this.submitStatus = 'PENDING'
+                setTimeout(() => {
+                this.submitStatus = 'OK'
+                }, 500)
+            }
 
         }
     },
