@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Recipe;
+use App\Models\RecipeDetail;
+use App\Models\Recipes_categories;
+
 
 class RecipeObserver
 {
@@ -19,6 +22,7 @@ class RecipeObserver
 
 
         //create details first since it has FK in Recipe
+        /*
         $recipeDetail = new RecipeDetail();
         $recipeDetail->calories = $request->calories;
         $recipeDetail->protein = $request->protein;
@@ -49,7 +53,7 @@ class RecipeObserver
             $categories->recipes_id = $recipe->id;
             $categories->categories_id = $categoryId;
             $categories->save();
-        }
+        }*/
     }
 
     /**
@@ -60,7 +64,9 @@ class RecipeObserver
      */
     public function updated(Recipe $recipe)
     {
-        //
+        error_log('update recipe observer');
+
+
     }
 
     /**

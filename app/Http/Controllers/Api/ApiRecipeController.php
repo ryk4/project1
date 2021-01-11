@@ -54,7 +54,7 @@ class ApiRecipeController extends Controller
     public function createRecipe(RecipePostRequest $request)
     {
         
-        //validates
+        //validates in RecipePostRequest
 
         //does the logic in observer
         //register observer in AppServiceProvider.php

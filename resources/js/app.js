@@ -33,7 +33,12 @@ Vue.component('recipes-component', require('./components/RecipesComponent.vue').
 Vue.component('contact-top-component', require('./components/contact/contactTop.vue').default);
 Vue.component('get-in-touch-component', require('./components/contact/getInTouch.vue').default);
 
+
+//recipe add
 Vue.component('recipe-add-component', require('./components/RecipeAdd/RecipeAddComponent.vue').default);
+Vue.component('recipe-add-top-component', require('./components/RecipeAdd/RecipeAddTopComponent.vue').default);
+Vue.component('recipe-add-middle-component', require('./components/RecipeAdd/RecipeAddMiddleComponent.vue').default);
+
 
 import VueSimpleAlert from "vue-simple-alert";
 Vue.use(VueSimpleAlert);

@@ -14,7 +14,7 @@
                 <description-component v-if="loaded" v-bind:recipe="recipe"></description-component>
                            
                 <div class="row">
-                    <steps-component v-if="loaded" v-bind:steps="stepsContent"></steps-component>
+                        <steps-component v-if="loaded" v-bind:steps="stepsContent"></steps-component>
                     <ingredients-component v-if="loaded" v-bind:ingredientsInJson="ingredients" :recipeID="recipe.id"></ingredients-component>
                 </div>
             </article>
@@ -31,7 +31,7 @@ export default {
   components: { DescriptionComponent, StepsComponent, IngredientsComponent },
   props: ['id'],
   data: function() {
-      return {
+    return {
           recipe :{
               id: '',
               title: '',
@@ -48,7 +48,7 @@ export default {
           loaded: false
 
       }
-  },
+    },
     mounted() {
         this.fetchArticle();
 

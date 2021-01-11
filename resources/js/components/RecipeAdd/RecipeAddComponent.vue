@@ -4,123 +4,10 @@
         <div class="titleArea">
             <h2>Create new recipe</h2>
         </div><br>
-        <div class="card">
-            <div class="card-header">
-                Recipe details
-            </div>
-            <div class="card-body">
-                <div class="row recipeDetails">
-                    <div class="inputArea col-lg-4">
-                        <label for="titleInput">Title</label>
-                        <input  class="form-control"  aria-describedby="titleHelp" v-model="recipe.title" placeholder="Enter title">        
-                    </div>
-                    <div class="inputArea col-lg-2">
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Calories</label>
-                        <input  class="form-control" v-model="recipe.calories" placeholder="Cals" required>     
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Cook time (mins)</label>
-                        <input  class="form-control" v-model="recipe.cookTime" value=20  >
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Portions</label>
-                        <input  class="form-control" v-model="recipe.servings" placeholder="Servings" value=1 required>
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Carbohydrates</label>
-                        <input  class="form-control" v-model="recipe.carbohydrates" >
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Protein</label>
-                        <input  class="form-control" v-model="recipe.protein">
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Fat</label>
-                        <input  class="form-control" v-model="recipe.fat">
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Sodium</label>
-                        <input  class="form-control" v-model="recipe.sodium" disabled>
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Fiber</label>
-                        <input  class="form-control" v-model="recipe.fiber" disabled>
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Sugar</label>
-                        <input  class="form-control" v-model="recipe.sugar" disabled>
-                    </div>
-                </div>   
-            </div>
-        </div><br>
+        
+        <recipe-add-top-component @recipe-top="processTopForm"></recipe-add-top-component><br>
+        <recipe-add-middle-component @recipe-middle="processMiddleForm"></recipe-add-middle-component><br>
 
-        <div class="card">
-            <div class="card-header">
-                Steps and Ingredients
-            </div>
-            <div class="card-body">
-                <div class="row recipeIngredients">
-                    <div class="inputArea col-lg-3">
-                        <label>Ingredient</label>
-                        <input v-model="ingredient.name" class="form-control" placeholder="Type ingredient">
-                    </div>
-                    <div class="inputArea col-lg-2">
-                        <label>Amount</label>
-                        <input v-model="ingredient.amount"  class="form-control" placeholder="amount">
-                    </div>
-                    <div class="inputArea col-lg-2"> 
-                        <label>Unit</label>
-                        <select v-model="ingredient.unit"  class="form-control">
-                            <option value='g' selected>g</option>
-                            <option value='ml'>ml</option>
-                            <option value='whole'>whole</option>
-                        </select>
-
-                    </div>
-                    <div class="inputArea col-lg-1"> 
-                        <label>Submit</label>
-                        <button type="button" v-on:click="ingredientAdd()" class="btn btn-primary">Add</button>
-                    </div>
-                    <div class="inputArea col-lg-4" v-if="this.ingredients.length">
-                        <label>Added ingredients:</label>
-                        <ul class="list-group">
-                            <li v-for="(ingredient, index) in this.ingredients" :key="index" class="list-group-item d-flex justify-content-between align-items-center"
-                            @click="ingredientRemove(index)">
-                                {{ingredient.Name}}
-                                <span class="badge badge-primary badge-pill" >{{ingredient.Quantity}} {{ingredient.Unit}}</span>
-                            </li>
-                            
-                        </ul>
-                    </div>      
-                </div><br>  
-                <div class="row justify-content-md-center recipeStepsInterface">
-                    <div class="row col-11 mb-4">
-                        <div class="col col-lg-3">
-                            <label>Recipe Description</label>
-                        </div>
-                        <div class="col col-lg-9">
-                                <textarea class="form-control" id="textAreaStage1" rows="2" v-model="steps.Description"></textarea>
-                        </div>
-                    </div>
-                    <div class="row col-11" v-for="(stage,index) in this.steps.Stages" :key="index">
-                        <div class="col col-lg-3  stepsColumn">
-                            <input  class="form-control" placeholder="Stage 1" v-model="stage.StageTitle">
-                        </div>
-                        <div class="col col-lg-7 stepsColumn">
-                            <textarea class="form-control" rows="2" v-model="stage.StageContent"></textarea>
-                        </div>
-                        <div class="col col-lg-2 stepsColumn">
-                            <button type="button" class="btn btn-primary" @click="removeStage(index)">Remove</button>
-                        </div>
-                    </div>
-                    <div class="row col-11">
-                        <button type="button" class="btn btn-light" v-on:click="addStage">Add Stage</button>
-                    </div>
-                </div>
-            </div>
-        </div><br>
 
         <div class="card submitCard">
             <div class="card-header">
@@ -131,7 +18,7 @@
                     <div class="col-lg-4">
                         <label>Category</label>
                         <div class="form-check">
-                        <input class="form-check-input" type="radio" id="meatButton" value="1"  v-model="mainCategory">
+                        <input class="form-check-input" type="radio" id="meatButton" value="1"  v-model="mainCategory" >
                         <label class="form-check-label" for="meatButton">
                             Meat
                         </label>
@@ -179,32 +66,36 @@
                     <div class="form-check col-lg-4">
                         <div class="form-group">
                             <label>Recipe image</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                            <input type="file" class="form-control-file" id="file-input" @change="uploadImage($event)">
                         </div>
                     </div>
                 </div><br>
-                <div class="submitArea">
-                    <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
-                    <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
-                    <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
-                </div>
+                
             </div>
         </div>
+
+        <div class="submitArea">
+            <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
+            <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
+            <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
+        </div><br>
     </div>
 </form>
 </template>
 
 <script>
 import { required, minLength, between } from 'vuelidate/lib/validators'
+import RecipeAddTopComponent from './RecipeAddTopComponent.vue'
 
 export default {
+  components: { RecipeAddTopComponent },
     data: function() {
         return {
+            //1
             recipe: {
-                //properties will go here
                 title: '',
                 calories: '',
-                cookTime: null,
+                cookTime: '',
                 servings: null,
                 carbohydrates: null,
                 protein: null,
@@ -219,24 +110,13 @@ export default {
                 amount: '',
                 unit: ''
             },
-            description: '',
             ingredients: [],
+            description: '',
             steps:{
-                Title: 'Cooking Guide',
-                Description: '',
-                Stages:[
-                    {
-                        StageTitle: 'Stage 1',
-                        StageContent: '',
-                    },
-                    {
-                        StageTitle: 'Stage 2',
-                        StageContent: '',
-                    }
-                ]
+                //object definition in RecipeAddMidleComponent.vue
             }, 
-            mainCategory: 1,
-            optionalCategories: [],
+            mainCategory : 1,
+            optionalCategories: [],       
             imageUrl: '',
             submitStatus: null
 
@@ -251,43 +131,16 @@ export default {
         }
     },
     methods: {
-        //ingrdients area
-        ingredientAdd(){
-            console.log('adding ingredient')
-            console.log('vals:'+this.ingredient.name+','+this.ingredient.amount+','+this.ingredient.unit);
-            this.ingredients.push({
-              //  id: this.ingredient.id++,//used as key as
-                Name: this.ingredient.name,
-                Quantity: this.ingredient.amount,
-                Unit: this.ingredient.unit
-            })
-
-            //reset fields
-            this.ingredient.name = '';
-            this.ingredient.amount = '';
-            this.ingredient.unit = '';
-
+        processTopForm(recipeObj){
+            //can this be removed???
+            this.recipe = recipeObj;
         },
-        ingredientRemove(ingredient){ //cant still be improved and moved directly into template
-            this.ingredients.splice(ingredient,1);
+        processMiddleForm(ingredients,steps){
+            //can this be removed???
+            this.ingredients = ingredients;
+            this.steps = steps;
         },
-        //stages add
-        addStage(){
-            this.steps.Stages.push({              
-                StageTitle: 'Stage'+(this.steps.Stages.length+1),
-                StageContent: '',
-            })
-        },
-        removeStage(stagesIndex){
-            this.steps.Stages.splice(stagesIndex,1);
-        },
-        //
-        cancelButton(){
-            this.$confirm("Are you sure you want to leave?","","warning").then(() => {
-                window.location.href = '/';
-            });
-        },
-         submitButton(){            
+        submitButton(){    // NEEDS TO BE OPTIMIZED / REWRITTEN        
             //body
             const recipe = { 
                 title: this.recipe.title,
@@ -325,11 +178,21 @@ export default {
             });
 
         },
+        cancelButton(){
+            this.$confirm("Are you sure you want to leave?","","warning").then(() => {
+                window.location.href = '/';
+            });
+        },
+        uploadImage(event){
+            console.log('selecting image')
+            console.log('event='+event.target.files[0])
+        },
         testPrint(){
             //print everything to log, purely for testing and to be removed afterwards
             console.log("=test button pressed= ")
+            console.log("value: "+this.recipe.title)
 
-            this.$v.$touch()
+            /*this.$v.$touch()
             if (this.$v.$invalid) {
                 console.log("=error= ")
 
@@ -342,13 +205,10 @@ export default {
                 setTimeout(() => {
                 this.submitStatus = 'OK'
                 }, 500)
-            }
+            }*/
 
-        }
+        }   
     },
-    mounted() {
-        console.log('add recipe component is mounted');
-    }
 }
 </script>
 
@@ -357,29 +217,10 @@ export default {
         text-align: center;
         margin:20px;
     }
-    .inputArea{
-        margin-bottom:30px;
-    }
+    
     .submitArea{
         text-align: center;
         margin-bottom:15px;
     }
     
-    
-    .recipeStepsInterface{
-        margin-bottom: 40px;
-    }
-    .individualStep{
-        margin: 10px 0 0px 0;
-
-        border-radius: 10px;
-    }
-    .stepsColumn{
-        padding:10px;
-        
-    }
-    .submitCard{
-        margin-bottom:20px;
-    }
-
 </style>
