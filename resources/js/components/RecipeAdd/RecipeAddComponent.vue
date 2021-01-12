@@ -74,6 +74,18 @@
             </div>
         </div>
 
+        <!-- test -->
+        <div>
+            <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
+                <label class="form__label">Name</label>
+                <input class="form__input" v-model.trim="$v.name.$model"/>
+            </div>
+            <div class="error" v-if="!$v.name.required">Field is required</div>
+            <div class="error" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
+            <div :data="$v.name" :options="{rootObjectKey: '$v.name', maxDepth: 2}"></div>
+        </div>
+        <!-- test -->
+
         <div class="submitArea">
             <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
             <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
@@ -86,11 +98,14 @@
 <script>
 import { required, minLength, between } from 'vuelidate/lib/validators'
 import RecipeAddTopComponent from './RecipeAddTopComponent.vue'
+import RecipeAddMiddleComponent from './RecipeAddMiddleComponent.vue'
 
 export default {
-  components: { RecipeAddTopComponent },
+  components: { RecipeAddTopComponent,RecipeAddMiddleComponent },
     data: function() {
         return {
+             name: '',
+            
             //1
             recipe: {
                 title: '',
@@ -118,22 +133,26 @@ export default {
             mainCategory : 1,
             optionalCategories: [],       
             imageUrl: '',
-            submitStatus: null
-
+            submitStatus: null,
+            validation: {
+                isTopInvalid: true,
+                isMiddleInvalid: true,
+                isBottomInvalid: true
+            }
         }
 
     },
     validations: {
-        steps: {
-            Description: {
-                required
-            }
-        }
+        name: {
+            required,
+            minLength: minLength(4)
+            },
     },
     methods: {
-        processTopForm(recipeObj){
+        processTopForm(recipeObj,isInvalid){
             //can this be removed???
             this.recipe = recipeObj;
+            this.validation.isTopInvalid = isInvalid;
         },
         processMiddleForm(ingredients,steps){
             //can this be removed???
@@ -192,20 +211,20 @@ export default {
             console.log("=test button pressed= ")
             console.log("value: "+this.recipe.title)
 
-            /*this.$v.$touch()
+            this.$v.$touch()
             if (this.$v.$invalid) {
-                console.log("=error= ")
+                console.log("=error in validation= ")
 
                 this.submitStatus = 'ERROR'
             } else {
                 // do your submit logic here
-                console.log("=no error= ")
+                console.log("=no error in validation= ")
 
                 this.submitStatus = 'PENDING'
                 setTimeout(() => {
                 this.submitStatus = 'OK'
                 }, 500)
-            }*/
+            }
 
         }   
     },

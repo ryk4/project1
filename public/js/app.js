@@ -1958,6 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
 /* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _RecipeAddTopComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RecipeAddTopComponent.vue */ "./resources/js/components/RecipeAdd/RecipeAddTopComponent.vue");
+/* harmony import */ var _RecipeAddMiddleComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RecipeAddMiddleComponent.vue */ "./resources/js/components/RecipeAdd/RecipeAddMiddleComponent.vue");
 //
 //
 //
@@ -2043,14 +2044,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    RecipeAddTopComponent: _RecipeAddTopComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    RecipeAddTopComponent: _RecipeAddTopComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    RecipeAddMiddleComponent: _RecipeAddMiddleComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
+      name: '',
       //1
       recipe: {
         title: '',
@@ -2077,20 +2093,25 @@ __webpack_require__.r(__webpack_exports__);
       mainCategory: 1,
       optionalCategories: [],
       imageUrl: '',
-      submitStatus: null
+      submitStatus: null,
+      validation: {
+        isTopInvalid: true,
+        isMiddleInvalid: true,
+        isBottomInvalid: true
+      }
     };
   },
   validations: {
-    steps: {
-      Description: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
-      }
+    name: {
+      required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+      minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(4)
     }
   },
   methods: {
-    processTopForm: function processTopForm(recipeObj) {
+    processTopForm: function processTopForm(recipeObj, isInvalid) {
       //can this be removed???
       this.recipe = recipeObj;
+      this.validation.isTopInvalid = isInvalid;
     },
     processMiddleForm: function processMiddleForm(ingredients, steps) {
       //can this be removed???
@@ -2146,21 +2167,24 @@ __webpack_require__.r(__webpack_exports__);
       console.log('event=' + event.target.files[0]);
     },
     testPrint: function testPrint() {
+      var _this2 = this;
+
       //print everything to log, purely for testing and to be removed afterwards
       console.log("=test button pressed= ");
       console.log("value: " + this.recipe.title);
-      /*this.$v.$touch()
+      this.$v.$touch();
+
       if (this.$v.$invalid) {
-          console.log("=error= ")
-            this.submitStatus = 'ERROR'
+        console.log("=error in validation= ");
+        this.submitStatus = 'ERROR';
       } else {
-          // do your submit logic here
-          console.log("=no error= ")
-            this.submitStatus = 'PENDING'
-          setTimeout(() => {
-          this.submitStatus = 'OK'
-          }, 500)
-      }*/
+        // do your submit logic here
+        console.log("=no error in validation= ");
+        this.submitStatus = 'PENDING';
+        setTimeout(function () {
+          _this2.submitStatus = 'OK';
+        }, 500);
+      }
     }
   }
 });
@@ -2317,6 +2341,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuelidate/lib/validators */ "./node_modules/vuelidate/lib/validators/index.js");
+/* harmony import */ var vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2371,6 +2397,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'recipe-add-top-component',
   data: function data() {
@@ -2390,6 +2424,20 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  validations: {
+    recipe: {
+      title: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(4)
+      },
+      calories: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+      },
+      cookTime: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+      }
+    }
+  },
   methods: {
     emitEvent: function emitEvent() {
       console.log('!!!!! emiting top !!!!!');
@@ -2404,7 +2452,8 @@ __webpack_require__.r(__webpack_exports__);
         sodium: this.recipe.sodium,
         fiber: this.recipe.fiber,
         sugar: this.recipe.sugar
-      });
+      }, this.$v.$invalid);
+      console.log('Is invalid:' + this.$v.$invalid); //emit copmuted $v back to parent
     }
   }
 });
@@ -43331,6 +43380,65 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c("div", [
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "form-group--error": _vm.$v.name.$error }
+            },
+            [
+              _c("label", { staticClass: "form__label" }, [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model.trim",
+                    value: _vm.$v.name.$model,
+                    expression: "$v.name.$model",
+                    modifiers: { trim: true }
+                  }
+                ],
+                staticClass: "form__input",
+                domProps: { value: _vm.$v.name.$model },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.$v.name, "$model", $event.target.value.trim())
+                  },
+                  blur: function($event) {
+                    return _vm.$forceUpdate()
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          !_vm.$v.name.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Field is required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.name.minLength
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(
+                  "Name must have at least " +
+                    _vm._s(_vm.$v.name.$params.minLength.min) +
+                    " letters."
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.name,
+              options: { rootObjectKey: "$v.name", maxDepth: 2 }
+            }
+          })
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "submitArea" }, [
           _c("input", {
             staticClass: "btn btn-primary mr-3",
@@ -43784,6 +43892,27 @@ var render = function() {
                 }
               ]
             }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.title.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Field is required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.title.minLength
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(
+                  "Title must have at least " +
+                    _vm._s(_vm.$v.recipe.title.$params.minLength.min) +
+                    " letters."
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.title,
+              options: { rootObjectKey: "$v.recipe.title", maxDepth: 2 }
+            }
           })
         ]),
         _vm._v(" "),
@@ -43802,6 +43931,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { isRequired: !_vm.$v.recipe.calories.required },
             attrs: { placeholder: "Cals" },
             domProps: { value: _vm.recipe.calories },
             on: {
@@ -43816,6 +43946,17 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.calories.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.calories,
+              options: { rootObjectKey: "$v.recipe.calories", maxDepth: 2 }
             }
           })
         ]),
@@ -43847,6 +43988,17 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.cookTime.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.cookTime,
+              options: { rootObjectKey: "$v.recipe.cookTime", maxDepth: 2 }
             }
           })
         ]),
