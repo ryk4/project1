@@ -23,8 +23,8 @@
 
                 </div>
                 <div class="inputArea col-lg-1"> 
-                    <label>Submit</label>
-                    <button type="button" v-on:click="ingredientAdd()" class="btn btn-primary">Add</button>
+                    <label>Add(RM)</label>
+                    <button type="button" v-on:click="ingredientAdd()" class="btn btn-primary" :disabled="ingredient.name == ''">Add</button>
                 </div>
                 <div class="inputArea col-lg-4" v-if="this.ingredients.length">
                     <label>Added ingredients:</label>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="row col-11">
-                    <button type="button" class="btn btn-light" v-on:click="addStage">Add Stage</button>
+                    <button type="button" class="btn btn-light" v-on:click="addStage" >Add Stage</button>
                 </div>
             </div>
         </div>

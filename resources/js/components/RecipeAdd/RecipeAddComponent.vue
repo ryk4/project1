@@ -74,18 +74,6 @@
             </div>
         </div>
 
-        <!-- test -->
-        <div>
-            <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
-                <label class="form__label">Name</label>
-                <input class="form__input" v-model.trim="$v.name.$model"/>
-            </div>
-            <div class="error" v-if="!$v.name.required">Field is required</div>
-            <div class="error" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
-            <div :data="$v.name" :options="{rootObjectKey: '$v.name', maxDepth: 2}"></div>
-        </div>
-        <!-- test -->
-
         <div class="submitArea">
             <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
             <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
@@ -103,9 +91,7 @@ import RecipeAddMiddleComponent from './RecipeAddMiddleComponent.vue'
 export default {
   components: { RecipeAddTopComponent,RecipeAddMiddleComponent },
     data: function() {
-        return {
-             name: '',
-            
+        return {          
             //1
             recipe: {
                 title: '',

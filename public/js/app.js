@@ -2044,18 +2044,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2066,7 +2054,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      name: '',
       //1
       recipe: {
         title: '',
@@ -2404,17 +2391,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'recipe-add-top-component',
   data: function data() {
     return {
       recipe: {
-        //properties will go here
+        //properties will go here. Defauklt values
         title: '',
-        calories: '',
+        calories: null,
         cookTime: null,
-        servings: null,
+        servings: 1,
         carbohydrates: null,
         protein: null,
         fat: null,
@@ -2428,13 +2430,31 @@ __webpack_require__.r(__webpack_exports__);
     recipe: {
       title: {
         required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
-        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(4)
+        minLength: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["minLength"])(5)
       },
       calories: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["decimal"]
       },
       cookTime: {
-        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"]
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        between: Object(vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["between"])(5, 150)
+      },
+      servings: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["decimal"]
+      },
+      carbohydrates: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["decimal"]
+      },
+      protein: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["decimal"]
+      },
+      fat: {
+        required: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["required"],
+        decimal: vuelidate_lib_validators__WEBPACK_IMPORTED_MODULE_0__["decimal"]
       }
     }
   },
@@ -7565,7 +7585,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.inputArea{\n    margin-bottom:30px;\n}\n.recipeStepsInterface{\n    margin-bottom: 40px;\n}\n.individualStep{\n    margin: 10px 0 0px 0;\n\n    border-radius: 10px;\n}\n.stepsColumn{\n    padding:10px;\n}\n.submitCard{\n    margin-bottom:20px;\n}\n\n", ""]);
+exports.push([module.i, "\n.inputArea{\n    margin-bottom:30px;\n}\n.recipeStepsInterface{\n    margin-bottom: 40px;\n}\n.individualStep{\n    margin: 10px 0 0px 0;\n\n    border-radius: 10px;\n}\n.stepsColumn{\n    padding:10px;\n}\n.submitCard{\n    margin-bottom:20px;\n}\n.inputRequired{\n    border-color:rgba(212, 38, 16, 0.932);\n}\n.error{\n    color:rgba(212, 38, 16, 0.932);\n}\n\n", ""]);
 
 // exports
 
@@ -43380,65 +43400,6 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", [
-          _c(
-            "div",
-            {
-              staticClass: "form-group",
-              class: { "form-group--error": _vm.$v.name.$error }
-            },
-            [
-              _c("label", { staticClass: "form__label" }, [_vm._v("Name")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.$v.name.$model,
-                    expression: "$v.name.$model",
-                    modifiers: { trim: true }
-                  }
-                ],
-                staticClass: "form__input",
-                domProps: { value: _vm.$v.name.$model },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.$v.name, "$model", $event.target.value.trim())
-                  },
-                  blur: function($event) {
-                    return _vm.$forceUpdate()
-                  }
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          !_vm.$v.name.required
-            ? _c("div", { staticClass: "error" }, [_vm._v("Field is required")])
-            : _vm._e(),
-          _vm._v(" "),
-          !_vm.$v.name.minLength
-            ? _c("div", { staticClass: "error" }, [
-                _vm._v(
-                  "Name must have at least " +
-                    _vm._s(_vm.$v.name.$params.minLength.min) +
-                    " letters."
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", {
-            attrs: {
-              data: _vm.$v.name,
-              options: { rootObjectKey: "$v.name", maxDepth: 2 }
-            }
-          })
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "submitArea" }, [
           _c("input", {
             staticClass: "btn btn-primary mr-3",
@@ -43621,13 +43582,13 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "inputArea col-lg-1" }, [
-          _c("label", [_vm._v("Submit")]),
+          _c("label", [_vm._v("Add(RM)")]),
           _vm._v(" "),
           _c(
             "button",
             {
               staticClass: "btn btn-primary",
-              attrs: { type: "button" },
+              attrs: { type: "button", disabled: _vm.ingredient.name == "" },
               on: {
                 click: function($event) {
                   return _vm.ingredientAdd()
@@ -43874,6 +43835,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { inputRequired: !_vm.$v.recipe.title.required },
             attrs: {
               "aria-describedby": "titleHelp",
               placeholder: "Enter title"
@@ -43895,7 +43857,7 @@ var render = function() {
           }),
           _vm._v(" "),
           !_vm.$v.recipe.title.required
-            ? _c("div", { staticClass: "error" }, [_vm._v("Field is required")])
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
             : _vm._e(),
           _vm._v(" "),
           !_vm.$v.recipe.title.minLength
@@ -43931,7 +43893,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            class: { isRequired: !_vm.$v.recipe.calories.required },
+            class: { inputRequired: !_vm.$v.recipe.calories.required },
             attrs: { placeholder: "Cals" },
             domProps: { value: _vm.recipe.calories },
             on: {
@@ -43951,6 +43913,10 @@ var render = function() {
           _vm._v(" "),
           !_vm.$v.recipe.calories.required
             ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.calories.decimal
+            ? _c("div", { staticClass: "error" }, [_vm._v("Not a number")])
             : _vm._e(),
           _vm._v(" "),
           _c("div", {
@@ -43974,7 +43940,8 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { value: "20" },
+            class: { inputRequired: !_vm.$v.recipe.cookTime.required },
+            attrs: { placeholder: "in minutes" },
             domProps: { value: _vm.recipe.cookTime },
             on: {
               input: [
@@ -43993,6 +43960,17 @@ var render = function() {
           _vm._v(" "),
           !_vm.$v.recipe.cookTime.required
             ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.cookTime.between
+            ? _c("div", { staticClass: "error" }, [
+                _vm._v(
+                  "Must be between " +
+                    _vm._s(_vm.$v.recipe.cookTime.$params.between.min) +
+                    " and " +
+                    _vm._s(_vm.$v.recipe.cookTime.$params.between.max)
+                )
+              ])
             : _vm._e(),
           _vm._v(" "),
           _c("div", {
@@ -44016,7 +43994,8 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { placeholder: "Servings", value: "1" },
+            class: { inputRequired: !_vm.$v.recipe.servings.required },
+            attrs: { placeholder: "Servings" },
             domProps: { value: _vm.recipe.servings },
             on: {
               input: [
@@ -44030,6 +44009,21 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.servings.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.servings.decimal
+            ? _c("div", { staticClass: "error" }, [_vm._v("Not a number")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.servings,
+              options: { rootObjectKey: "$v.recipe.servings", maxDepth: 2 }
             }
           })
         ]),
@@ -44047,6 +44041,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { inputRequired: !_vm.$v.recipe.carbohydrates.required },
             domProps: { value: _vm.recipe.carbohydrates },
             on: {
               input: [
@@ -44060,6 +44055,21 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.carbohydrates.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.carbohydrates.decimal
+            ? _c("div", { staticClass: "error" }, [_vm._v("Not a number")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.carbohydrates,
+              options: { rootObjectKey: "$v.recipe.carbohydrates", maxDepth: 2 }
             }
           })
         ]),
@@ -44077,6 +44087,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { inputRequired: !_vm.$v.recipe.protein.required },
             domProps: { value: _vm.recipe.protein },
             on: {
               input: [
@@ -44090,6 +44101,21 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.protein.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.protein.decimal
+            ? _c("div", { staticClass: "error" }, [_vm._v("Not a number")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.protein,
+              options: { rootObjectKey: "$v.recipe.protein", maxDepth: 2 }
             }
           })
         ]),
@@ -44107,6 +44133,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
+            class: { inputRequired: !_vm.$v.recipe.fat.required },
             domProps: { value: _vm.recipe.fat },
             on: {
               input: [
@@ -44120,6 +44147,21 @@ var render = function() {
                   return _vm.emitEvent()
                 }
               ]
+            }
+          }),
+          _vm._v(" "),
+          !_vm.$v.recipe.fat.required
+            ? _c("div", { staticClass: "error" }, [_vm._v("Required")])
+            : _vm._e(),
+          _vm._v(" "),
+          !_vm.$v.recipe.fat.decimal
+            ? _c("div", { staticClass: "error" }, [_vm._v("Not a number")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("div", {
+            attrs: {
+              data: _vm.$v.recipe.fat,
+              options: { rootObjectKey: "$v.recipe.fat", maxDepth: 2 }
             }
           })
         ]),
@@ -60346,8 +60388,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
