@@ -32,7 +32,7 @@ class Initial extends Migration
             $table->bigIncrements('id')->autoIncrement();
             $table->string('title');
             $table->text('ingredients');
-            $table->text('steps');
+            $table->text('steps')->nullable();
             $table->string('image')->nullable(); //nullable means that it can be null
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

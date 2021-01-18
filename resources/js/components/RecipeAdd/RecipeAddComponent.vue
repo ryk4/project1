@@ -118,7 +118,7 @@ export default {
             }, 
             mainCategory : 1,
             optionalCategories: [],       
-            imageUrl: '',
+            image: null,
             submitStatus: null,
             validation: {
                 isTopInvalid: true,
@@ -166,6 +166,10 @@ export default {
                 "Content-type": "application/json",
                 "Accept": "application/json"
             };
+
+           // let imageFile = new FormData();
+           // imageFile.append('file', this.image);
+
             axios.post("/api/recipe/create", recipe, { headers })
                 .then(response => {
                     //print response
@@ -191,6 +195,7 @@ export default {
         uploadImage(event){
             console.log('selecting image')
             console.log('event='+event.target.files[0])
+            this.image = event.target.files[0];
         },
         testPrint(){
             //print everything to log, purely for testing and to be removed afterwards

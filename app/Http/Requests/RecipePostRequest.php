@@ -28,9 +28,7 @@ class RecipePostRequest extends FormRequest
             'calories' => 'required|max:255',
             'servings' => 'required|integer',
             'ingredients' => 'required',
-            'image' => 'required',
-            'steps' => 'required',
-            'categories' => 'required'
+            //'image' => 'required'
         ];
     }
 }

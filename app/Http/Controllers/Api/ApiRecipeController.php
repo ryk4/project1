@@ -56,8 +56,9 @@ class ApiRecipeController extends Controller
         
         //validates in RecipePostRequest
 
-        //does the logic in observer
-        //register observer in AppServiceProvider.php
+
+        //insert image into public folder
+
         $recipeDetail = new RecipeDetail();
         $recipeDetail->calories = $request->calories;
         $recipeDetail->protein = $request->protein;
@@ -71,6 +72,7 @@ class ApiRecipeController extends Controller
 
         $recipeDetail->save();
 
+
         //create Recipe model
         $recipe = new Recipe;
 
@@ -81,7 +83,17 @@ class ApiRecipeController extends Controller
         $recipe->recipeDetails_id = $recipeDetail->id;
         $recipe->save();
 
+        /*if($request->image != null){
+            $file = $request->image->store('public/images');
+
+            $image_uploaded_path = $image->store($uploadFolder, 'public');
+
+
+            $recipe->image = 'no longer default pal';
+        }*/
+
         //insert to recipies_categories
+        
         foreach ($request->categories as $categoryId) {
             $categories = new recipes_categories;
 

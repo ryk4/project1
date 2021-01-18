@@ -2079,7 +2079,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       mainCategory: 1,
       optionalCategories: [],
-      imageUrl: '',
+      image: null,
       submitStatus: null,
       validation: {
         isTopInvalid: true,
@@ -2128,7 +2128,9 @@ __webpack_require__.r(__webpack_exports__);
       var headers = {
         "Content-type": "application/json",
         "Accept": "application/json"
-      };
+      }; // let imageFile = new FormData();
+      // imageFile.append('file', this.image);
+
       axios.post("/api/recipe/create", recipe, {
         headers: headers
       }).then(function (response) {
@@ -2152,6 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
     uploadImage: function uploadImage(event) {
       console.log('selecting image');
       console.log('event=' + event.target.files[0]);
+      this.image = event.target.files[0];
     },
     testPrint: function testPrint() {
       var _this2 = this;
@@ -60388,8 +60391,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
