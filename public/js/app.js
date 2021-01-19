@@ -2125,14 +2125,29 @@ __webpack_require__.r(__webpack_exports__);
 
       }; //headers
 
-      var headers = {
-        "Content-type": "application/json",
-        "Accept": "application/json"
-      }; // let imageFile = new FormData();
-      // imageFile.append('file', this.image);
+      /*const headers = { 
+          "Content-type": "application/json",
+          "Accept": "application/json"
+      };*/
+      // let imageFile = new FormData();
 
-      axios.post("/api/recipe/create", recipe, {
-        headers: headers
+      var recipe2 = new FormData();
+      recipe2.append('title', this.recipe.title);
+      recipe2.append('ingredients', JSON.stringify(this.ingredients));
+      recipe2.append('image', this.image);
+      recipe2.append('steps', JSON.stringify(this.steps));
+      recipe2.append('calories', this.recipe.calories);
+      recipe2.append('protein', this.recipe.protein);
+      recipe2.append('carbohydrates', this.recipe.carbohydrates);
+      recipe2.append('fat', this.recipe.fat);
+      recipe2.append('servings', this.recipe.servings);
+      recipe2.append('cookTime', this.recipe.cookTime);
+      recipe2.append('categories', [this.mainCategory].concat(this.optionalCategories));
+      axios.post("/api/recipe/create", recipe2, {
+        headers: {
+          'Accept': "application/json",
+          'Content-Type': "multipart/form-data;"
+        }
       }).then(function (response) {
         //print response
         _this.$alert("Recipe Successfully added!", "", "success");
@@ -2153,7 +2168,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     uploadImage: function uploadImage(event) {
       console.log('selecting image');
-      console.log('event=' + event.target.files[0]);
+      console.log('event=' + event.target.files[0]); //console.log('ref='+this.$refs.file.files[0])
+
       this.image = event.target.files[0];
     },
     testPrint: function testPrint() {
@@ -43388,6 +43404,7 @@ var render = function() {
                   _c("label", [_vm._v("Recipe image")]),
                   _vm._v(" "),
                   _c("input", {
+                    ref: "file",
                     staticClass: "form-control-file",
                     attrs: { type: "file", id: "file-input" },
                     on: {
@@ -44453,9 +44470,7 @@ var render = function() {
                             {
                               staticClass: "b-card_image",
                               style:
-                                "background-image:url(/images/recipes/" +
-                                r.id +
-                                ".jpg)"
+                                "background-image:url(/storage/" + r.image + ")"
                             },
                             [
                               _c("a", {
@@ -44905,7 +44920,7 @@ var render = function() {
     _c("div", { staticClass: "col-12 col-md-6" }, [
       _c("img", {
         staticClass: "img-fluid mb-3",
-        attrs: { src: "/images/recipes/1.jpg", alt: "HHH" }
+        attrs: { src: "/storage/" + this.recipe.image, alt: "HHH" }
       })
     ]),
     _vm._v(" "),

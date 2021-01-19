@@ -34,7 +34,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/api/sendEmail', [App\Http\Controllers\HomeController::class, 'sendEmail'])->name('sendEmail'); //add routes
 
 
-Route::get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
 //Route::middleware('auth:api')->get('/api/recipes', [App\Http\Controllers\RecipeController::class, 'getAllRecipes']);
 
 
@@ -60,4 +59,5 @@ Route::get('/api/recipe/tags/{id}', [App\Http\Controllers\Api\ApiRecipeControlle
 Route::post('/api/recipe/create', [App\Http\Controllers\Api\ApiRecipeController::class, 'createRecipe']);
 Route::put('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'updateRecipe']);
 Route::delete('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'deleteRecipe']);
+Route::get('/api/recipes', [App\Http\Controllers\Api\ApiRecipeController::class, 'getAllRecipes']);
 

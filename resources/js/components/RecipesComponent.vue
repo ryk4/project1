@@ -51,7 +51,7 @@
                         <div class="b-card col-12 col-lg-6 col-xl-4" v-for="r in recipes.data" :key="r.id">
                     
                             <div class="b-card_inner" >
-                                <div class="b-card_image" v-bind:style="`background-image:url(/images/recipes/${r.id}.jpg)`">
+                                <div class="b-card_image" v-bind:style="`background-image:url(/storage/${r.image})`">
                                 <a class="b-card_image-link" :href="`/recipe/${r.id}`"></a>
                                     <div class="b-card_image-info-top">
                                         <span class="g-badge" :style="`background-color:#${r.representative_color}`">{{r.name}}</span>

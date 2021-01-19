@@ -66,7 +66,7 @@
                     <div class="form-check col-lg-4">
                         <div class="form-group">
                             <label>Recipe image</label>
-                            <input type="file" class="form-control-file" id="file-input" @change="uploadImage($event)">
+                            <input type="file" class="form-control-file" id="file-input" ref="file" @change="uploadImage($event)">
                         </div>
                     </div>
                 </div><br>
@@ -162,15 +162,34 @@ export default {
 
             };
             //headers
-            const headers = { 
+            /*const headers = { 
                 "Content-type": "application/json",
                 "Accept": "application/json"
-            };
+            };*/
 
            // let imageFile = new FormData();
-           // imageFile.append('file', this.image);
+            const recipe2 = new FormData();
+            recipe2.append('title', this.recipe.title)
+            recipe2.append('ingredients', JSON.stringify(this.ingredients))
+            recipe2.append('image', this.image)
+            recipe2.append('steps',  JSON.stringify(this.steps))
 
-            axios.post("/api/recipe/create", recipe, { headers })
+
+            recipe2.append('calories', this.recipe.calories)
+            recipe2.append('protein', this.recipe.protein)
+            recipe2.append('carbohydrates', this.recipe.carbohydrates)
+            recipe2.append('fat', this.recipe.fat)
+            recipe2.append('servings', this.recipe.servings)
+            recipe2.append('cookTime', this.recipe.cookTime)
+            recipe2.append('categories',[this.mainCategory].concat(this.optionalCategories))
+
+
+            axios.post("/api/recipe/create", recipe2, { 
+                headers: {
+                    'Accept': "application/json",
+                    'Content-Type': "multipart/form-data;"
+                } 
+            })
                 .then(response => {
                     //print response
                     this.$alert("Recipe Successfully added!","","success");
@@ -195,6 +214,7 @@ export default {
         uploadImage(event){
             console.log('selecting image')
             console.log('event='+event.target.files[0])
+            //console.log('ref='+this.$refs.file.files[0])
             this.image = event.target.files[0];
         },
         testPrint(){
