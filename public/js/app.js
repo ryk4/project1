@@ -2080,11 +2080,9 @@ __webpack_require__.r(__webpack_exports__);
       mainCategory: 1,
       optionalCategories: [],
       image: null,
-      submitStatus: null,
       validation: {
-        isTopInvalid: true,
-        isMiddleInvalid: true,
-        isBottomInvalid: true
+        //validating child component separately
+        isTopInvalid: true
       }
     };
   },
@@ -2109,57 +2107,43 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // NEEDS TO BE OPTIMIZED / REWRITTEN        
-      //body
-      var recipe = {
-        title: this.recipe.title,
-        ingredients: JSON.stringify(this.ingredients),
-        image: "default img for now",
-        steps: JSON.stringify(this.steps),
-        calories: this.recipe.calories,
-        protein: this.recipe.protein,
-        carbohydrates: this.recipe.carbohydrates,
-        fat: this.recipe.title.fat,
-        servings: this.recipe.servings,
-        cookTime: this.recipe.cookTime,
-        categories: [this.mainCategory].concat(this.optionalCategories) //concat "main category" and optional categories into 1 array
+      //UI validation
+      if (!this.validation.isTopInvalid) {
+        //POST api body
+        var recipe = new FormData();
+        recipe.append('title', this.recipe.title);
+        recipe.append('ingredients', JSON.stringify(this.ingredients));
+        recipe.append('image', this.image);
+        recipe.append('steps', JSON.stringify(this.steps));
+        recipe.append('calories', this.recipe.calories);
+        recipe.append('protein', this.recipe.protein);
+        recipe.append('carbohydrates', this.recipe.carbohydrates);
+        recipe.append('fat', this.recipe.fat);
+        recipe.append('servings', this.recipe.servings);
+        recipe.append('cookTime', this.recipe.cookTime);
+        recipe.append('categories', [this.mainCategory].concat(this.optionalCategories));
+        axios.post("/api/recipe/create", recipe, {
+          headers: {
+            'Accept': "application/json",
+            'Content-Type': "multipart/form-data;"
+          }
+        }).then(function (response) {
+          console.log('API success. response: ' + response.data.message);
 
-      }; //headers
+          _this.$confirm("Recipe Successfully added. Do you want to Exit?").then(function () {
+            window.location.href = "/recipes";
+          });
+        })["catch"](function (error) {
+          //catch error
+          var errorMsg = "Server side error! " + error.response.data.message;
 
-      /*const headers = { 
-          "Content-type": "application/json",
-          "Accept": "application/json"
-      };*/
-      // let imageFile = new FormData();
+          _this.$alert(errorMsg, "", "error");
 
-      var recipe2 = new FormData();
-      recipe2.append('title', this.recipe.title);
-      recipe2.append('ingredients', JSON.stringify(this.ingredients));
-      recipe2.append('image', this.image);
-      recipe2.append('steps', JSON.stringify(this.steps));
-      recipe2.append('calories', this.recipe.calories);
-      recipe2.append('protein', this.recipe.protein);
-      recipe2.append('carbohydrates', this.recipe.carbohydrates);
-      recipe2.append('fat', this.recipe.fat);
-      recipe2.append('servings', this.recipe.servings);
-      recipe2.append('cookTime', this.recipe.cookTime);
-      recipe2.append('categories', [this.mainCategory].concat(this.optionalCategories));
-      axios.post("/api/recipe/create", recipe2, {
-        headers: {
-          'Accept': "application/json",
-          'Content-Type': "multipart/form-data;"
-        }
-      }).then(function (response) {
-        //print response
-        _this.$alert("Recipe Successfully added!", "", "success");
-
-        console.log('API success. response: ' + response.data.message); //===================================================================forward back or add another one ? 
-        //custom event box
-      })["catch"](function (error) {
-        //catch error
-        _this.$alert("Error! (Add error msg)", "", "error");
-
-        console.log("Api post error: ", error.response.data);
-      });
+          console.log("Api post error: ", error.response.data);
+        });
+      } else {
+        window.scrollTo(0, 0);
+      }
     },
     cancelButton: function cancelButton() {
       this.$confirm("Are you sure you want to leave?", "", "warning").then(function () {
@@ -2171,26 +2155,6 @@ __webpack_require__.r(__webpack_exports__);
       console.log('event=' + event.target.files[0]); //console.log('ref='+this.$refs.file.files[0])
 
       this.image = event.target.files[0];
-    },
-    testPrint: function testPrint() {
-      var _this2 = this;
-
-      //print everything to log, purely for testing and to be removed afterwards
-      console.log("=test button pressed= ");
-      console.log("value: " + this.recipe.title);
-      this.$v.$touch();
-
-      if (this.$v.$invalid) {
-        console.log("=error in validation= ");
-        this.submitStatus = 'ERROR';
-      } else {
-        // do your submit logic here
-        console.log("=no error in validation= ");
-        this.submitStatus = 'PENDING';
-        setTimeout(function () {
-          _this2.submitStatus = 'OK';
-        }, 500);
-      }
     }
   }
 });
@@ -2741,8 +2705,7 @@ __webpack_require__.r(__webpack_exports__);
       console.log('if i need event:' + event);
       value.selected = !value.selected;
       this.fetchRecipesAPI();
-    },
-    categoiresCounter: function categoiresCounter() {}
+    }
   }
 });
 
@@ -43435,16 +43398,6 @@ var render = function() {
               on: { click: _vm.cancelButton }
             },
             [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-warning",
-              attrs: { type: "button" },
-              on: { click: _vm.testPrint }
-            },
-            [_vm._v("Test Print")]
           )
         ]),
         _c("br")
@@ -44495,7 +44448,7 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("span", { staticClass: "g-views" }, [
                                     _c("i", { staticClass: "fa fa-eye" }),
-                                    _vm._v(_vm._s(r.views))
+                                    _vm._v(_vm._s(r.viewCounter))
                                   ]),
                                   _vm._v(" "),
                                   _c("span", { staticClass: "g-likes" }, [

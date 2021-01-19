@@ -32,7 +32,8 @@ class ApiRecipeController extends Controller
             ->join('recipeDetails', 'recipes.recipeDetails_id', '=', 'recipeDetails.id')
             ->join('recipes_categories','recipes.id','=','recipes_categories.recipes_id')
             ->join('categories','recipes_categories.categories_id','=','categories.id')
-            ->select('recipes.*', 'recipeDetails.calories','recipeDetails.cookTime','recipes_categories.categories_id','categories.name','categories.description','categories.representative_color')
+            ->select('recipes.*', 'recipeDetails.calories','recipeDetails.cookTime','recipes_categories.categories_id','categories.name',
+            'categories.description','categories.representative_color')
             ->whereIn('recipes_categories.categories_id',['1','2','3','4'])//required in recipes page to display 'main' tag
             ->whereIn('recipes.id',$categories->pluck('recipes_id'))
             ->get();
@@ -187,6 +188,19 @@ class ApiRecipeController extends Controller
                 "meesage" => "Recipe with id:".$id." not found."
             ],404);
         }
+    }
+
+    //GET all categories info
+    public function getCategories(){
+        
+        //NEEDS TO BE: select  id,name,description,representative_color,(select  count(*) from recipes_categories where categories_id=A.id) as Count from categories A
+        $recipes = DB::table('categories')
+            ->select('categories.name','categories.description','categories.representative_color')
+            ->get()->toJson(JSON_PRETTY_PRINT);
+
+
+        return response($recipes, 200);
+
     }
 
 }

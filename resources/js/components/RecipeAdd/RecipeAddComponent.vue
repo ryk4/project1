@@ -77,7 +77,7 @@
         <div class="submitArea">
             <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
             <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
-            <button type="button" class="btn btn-warning" @click="testPrint">Test Print</button>
+            
         </div><br>
     </div>
 </form>
@@ -119,11 +119,8 @@ export default {
             mainCategory : 1,
             optionalCategories: [],       
             image: null,
-            submitStatus: null,
-            validation: {
-                isTopInvalid: true,
-                isMiddleInvalid: true,
-                isBottomInvalid: true
+            validation: { //validating child component separately
+                isTopInvalid: true
             }
         }
 
@@ -146,64 +143,46 @@ export default {
             this.steps = steps;
         },
         submitButton(){    // NEEDS TO BE OPTIMIZED / REWRITTEN        
-            //body
-            const recipe = { 
-                title: this.recipe.title,
-                ingredients: JSON.stringify(this.ingredients),
-                image: "default img for now",
-                steps: JSON.stringify(this.steps),
-                calories: this.recipe.calories,
-                protein: this.recipe.protein,
-                carbohydrates: this.recipe.carbohydrates,
-                fat: this.recipe.title.fat,
-                servings: this.recipe.servings,
-                cookTime: this.recipe.cookTime,
-                categories: [this.mainCategory].concat(this.optionalCategories)//concat "main category" and optional categories into 1 array
 
-            };
-            //headers
-            /*const headers = { 
-                "Content-type": "application/json",
-                "Accept": "application/json"
-            };*/
+        //UI validation
+        if (!this.validation.isTopInvalid) {
+            //POST api body
+            const recipe = new FormData();
+            recipe.append('title', this.recipe.title)
+            recipe.append('ingredients', JSON.stringify(this.ingredients))
+            recipe.append('image', this.image)
+            recipe.append('steps',  JSON.stringify(this.steps))
 
-           // let imageFile = new FormData();
-            const recipe2 = new FormData();
-            recipe2.append('title', this.recipe.title)
-            recipe2.append('ingredients', JSON.stringify(this.ingredients))
-            recipe2.append('image', this.image)
-            recipe2.append('steps',  JSON.stringify(this.steps))
+            recipe.append('calories', this.recipe.calories)
+            recipe.append('protein', this.recipe.protein)
+            recipe.append('carbohydrates', this.recipe.carbohydrates)
+            recipe.append('fat', this.recipe.fat)
+            recipe.append('servings', this.recipe.servings)
+            recipe.append('cookTime', this.recipe.cookTime)
+            recipe.append('categories',[this.mainCategory].concat(this.optionalCategories))
 
 
-            recipe2.append('calories', this.recipe.calories)
-            recipe2.append('protein', this.recipe.protein)
-            recipe2.append('carbohydrates', this.recipe.carbohydrates)
-            recipe2.append('fat', this.recipe.fat)
-            recipe2.append('servings', this.recipe.servings)
-            recipe2.append('cookTime', this.recipe.cookTime)
-            recipe2.append('categories',[this.mainCategory].concat(this.optionalCategories))
-
-
-            axios.post("/api/recipe/create", recipe2, { 
+            axios.post("/api/recipe/create", recipe, { 
                 headers: {
                     'Accept': "application/json",
                     'Content-Type': "multipart/form-data;"
                 } 
             })
-                .then(response => {
-                    //print response
-                    this.$alert("Recipe Successfully added!","","success");
-                    console.log('API success. response: ' + response.data.message );
-
-                    //===================================================================forward back or add another one ? 
-                    //custom event box
-
+            .then(response => {
+                console.log('API success. response: ' + response.data.message );
+                this.$confirm("Recipe Successfully added. Do you want to Exit?").then(() => {
+                    window.location.href = "/recipes"
                 })
-                .catch(error => {//catch error
-                    this.$alert("Error! (Add error msg)","","error");
-                    console.log("Api post error: ", error.response.data);                   
-                    
+
+            })
+            .catch(error => {//catch error
+                let errorMsg = "Server side error! " + error.response.data.message;
+                this.$alert(errorMsg,"","error");
+                console.log("Api post error: ", error.response.data);  
             });
+        }else{
+            window.scrollTo(0,0);         
+        }
 
         },
         cancelButton(){
@@ -216,28 +195,7 @@ export default {
             console.log('event='+event.target.files[0])
             //console.log('ref='+this.$refs.file.files[0])
             this.image = event.target.files[0];
-        },
-        testPrint(){
-            //print everything to log, purely for testing and to be removed afterwards
-            console.log("=test button pressed= ")
-            console.log("value: "+this.recipe.title)
-
-            this.$v.$touch()
-            if (this.$v.$invalid) {
-                console.log("=error in validation= ")
-
-                this.submitStatus = 'ERROR'
-            } else {
-                // do your submit logic here
-                console.log("=no error in validation= ")
-
-                this.submitStatus = 'PENDING'
-                setTimeout(() => {
-                this.submitStatus = 'OK'
-                }, 500)
-            }
-
-        }   
+        }
     },
 }
 </script>

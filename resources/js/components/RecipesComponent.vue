@@ -56,7 +56,7 @@
                                     <div class="b-card_image-info-top">
                                         <span class="g-badge" :style="`background-color:#${r.representative_color}`">{{r.name}}</span>
                                             
-                                        <span class="g-views"><i class="fa fa-eye"></i>{{r.views}}</span>
+                                        <span class="g-views"><i class="fa fa-eye"></i>{{r.viewCounter}}</span>
                                         <span class="g-likes"><i class="fa fa-heart"></i>{{r.favouriteCounter}}</span></div>
                                     <div class="b-card_image-info-bottom">
                                         <h3 class="b-card_title"><a href="#">{{r.title}}</a></h3>
@@ -153,9 +153,6 @@ export default {
             this.fetchRecipesAPI()
 
         },
-        categoiresCounter(){
-
-        }
     }
 }
 </script>

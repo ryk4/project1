@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         //call api get recipes
-        $recipes = app(RecipeController::class)->getAllRecipes(); //working
+      /*  $recipes = app(RecipeController::class)->getAllRecipes(); //working
 
 
         //check if response is valid
@@ -40,7 +40,7 @@ class HomeController extends Controller
 
         $popularCollection= \App\Models\Recipe::hydrate($object)->slice(0,3); //top 3popular
         $newCollection = \App\Models\Recipe::hydrate($object)->slice(0,4); //top 4 new
-
+*/
         //$collection = $collection->flatten(); --OPTIONAL ?????
 
         //return view('home', ['recipesNew' => $newCollection,'recipesPopular' => $popularCollection]);

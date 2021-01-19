@@ -60,4 +60,5 @@ Route::post('/api/recipe/create', [App\Http\Controllers\Api\ApiRecipeController:
 Route::put('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'updateRecipe']);
 Route::delete('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'deleteRecipe']);
 Route::get('/api/recipes', [App\Http\Controllers\Api\ApiRecipeController::class, 'getAllRecipes']);
+Route::get('/api/recipes/categories', [App\Http\Controllers\Api\ApiRecipeController::class, 'getCategories']);
 
