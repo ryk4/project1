@@ -2659,27 +2659,33 @@ __webpack_require__.r(__webpack_exports__);
       recipesFetched: false,
       filterCategories: [],
       categories: [//===change it so it fetches from api only once during mounted/created. along with count for each category
-      {
-        name: 'Meat',
-        color: 'd44f68',
-        selected: false
-      }, {
-        name: 'Fish',
-        color: '7d6dad',
-        selected: false
-      }, {
-        name: 'Vegetarian',
-        color: '67d44f',
-        selected: false
-      }, {
-        name: 'Fruits',
-        color: 'e8a765',
-        selected: false
-      }]
+
+        /*{
+            name: 'Meat',
+            color : 'd44f68',
+            selected : false
+        },
+        {
+            name: 'Fish',
+            color : '7d6dad',
+            selected : false
+          },
+        {
+            name: 'Vegetarian',
+            color : '67d44f',
+            selected : false
+          },
+        {
+            name: 'Fruits',
+            color : 'e8a765',
+            selected : false
+          },*/
+      ]
     };
   },
   mounted: function mounted() {
     //as soon as mounted call api to fetch recipes
+    this.fetchCategories();
     this.fetchRecipesAPI();
   },
   methods: {
@@ -2699,6 +2705,32 @@ __webpack_require__.r(__webpack_exports__);
         _this.recipes = res.data;
       });
       this.recipesFetched = true;
+    },
+    fetchCategories: function fetchCategories() {
+      var _this2 = this;
+
+      console.log('fetching categories');
+      axios.get('/api/recipes/categories').then(function (res) {
+        res.data.forEach(function (element) {
+          _this2.categories.push({
+            name: element.name,
+            color: element.representative_color,
+            selected: false,
+            total: element.total
+          });
+        }); //this.categories = res.data;
+      });
+      /*
+          fetch(`/api/recipe/tags/${this.recipeID}`)
+          .then(res => res.json())
+          .then(res => {                
+              res.forEach(element => {
+                  this.tags.push({
+                      name : element.name,
+                      description: element.description});
+              });    
+          }) 
+            */
     },
     applyFilter: function applyFilter(event, value) {
       this.hasError = true;
@@ -44391,7 +44423,7 @@ var render = function() {
                         staticClass: "badge badge-pill text-white",
                         style: "background-color:#" + cat.color
                       },
-                      [_vm._v("0")]
+                      [_vm._v(_vm._s(cat.total))]
                     )
                   ]
                 )
@@ -60359,8 +60391,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\r\Desktop\project\recipeApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

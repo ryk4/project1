@@ -109,8 +109,9 @@ class ApiRecipeController extends Controller
         //create Recipe model
         $recipe = new Recipe;
 
-        if($request->image != null){
-            error_log('!!!!!image received!!!!!');
+
+        if($request->file('image') != null){
+            error_log('image receivede');
             $file = $request->file('image');
             $name = '/images/recipes/' . uniqid() . '.' . $file->extension();
             $file->storePubliclyAs('public', $name);
@@ -195,7 +196,9 @@ class ApiRecipeController extends Controller
         
         //NEEDS TO BE: select  id,name,description,representative_color,(select  count(*) from recipes_categories where categories_id=A.id) as Count from categories A
         $recipes = DB::table('categories')
-            ->select('categories.name','categories.description','categories.representative_color')
+            ->select('categories.name','categories.description','categories.representative_color',
+             DB::raw('(select  count(*) from recipes_categories where categories_id=categories.id) as total'))
+            ->whereIn('categories.id',['1','2','3','4']) //exclude optinal categories
             ->get()->toJson(JSON_PRETTY_PRINT);
 
 

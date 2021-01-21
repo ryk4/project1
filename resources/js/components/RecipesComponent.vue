@@ -25,7 +25,7 @@
                         <a v-for="cat in this.categories" :key="cat.name" v-on:click="applyFilter($event,cat)"
                         v-bind:class="{'selectedCategory' : cat.selected}"
                         class="category list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        {{cat.name}}<span class="badge badge-pill text-white" :style="`background-color:#${cat.color}`">0</span></a>
+                        {{cat.name}}<span class="badge badge-pill text-white" :style="`background-color:#${cat.color}`">{{cat.total}}</span></a>
                         
                     </div>
                 </div>
@@ -37,10 +37,10 @@
                             <input type="radio" name="sortBy" id="option1" autocomplete="off" checked>A-Z
                         </label>
                         <label class="btn btn-light">
-                            <input type="radio" name="sortBy" id="option2" autocomplete="off"><i class="fas fa-heart"></i>
+                            <input type="radio" name="sortBy" id="option2" autocomplete="off"><i class="fas fa-heart" ></i>
                         </label>
                         <label class="btn btn-light">
-                            <input type="radio" name="sortBy" id="option3" autocomplete="off"><i class="fas fa-eye"></i>
+                            <input type="radio" name="sortBy" id="option3" autocomplete="off"><i class="fas fa-eye" ></i>
                         </label>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ export default {
             recipesFetched : false,
             filterCategories: [],
             categories: [ //===change it so it fetches from api only once during mounted/created. along with count for each category
-                {
+                /*{
                     name: 'Meat',
                     color : 'd44f68',
                     selected : false
@@ -115,13 +115,14 @@ export default {
                     color : 'e8a765',
                     selected : false
 
-                },
+                },*/
             ]
 
         }
     },
     mounted() {
         //as soon as mounted call api to fetch recipes
+        this.fetchCategories();
         this.fetchRecipesAPI();
 
     },
@@ -137,10 +138,46 @@ export default {
             .then(res => {                
                 this.recipes = res.data;
 
+            });
+
+            this.recipesFetched = true;
+            
+        },
+        fetchCategories(){
+            console.log('fetching categories');
+
+            axios.get('/api/recipes/categories')
+            .then(res => {       
+                res.data.forEach(element => {
+                    this.categories.push({
+                        name : element.name,
+                        color : element.representative_color,
+                        selected: false,
+                        total: element.total
+                    })
                 });
 
-                this.recipesFetched = true;
-            
+                //this.categories = res.data;
+
+            });
+
+
+            /*
+
+
+            fetch(`/api/recipe/tags/${this.recipeID}`)
+                .then(res => res.json())
+                .then(res => {                
+                    res.forEach(element => {
+                        this.tags.push({
+                            name : element.name,
+                            description: element.description});
+                    });    
+                }) 
+
+                */
+
+
         },
         applyFilter(event,value){
             
