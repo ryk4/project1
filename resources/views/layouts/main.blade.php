@@ -32,6 +32,15 @@
 </head>
 <body>
 <div id="app">
+<p>variable: {{$page}}<p>
+@if($page == 'home')
+    <p>this is home</p>
+@else
+    <p>this is NOT home</p>
+@endif
+
+
+
 <header class="b-header b-header__absolute-top b-header__white">
     <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
