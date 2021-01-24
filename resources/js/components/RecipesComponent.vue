@@ -34,13 +34,13 @@
                 <div class="d-flex align-items-center"><span class="ml-auto mr-3">Sort by:</span>
                     <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
                         <label class="btn btn-light active">
-                            <input type="radio" name="sortBy" id="option1" autocomplete="off" checked>A-Z
+                            <input type="radio" name="sortBy" id="option1" checked @click="applySort('title')">A-Z
                         </label>
                         <label class="btn btn-light">
-                            <input type="radio" name="sortBy" id="option2" autocomplete="off"><i class="fas fa-heart" ></i>
+                            <input type="radio" name="sortBy" id="option2"  @click="applySort('favouriteCounter')"><i class="fas fa-heart" ></i>
                         </label>
                         <label class="btn btn-light">
-                            <input type="radio" name="sortBy" id="option3" autocomplete="off"><i class="fas fa-eye" ></i>
+                            <input type="radio" name="sortBy" id="option3"  @click="applySort('viewCounter')"><i class="fas fa-eye" ></i>
                         </label>
                     </div>
                 </div>
@@ -116,7 +116,8 @@ export default {
                     selected : false
 
                 },*/
-            ]
+            ],
+            sortBy: 'title'
 
         }
     },
@@ -134,7 +135,7 @@ export default {
             //add categorie's names ONLY to a single array
             var categories = this.categories.filter(vals => vals.selected).map(element => element.name)
 
-            axios.get('/api/recipes?page=' + page+'&category='+categories.join(','))
+            axios.get('/api/recipes?page=' + page+'&category='+categories.join(',')+'&order='+this.sortBy)
             .then(res => {                
                 this.recipes = res.data;
 
@@ -188,13 +189,16 @@ export default {
             value.selected = !value.selected;
 
             this.fetchRecipesAPI()
-
         },
+        applySort(sortBy){
+            this.sortBy = sortBy;
+            this.fetchRecipesAPI()
+        }
     }
 }
 </script>
 
-<style>
+<style scoped>
     .category:hover{
         background-color: #e1e6ea;
 

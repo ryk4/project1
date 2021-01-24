@@ -32,17 +32,19 @@
 </head>
 <body>
 <div id="app">
-<p>variable: {{$page}}<p>
-@if($page == 'home')
-    <p>this is home</p>
-@else
-    <p>this is NOT home</p>
-@endif
+
+@isset($page)
+    @if($page == 'home')
+        <header class="b-header b-header__absolute-top b-header__white">
+            <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
+    @else
+        <header class="b-header b-header__default">
+            <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1pngPurple.png" alt="Logo"/></a>
+    @endif
+@endisset
 
 
 
-<header class="b-header b-header__absolute-top b-header__white">
-    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
         <nav class="b-header_nav">
             
 

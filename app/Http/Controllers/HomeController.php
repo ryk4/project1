@@ -23,28 +23,34 @@ class HomeController extends Controller
     //UI
     public function index()
     {
-        //call api get recipes
-      /*  $recipes = app(RecipeController::class)->getAllRecipes(); //working
+        
+        //this is code duplication, fix it !!!
+        $recipes = DB::table('recipes')
+        ->join('recipedetails','recipes.recipeDetails_id','recipedetails.id')
+        ->get(); 
 
+        
 
-        //check if response is valid
-        if($recipes->status() != 200){
-            abort(404);
-        }
-
+     
 
         //convert json response into
-        $object = (array)json_decode($recipes->content());
+        
 
+        
         //convert into Recipe Collection
+       
 
-        $popularCollection= \App\Models\Recipe::hydrate($object)->slice(0,3); //top 3popular
-        $newCollection = \App\Models\Recipe::hydrate($object)->slice(0,4); //top 4 new
-*/
+        $popularCollection= $recipes->sortByDesc('viewCounter')->slice(0,3)->values(); //top 3popular
+        $newCollection = $recipes->sortbyDesc('created_at')->slice(0,4)->values(); //top 4 new
+        //dd($newCollection);
         //$collection = $collection->flatten(); --OPTIONAL ?????
+        //dd($popularCollection);
 
         //return view('home', ['recipesNew' => $newCollection,'recipesPopular' => $popularCollection]);
-        return view('home');
+        return view('home',[
+            'recipePopular' => $popularCollection,
+            'recipesNew' => $newCollection
+            ]);
     }
 
     public function contactPage(){

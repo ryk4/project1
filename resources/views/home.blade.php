@@ -46,15 +46,15 @@
         <p class="text-muted">Most popular recipes</p>
         <div class="row">
 
-            @isset($recipesNew)
+            @isset($recipePopular)
                 <div class="b-card col-12 col-xl-6">
                     <div class="b-card_inner">
-                        <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipesNew[0] -> id}}.jpg)">
-                            <a class="b-card_image-link" href="/recipe/{{$recipesNew[0] -> id}}"></a>
-
+                        <div class="b-card_image" style="background-image:url(/storage/{{$recipePopular[0] -> image}})">
+                            <a class="b-card_image-link" href="/recipe/{{$recipePopular[0] -> id}}"></a>
+ 
                             <div class="b-card_image-info-top">
                                 @php
-                                    $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipesNew[0]->id)->content());
+                                    $tags= json_decode(\App\Http\Controllers\Api\ApiRecipeController::getRecipeTags($recipePopular[0]->id)->content());
                                 @endphp
                                 @if(!empty($tags))
                                     <span class="g-badge" style="background-color:#{{$tags[0]->representative_color}}">{{$tags[0]->name}}</span>
@@ -62,35 +62,27 @@
                                         unset($tags[0])
                                     @endphp
                                 @endif
-                                <span class="g-views"><i class="fa fa-eye"></i>{{$recipesNew[0] -> viewCounter}}</span>
-                                <span class="g-likes"><i class="fa fa-heart"></i>{{$recipesNew[0] -> favouriteCounter}}</span></div>
+                                <span class="g-views"><i class="fa fa-eye"></i>{{$recipePopular[0] -> viewCounter}}</span>
+                                <span class="g-likes"><i class="fa fa-heart"></i>{{$recipePopular[0] -> favouriteCounter}}</span></div>
                             <div class="b-card_image-info-bottom">
-                                <h3 class="b-card_title"><a href="/recipe/{{$recipesNew[0] -> id}}">{{$recipesNew[0] -> title}}</a></h3>
-                                <div class="g-autor"><a href="/recipe/{{$recipesNew[0] -> id}}">Read more</a></div>
+                                <h3 class="b-card_title"><a href="/recipe/{{$recipePopular[0] -> id}}">{{$recipePopular[0] -> title}}</a></h3>
+                                <div class="g-autor"><a href="/recipe/{{$recipePopular[0] -> id}}">Read more</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                @for ($i = 1; $i < 3; $i++)
+                @for ($i = 1; $i < 3; $i++) <!-- change $i< 1 -> count-->
                     <div class="b-card col-12 col-md-6 col-xl-3">
                         <div class="b-card_inner">
-                            <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipesNew[$i] -> id}}.jpg)">
-                                <a class="b-card_image-link" href="/recipe/{{$recipesNew[$i] -> id}}"></a>
+                            <div class="b-card_image" style="background-image:url(/storage/{{$recipePopular[$i] -> image}}.jpg)">
+                                <a class="b-card_image-link" href="/recipe/{{$recipePopular[$i] -> id}}"></a>
                                 <div class="b-card_image-info-top">
-                                    @php
-                                        $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipesNew[$i]->id)->content());
-                                    @endphp
-                                    @if(!empty($tags))
-                                        <span class="g-badge" style="background-color:#{{$tags[0]->representative_color}}">{{$tags[0]->name}}</span>
-                                        @php
-                                            unset($tags[$i])
-                                        @endphp
-                                    @endif
-                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipesNew[$i] -> viewCounter}}</span>
-                                    <span class="g-likes"><i class="fa fa-heart"></i>{{$recipesNew[$i] -> favouriteCounter}}</span></div>
+                                    
+                                    <span class="g-views"><i class="fa fa-eye"></i>{{$recipePopular[$i] -> viewCounter}}</span>
+                                    <span class="g-likes"><i class="fa fa-heart"></i>{{$recipePopular[$i] -> favouriteCounter}}</span></div>
                                 <div class="b-card_image-info-bottom">
-                                    <h3 class="b-card_title"><a href="/recipe/{{$recipesNew[$i] -> id}}">{{$recipesNew[$i] -> title}}</a></h3>
-                                    <div class="g-autor"><a href="/recipe/{{$recipesNew[$i] -> id}}">Read more</a></div>
+                                    <h3 class="b-card_title"><a href="/recipe/{{$recipePopular[$i] -> id}}">{{$recipePopular[$i] -> title}}</a></h3>
+                                    <div class="g-autor"><a href="/recipe/{{$recipePopular[$i] -> id}}">Read more</a></div>
                                 </div>
                             </div>
                         </div>
@@ -114,9 +106,9 @@
                 @foreach ($recipesNew as $recipe)
                     <div class="b-card col-12 col-md-6 col-xl-3">
                         <div class="b-card_inner">
-                            <div class="b-card_image" style="background-image:url(/images/recipes/{{$recipe -> id}}.jpg)"><a class="b-card_image-link" href="/recipe/{{$recipe -> id}}"></a>
+                            <div class="b-card_image" style="background-image:url(/storage/{{$recipe -> image}})"><a class="b-card_image-link" href="/recipe/{{$recipe -> id}}"></a>
                                 @php
-                                    $tags= json_decode(\App\Http\Controllers\RecipeController::getRecipeTags($recipe->id)->content());
+                                    $tags= json_decode(\App\Http\Controllers\Api\ApiRecipeController::getRecipeTags($recipe->id)->content());
 
                                 @endphp
                                 <div class="b-card_image-info-top">
@@ -159,6 +151,8 @@
         <div class="clearfix text-right"><a class="link_animated" href="{{ route ('recipes') }}">View more<i class="fa fa-angle-right"></i></a></div>
     </section>
     <!--newest items section END-->
+
+    
     <!--newest items section-->
     <!--
     <section class="container py-3">

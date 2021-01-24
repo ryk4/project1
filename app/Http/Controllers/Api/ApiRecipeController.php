@@ -14,7 +14,7 @@ use App\Http\Controllers\CollectionHelper;
 class ApiRecipeController extends Controller
 {
     //get all recipes + recipeDetails
-    //ADD FILTERING
+    //e.g /api/recipes?page=1&order=title&category=Meat
     public function getAllRecipes()
     {
 
@@ -22,9 +22,7 @@ class ApiRecipeController extends Controller
         $categories = DB::table('recipes_categories')
             ->join('categories','recipes_categories.categories_id','=','categories.id')
             ->when(request('category'), function ($query, $role) {
-
                 $arr = explode(',', $role); //split category from 1 string into array of strings.
-
                 return $query->whereIn('name', $arr);
             })->get();
 
@@ -35,9 +33,21 @@ class ApiRecipeController extends Controller
             ->select('recipes.*', 'recipeDetails.calories','recipeDetails.cookTime','recipes_categories.categories_id','categories.name',
             'categories.description','categories.representative_color')
             ->whereIn('recipes_categories.categories_id',['1','2','3','4'])//required in recipes page to display 'main' tag
-            ->whereIn('recipes.id',$categories->pluck('recipes_id'))
+            ->whereIn('recipes.id',$categories->pluck('recipes_id'))//recipe IDs from Query above
+            ->when(request('order'), function ($query,$role) {
+                
+                $order = 'asc';
+
+                //if viewCounter/favouriteCounter needs to be DESC
+                if($role == 'viewCounter' || $role == 'favouriteCounter'){
+                    $order = 'desc';
+                }
+              
+                return $query->orderBy($role, $order);
+            })
             ->get();
 
+        //dd($recipes);
 
         $collection = CollectionHelper::paginate($recipes, 6);    
 

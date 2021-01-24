@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12 col-lg-6 py-3">
                     <h1>Our contacts</h1>
-                    <p><i class="fas fa-map-marker fa-fw mr-2"></i><span>Sunrise Valley Science and Technology Park,</span><br><span> Sauletekio ave. 15, Vilnius, Lithuania</span></p>
+                    <p><i class="fas fa-map-marker fa-fw mr-2"></i><span> Sauletekio ave. 15, Vilnius, Lithuania. LT-00000</span></p>
                     <p><a href="#"><i class="fas fa-phone fa-fw mr-2"></i>+370 000 00000</a></p>
                     <p><a href="#"><i class="fas fa-envelope fa-fw mr-2"></i>foodlifting.contact@gmail.com</a></p>
                     <p class="text-muted">Get in touch with us if you have any questions along with any sort of business enquires. Any suggestions or bugs regarding this site are also very much appreciated.</p>
