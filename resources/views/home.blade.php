@@ -45,6 +45,7 @@
         <h2 class="h1">Popular</h2>
         <p class="text-muted">Most popular recipes</p>
         <div class="row">
+            
 
             @isset($recipePopular)
                 <div class="b-card col-12 col-xl-6">
@@ -74,7 +75,7 @@
                 @for ($i = 1; $i < 3; $i++) <!-- change $i< 1 -> count-->
                     <div class="b-card col-12 col-md-6 col-xl-3">
                         <div class="b-card_inner">
-                            <div class="b-card_image" style="background-image:url(/storage/{{$recipePopular[$i] -> image}}.jpg)">
+                            <div class="b-card_image" style="background-image:url(/storage/{{$recipePopular[$i] -> image}})">
                                 <a class="b-card_image-link" href="/recipe/{{$recipePopular[$i] -> id}}"></a>
                                 <div class="b-card_image-info-top">
                                     

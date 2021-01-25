@@ -1,4 +1,5 @@
-@extends('layouts.mainRecipe')
+@extends('layouts.main',['page' => 'recipe'])
+
 
 @section('content')
 

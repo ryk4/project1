@@ -4,6 +4,7 @@
             <div class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active">Recipes</li>
+                
             </div>
         </div>
         <div class="container">

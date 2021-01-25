@@ -33,20 +33,24 @@
 <body>
 <div id="app">
 
-@isset($page)
-    @if($page == 'home')
-        <header class="b-header b-header__absolute-top b-header__white">
-            <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
-    @else
-        <header class="b-header b-header__default">
-            <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1pngPurple.png" alt="Logo"/></a>
-    @endif
-@endisset
+<!-- Button trigger modal -->
 
 
+        @isset($page)
+            @if($page == 'home')
+                <header class="b-header b-header__absolute-top b-header__white">
+                    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1png.png" alt="Logo"/></a>
+            @else
+                <header class="b-header b-header__default">
+                    <div class="b-header_flex"><a class="b-header_logo" href="index.html"><img src="/assets/images/logo1pngPurple.png" alt="Logo"/></a>
+            @endif
+        @endisset
 
         <nav class="b-header_nav">
             
+        
+
+
 
             <ul>
                 
@@ -68,6 +72,18 @@
                     <li class="nav_block">
                         <a href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
+                    
+                    <a style="color:white" href="#" class= "grab" id="show-modal" @click="showModal = true">Login2</a>
+                    <!-- use the modal component, pass in the prop -->
+                    <modal v-if="showModal" @close="showModal = false">
+                        <!--
+                        you can use custom content here to overwrite
+                        default content
+                        -->
+                        <h3 slot="header">custom header asdasd</h3>
+                    </modal>
+                                
+
                     @if (Route::has('register'))
                         <li class="nav_block">
                             <a href="{{ route('register') }}">{{ __('Register') }}</a>
