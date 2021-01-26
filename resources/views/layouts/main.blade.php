@@ -1,5 +1,6 @@
 
 
+
 <!--header-->
 <!--header END--><!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,6 @@
     <!--decorative END-->
 
     <!-- Vue.js -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/preload.css">
@@ -69,26 +69,16 @@
                 <li class="nav_block"><a href="{{ url('/contact') }}">Contact us</a>
                 </li>
                 @guest
-                    <li class="nav_block">
-                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
-                    </li>
+                
+                <li class="nav-item">
+                                <a class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
+                            </li>
                     
-                    <a style="color:white" href="#" class= "grab" id="show-modal" @click="showModal = true">Login2</a>
-                    <!-- use the modal component, pass in the prop -->
-                    <modal v-if="showModal" @close="showModal = false">
-                        <!--
-                        you can use custom content here to overwrite
-                        default content
-                        -->
-                        <h3 slot="header">custom header asdasd</h3>
-                    </modal>
-                                
-
-                    @if (Route::has('register'))
-                        <li class="nav_block">
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
+                @if (Route::has('register'))
+                    <li class="nav_block">
+                        <a style="cursor: pointer"data-toggle="modal" data-target="#registerModal">{{ __('Register') }}</a>
+                    </li>
+                @endif
                 @else
                     
                     <li class="nav_block">
@@ -171,9 +161,12 @@
 
 
 
-</div>
+    </div>
+    @include('partials.login')
+    @include('partials.register')
 
-<!-- Enable tooltips-->
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>
 

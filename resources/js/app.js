@@ -40,7 +40,6 @@ Vue.component('recipe-add-top-component', require('./components/RecipeAdd/Recipe
 Vue.component('recipe-add-middle-component', require('./components/RecipeAdd/RecipeAddMiddleComponent.vue').default);
 
 
-Vue.component('modal', require('./components/AuthenticationModalComponent.vue').default);
 
 
 import VueSimpleAlert from "vue-simple-alert";
@@ -69,6 +68,6 @@ const app = new Vue({
 
     },
     data : {
-        showModal: false
+        
     }
 });
