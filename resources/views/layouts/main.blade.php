@@ -71,8 +71,8 @@
                 @guest
                 
                 <li class="nav-item">
-                                <a class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
-                            </li>
+                    <a class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
+                </li>
                     
                 @if (Route::has('register'))
                     <li class="nav_block">
