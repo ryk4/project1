@@ -4,7 +4,6 @@
             <div class="modal-header">
                 <h4 class="d-flex flex-wrap" id="registerModal"><strong>{{ __('Register') }}</strong><span class="mx-1 d-none d-sm-inline">|</span><a href="#">
                     <small class="font-weight-light">Login</small></a></h4>
-
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
