@@ -46,8 +46,7 @@ Route::post('/api/token/generate', [App\Http\Controllers\ApiTokenController::cla
 //UI routes
 Route::get('/recipe/add', [App\Http\Controllers\RecipeController::class, 'recipeAdd'])->name('recipeAdd');
 
-Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
-Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
+//Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contactPage']);
 
 
@@ -61,4 +60,18 @@ Route::put('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::cl
 Route::delete('/api/recipe/{id}', [App\Http\Controllers\Api\ApiRecipeController::class, 'deleteRecipe']);
 Route::get('/api/recipes', [App\Http\Controllers\Api\ApiRecipeController::class, 'getAllRecipes']);
 Route::get('/api/recipes/categories', [App\Http\Controllers\Api\ApiRecipeController::class, 'getCategories']);
+
+//UI
+Route::get('/recipe/add', [App\Http\Controllers\RecipeController::class, 'recipeAdd'])->name('recipeAdd');
+Route::get('/recipe/manage', [App\Http\Controllers\RecipeController::class, 'recipesManage'])->name('recipesManage');
+Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
+Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
+Route::delete('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipeDelete'])->name('recipeDelete');
+
+
+
+//Admin Area UI
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('adminDashboard');
+
+
 

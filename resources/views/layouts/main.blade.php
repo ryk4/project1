@@ -58,20 +58,24 @@
                 </li>
                 <li class="nav_block"><a href="{{ url('/recipes') }}">Recipes</a>
                 </li>
-                <li>  
+                
                 @guest 
                 @else                
                     @if (Auth::user()->user_level<=1)
-                        <a href='{{url('/recipe/add')}}'>Add recipes</a>
+                    
+                    <li class="nav_block">  
+                        <a href='{{url('/recipe/manage')}}'>Manage recipes</a>
+                    </li>
                     @endif
                 @endguest
-                </li>
-                <li class="nav_block"><a href="{{ url('/contact') }}">Contact us</a>
+                
+                <li class="nav_block">
+                    <a href="{{ url('/contact') }}">Contact us</a>
                 </li>
                 @guest
                 
-                <li class="nav-item">
-                    <a class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
+                <li class="nav_block">
+                    <a style="cursor: pointer" data-toggle="modal" data-target="#loginModal">{{ __('Login') }}</a>
                 </li>
                     
                 @if (Route::has('register'))
@@ -81,17 +85,18 @@
                 @endif
                 @else
                     
-                    <li class="nav_block">
+                    <!--<li class="nav_block">
                         <form method="post" action="{{ action('App\Http\Controllers\ApiTokenController@generateToken') }}" accept-charset="UTF-8">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('generateToken') }}
                             </button>
                         </form>
-                    </li>
+                    </li>-->
+                    
                     <li class="nav_block">{{ Auth::user()->name }}
                         <ul>
                             <li>
-                                <a href="{{ url('settings') }}">Admin area</a>
+                                <a href="{{ url('/admin/dashboard') }}">Admin area</a>
                             </li>
                             <li>
                                 <a href="{{ url('settings') }}">Settings</a>
@@ -111,7 +116,11 @@
         <div class="span" id="menu_toggle"><i class="fa fa-bars"></i></div>
         <div class="dropdown b-header_language" data-toggle="tooltip" data-placement="left" title="Change language">
             <button class="btn btn-light b-header_language-button" type="button" id="languageChanger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-globe fa-fw"></i></button>
-            <div class="dropdown-menu dropdown-menu-right b-header_language-list" aria-labelledby="languageChanger"><a class="dropdown-item b-header_language-item active" href="#"><span>En</span></a><a class="dropdown-item b-header_language-item" href="#"><span>Ru</span></a><a class="dropdown-item b-header_language-item" href="#"><span>De</span></a></div>
+            <div class="dropdown-menu dropdown-menu-right b-header_language-list" aria-labelledby="languageChanger">
+                <a class="dropdown-item b-header_language-item active" href="#"><span>En</span></a>
+                <a class="dropdown-item b-header_language-item" href="#"><span>Ru</span></a>
+                <a class="dropdown-item b-header_language-item" href="#"><span>De</span></a>
+            </div>
         </div>
     </div>
 </header>

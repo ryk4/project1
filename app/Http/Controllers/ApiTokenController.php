@@ -19,7 +19,7 @@ class ApiTokenController extends Controller
         ])->save();
 
         //return ['token' => $token];
-        return view ('home',['token' => $token]);
+        return redirect()->route('adminDashboard');
     }
 
 

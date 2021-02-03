@@ -190,7 +190,7 @@ class ApiRecipeController extends Controller
             $recipe->delete();
 
             return response()->json([
-                "message" => "Record has been deleted"
+                "message" => "Recipe has been deleted"
             ], 202);
         }
         else
