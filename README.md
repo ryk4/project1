@@ -1,69 +1,72 @@
 ### Rytis Klimavicius - Rytiskli@gmail.com
-# Recipes Website
+# Recipes Website (**Under development**)
 
-This is a project purely allowing to easily manage recipes and improve Laravel skills. Vue.js is used to help do extra functionality in the UI, without having to refresh pages.
-This is not an SPA, Vue.js is only used to help in several pages. For example sort,filter and search for recipes without refreshing the page, pagination without refreshing page and so on.
+This is a personal project that I will personally use every day to manage my recipes. It is built in Laravel along with Vue.js to help with UI functionality. For the design I've purchased a template that is written in Bootstrap 4 and adapted it to fit my needs. This is not an SPA, Vue.js is only used to help in several pages. For example sort,filter and search for recipes without refreshing the page, pagination without refreshing page and so on. 
+
+### To-do list
+- [x] View and filter recipes without re-freshing the page.
+- [x] Add recipe to the database. Vue.js for extra functionality
+- [ ] Edit/delete recipes using admin->manage area.
+- [x] Login/Register to be moved to modal
+- [ ] Protect POST,GET and DELETE api using Laravel Passport/Sanctum. Will require additional work in Vue components.
+- [ ] Caching and api authorization in Vue.js
+- [ ] API Unit tests
+- [x] Login/Register to be moved to modals.
+- [ ] Project clean-up. Unused HTML files, Postman requests, commented out code, optimizations.
+- [ ] API improvements. Request validations, logic moved elsewhere, well strctured/consistent APIs.
+
+
+
+
+Requirements:
+* XAMPP (MySQL)
+* PHP ^ 7.4.10
+* NPM ^ 6.14.8
+* Node ^ 12.19.0
+* Composer ^ 2.0.7
 
 ## Running Project on local
-1. git clone {projectURL} --Clone GitHub repository. 
-2. composer install --Install composer dependencies from project dir. (laravel itself + other dependencies). it checks composer.json file.
-3. npm install --Install npm dependencies (vue.js, bootstrap,lodash and laravel mix). Essentially these are JS or Node packages. Packages are listed in packages.json and it should be submitted to git repo. 
-4. copy .env.example .env --create a copy of .env file
-5. php artisan key:generate --create app encryption key. Laravel requires encryption key which is used to encode various elements like cookies, password and more. 
-6. php artisan migrate:fresh --create a fresh database using database migration files.
-Optional 7. php artisan db:Seed --fills database with starter/dummy data from Database/Seeders.
 
------Steps required to initialise a brand new project and push onto repository----<br>
-For vue.js project:
-1. Create a repository on github.com
-2. Open cmd and navigate to project folder 
-3. Git init --initialize the local directory as a Git repository
-4. Git add * --add all changes and prepare them for commit
-5. Git commit -m "initial commit" --commit the changes onto local repository
-6. Git remote add origin remote {project_url_from_github.com}
-7. Git push -f origin master --push onto master branch on github
+Clone project from Github repository:
+```sh
+$ git clone {projectURL}
+```
 
+Install packages and dependancies:
+```sh
+$ composer install
+$ npm install
+```
 
+Create .env file (Windows):
+```sh
+$ copy .env.example .env
+```
+Create .env file (Mac OS):
+```sh
+$ cp .env.example .env
+```
 
+Generate encryption key (used for cookies, password and more):
+```sh
+$ php artisan key:generate
+```
 
+Create Database tables:
+```sh
+$ php artisan migrate:fresh
+# Optional: insert dummy data
+$ php artisan db:Seed
+```
 
-=======================IGNORE THE REST=======================
+Run project:
+```sh
+$ php artisan serve
+# Optional: instant effect changes to Vue.js components
+$ npm run watch
+```
 
-For laravel project
-
------Push/Pull to repository---- <br>
-git status --view files that are ready to commit <br>
-git add fileName --adds the files in the local repo and stages them for commit <br>
-git commit -m "updating readme file v3" --commits the tracked changes and prepares them to be pushed. <br>
-git branch --check which branch your on <br>
-git push --push to the branch you're currently on <br>
-git push origin master --push everything to 'master' branch <br>
-
-
-
------Other Git Commands-----
-php artisan migrate:fresh --seed --to migrate and seed database in one go <br>
-
-
----Git commands---
-
-
-Git clone {projectURL} --clones an existing repository <br>
-Git init --initialise local repository as git repository <br>
-
-git add . -- Adds the files in the local repository and stages them for commit. To unstage a file, use 'git reset HEAD YOUR-FILE'.
-git commit -m "First commit" --commits the tracked changes and prepares them to be pushed.
-
-git remote add origin {remote repository url} --sets the new remote
-git remote -v --verifies the new remote url
-
-git push origin master --pushes everything to 'master'
-
-git branch --check which branch your on
-
------Software versions-----<br>
-6.14.8  npm -v  <br>
-12.19.0 node -v <br>
-7.4.10  php -v <br>
-4.0.5   laravel -v <br>
---------------------------- <br>
+Local project URL
+```sh
+127.0.0.1:8000
+```
