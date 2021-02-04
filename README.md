@@ -1,11 +1,10 @@
-Rytis Klimavicius
+## Rytis Klimavicius
+# Recipes Website
 
------Project creation-----
-#to be added
-php artisan ui vue<br>
-npm install
+This is a project purely allowing to easily manage recipes and improve Laravel skills. Vue.js is used to help do extra functionality in the UI, without having to refresh pages.
+This is not an SPA, Vue.js is only used to help in several pages. For example sort,filter and search for recipes without refreshing the page, pagination without refreshing page and so on.
 
------Steps required to pull a project and configure on local------
+## Running Project on local
 1. git clone {projectURL} --Clone GitHub repository. 
 2. composer install --Install composer dependencies from project dir. (laravel itself + other dependencies). it checks composer.json file.
 3. npm install --Install npm dependencies (vue.js, bootstrap,lodash and laravel mix). Essentially these are JS or Node packages. Packages are listed in packages.json and it should be submitted to git repo. 
@@ -27,6 +26,8 @@ For vue.js project:
 
 
 
+
+=======================IGNORE THE REST=======================
 
 For laravel project
 
