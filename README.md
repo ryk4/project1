@@ -1,4 +1,4 @@
-## Rytis Klimavicius
+### Rytis Klimavicius - Rytiskli@gmail.com
 # Recipes Website
 
 This is a project purely allowing to easily manage recipes and improve Laravel skills. Vue.js is used to help do extra functionality in the UI, without having to refresh pages.
@@ -60,13 +60,6 @@ git remote -v --verifies the new remote url
 git push origin master --pushes everything to 'master'
 
 git branch --check which branch your on
-
-
-
-
-
-
-
 
 -----Software versions-----<br>
 6.14.8  npm -v  <br>
