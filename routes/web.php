@@ -62,16 +62,16 @@ Route::get('/api/recipes', [App\Http\Controllers\Api\ApiRecipeController::class,
 Route::get('/api/recipes/categories', [App\Http\Controllers\Api\ApiRecipeController::class, 'getCategories']);
 
 //UI
-Route::get('/recipe/add', [App\Http\Controllers\RecipeController::class, 'recipeAdd'])->name('recipeAdd');
-Route::get('/recipe/manage', [App\Http\Controllers\RecipeController::class, 'recipesManage'])->name('recipesManage');
+Route::get('/recipe/add', [App\Http\Controllers\RecipeController::class, 'recipeAdd'])->name('recipeAdd')->middleware('checkRole:super');
+Route::get('/recipe/manage', [App\Http\Controllers\RecipeController::class, 'recipesManage'])->name('recipesManage')->middleware('checkRole:admin');
 Route::get('/recipes', [App\Http\Controllers\RecipeController::class, 'getRecipesFilter'])->name('recipes');
 Route::get('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipe'])->name('recipe');
-Route::delete('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipeDelete'])->name('recipeDelete');
+Route::delete('/recipe/{id}', [App\Http\Controllers\RecipeController::class, 'recipeDelete'])->name('recipeDelete')->middleware('checkRole:admin');
 
 
 
 //Admin Area UI
-Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('adminDashboard');
+Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'adminDashboard'])->name('adminDashboard')->middleware('checkRole:super');
 
 
 

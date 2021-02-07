@@ -2044,6 +2044,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2080,8 +2082,10 @@ __webpack_require__.r(__webpack_exports__);
       mainCategory: 1,
       optionalCategories: [],
       image: null,
+      imageInvalid: false,
+      imageError: '',
       validation: {
-        //validating child component separately
+        //validating components separetaly
         isTopInvalid: true
       }
     };
@@ -2135,7 +2139,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         })["catch"](function (error) {
           //catch error
-          var errorMsg = "Server side error! " + error.response.data.message;
+          var errorMsg = "Server side error! " + error.response.data.errors;
 
           _this.$alert(errorMsg, "", "error");
 
@@ -2151,10 +2155,22 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     uploadImage: function uploadImage(event) {
+      this.imageError = '';
       console.log('selecting image');
       console.log('event=' + event.target.files[0]); //console.log('ref='+this.$refs.file.files[0])
 
-      this.image = event.target.files[0];
+      this.image = event.target.files[0]; //validate image (1920x1080p, <3mb)
+
+      if (!this.image) {
+        this.imageError = 'Image not selected!';
+      } else {
+        if (this.image.size > 1024 * 1024 * 3) {
+          this.imageError = 'Image is too big (> 3MB)';
+        }
+      }
+    },
+    testButton: function testButton() {
+      console.log('print: ' + this.image);
     }
   }
 });
@@ -43461,7 +43477,13 @@ var render = function() {
                         return _vm.uploadImage($event)
                       }
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  this.imageError
+                    ? _c("div", { staticClass: "error" }, [
+                        _vm._v(_vm._s(this.imageError))
+                      ])
+                    : _vm._e()
                 ])
               ])
             ]),
@@ -43484,6 +43506,16 @@ var render = function() {
               on: { click: _vm.cancelButton }
             },
             [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-warning",
+              attrs: { type: "button" },
+              on: { click: _vm.testButton }
+            },
+            [_vm._v("Test Button")]
           )
         ]),
         _c("br")
@@ -60460,8 +60492,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\bulbis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\rytis\Desktop\project1\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\rytis\Desktop\project1\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

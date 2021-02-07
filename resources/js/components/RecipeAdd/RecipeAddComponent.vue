@@ -67,6 +67,7 @@
                         <div class="form-group">
                             <label>Recipe image</label>
                             <input type="file" class="form-control-file" id="file-input" ref="file" @change="uploadImage($event)">
+                            <div class="error" v-if="this.imageError">{{ this.imageError }}</div>
                         </div>
                     </div>
                 </div><br>
@@ -77,7 +78,8 @@
         <div class="submitArea">
             <input type="button" class="btn btn-primary mr-3" @click="submitButton" value="Create recipe" >
             <button type="button" class="btn btn-secondary" @click="cancelButton">Cancel</button>
-            
+            <button type="button" class="btn btn-warning" @click="testButton">Test Button</button>
+
         </div><br>
     </div>
 </form>
@@ -119,8 +121,10 @@ export default {
             mainCategory : 1,
             optionalCategories: [],       
             image: null,
-            validation: { //validating child component separately
-                isTopInvalid: true
+            imageInvalid: false,
+            imageError : '',
+            validation: { //validating components separetaly
+                isTopInvalid: true,
             }
         }
 
@@ -145,7 +149,7 @@ export default {
         submitButton(){    // NEEDS TO BE OPTIMIZED / REWRITTEN        
 
         //UI validation
-        if (!this.validation.isTopInvalid) {
+        if (!this.validation.isTopInvalid ) {
             //POST api body
             const recipe = new FormData();
             recipe.append('title', this.recipe.title)
@@ -176,7 +180,7 @@ export default {
 
             })
             .catch(error => {//catch error
-                let errorMsg = "Server side error! " + error.response.data.message;
+                let errorMsg = "Server side error! " + error.response.data.errors;
                 this.$alert(errorMsg,"","error");
                 console.log("Api post error: ", error.response.data);  
             });
@@ -191,10 +195,25 @@ export default {
             });
         },
         uploadImage(event){
+            this.imageError = ''
             console.log('selecting image')
             console.log('event='+event.target.files[0])
             //console.log('ref='+this.$refs.file.files[0])
             this.image = event.target.files[0];
+
+            //validate image (1920x1080p, <3mb)
+            if(!this.image){
+                 this.imageError = 'Image not selected!'
+            }
+            else{
+                if(this.image.size > 1024*1024*3){
+                    this.imageError = 'Image is too big (> 3MB)'
+                }
+            }
+
+        },
+        testButton(){
+            console.log('print: '+this.image);
         }
     },
 }

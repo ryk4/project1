@@ -33,7 +33,7 @@ class RecipePostRequest extends FormRequest
             'protein' => 'required|integer',
             'fat' => 'required|integer',
             'ingredients' => 'required',
-            'image' => 'image|dimensions:max_width=1920,max_height=1080',
+            'image' => 'required|image|dimensions:max_width=1920,max_height=1080',
 
         ];
     }

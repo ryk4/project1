@@ -33,14 +33,20 @@
                     <td>{{$recipe->viewCounter}}</td>
                     <td>{{$recipe->updated_at}}</td>
                     <td>Rytis Klimavicius</td>
-                    <td><a href="#">Edit</a>|
-                    
-                    <form action="{{route('recipeDelete',$recipe->id)}}" method="POST">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit">Delete</button>               
-                    </form>
+                    <td>
+                      <div class="row">
+                        <form action="{{route('recipeDelete',$recipe->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-link">Edit</button>               
+                        </form>
 
+                        <form action="{{route('recipeDelete',$recipe->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-link" onclick="return confirm('Are you sure?')">Delete</button>               
+                        </form>
+                      </div>
                     </td>
 
                   </tr>
@@ -61,3 +67,4 @@
 
 
 @endsection
+
